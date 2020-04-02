@@ -5,4 +5,29 @@
         <item name="android:windowBackground">@color/colorScreenBackground</item>
     </style>
 
+    <style name="SimpleText" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/colorSimpleText</item>
+        <item name="android:textSize">@dimen/simple_text_size</item>
+    </style>
+
+    <style name="TitleText" parent="SimpleText">
+        <item name="android:textSize">@dimen/title_text_size</item>
+    </style>
+
+    <style name="CustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/colorTabAppearanceText</item>
+        <item name="android:textSize">@dimen/title_text_size</item>
+    </style>
+
+    <style name="LocationTab" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/CustomTabTextAppearance</item>
+        <item name="tabIndicatorColor">@color/colorTabIndicator</item>
+        <item name="tabSelectedTextColor">@color/colorFocusedSimpleText</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:background">@color/colorAccent</item>
+    </style>
 </resources>

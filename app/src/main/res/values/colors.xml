@@ -4,4 +4,6 @@
     <color name="colorSimpleText">#919191</color>
     <color name="colorFocusedSimpleText">#FFFFFF</color>
     <color name="colorScreenBackground">#FFFFFF</color>
+    <color name="colorTabIndicator">#E91E63</color>
+    <color name="colorTabAppearanceText">#494949</color>
 </resources>
