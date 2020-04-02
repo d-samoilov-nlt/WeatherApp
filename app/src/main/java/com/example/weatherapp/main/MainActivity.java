@@ -1,11 +1,14 @@
 package com.example.weatherapp.main;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.view.ViewGroup;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.weatherapp.R;
+import com.example.weatherapp.common.view.WeatherAppActivity;
 import com.example.weatherapp.currenctLocation.CurrentLocationFragment;
 import com.example.weatherapp.locationList.LocationListFragment;
 import com.example.weatherapp.main.presenter.AsyncMainPresenter;
@@ -14,11 +17,12 @@ import com.example.weatherapp.main.presenter.MainPresenter;
 import com.example.weatherapp.main.view.IMainView;
 import com.example.weatherapp.main.view.InMainThreadMainView;
 import com.example.weatherapp.main.view.LocationTabFragmentAdapter;
+import com.example.weatherapp.service.ConnectivityReceiver;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.concurrent.Executors;
 
-public class MainActivity extends AppCompatActivity implements IMainView {
+public class MainActivity extends WeatherAppActivity implements IMainView {
     private IMainPresenter presenter;
 
     @Override
@@ -26,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupActions();
+        registerReceiver(new ConnectivityReceiver(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
         presenter =
                 new AsyncMainPresenter(
@@ -41,6 +46,11 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
     private void setupActions() {
         findViewById(R.id.fab_main_check_weather_for_city).setOnClickListener(v -> presenter.onSearchByCityPressed());
+    }
+
+    @Override
+    protected ViewGroup getCoordinatorContainerView() {
+        return findViewById(R.id.cl_main_container);
     }
 
     @Override
