@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+
+    // main screen
+    <string name="main_screen_tab_current_location">Current Location</string>
+    <string name="main_screen_tab_all_locations">Locations</string>
+
 </resources>
