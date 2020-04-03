@@ -36,6 +36,11 @@ public class GsonCurrentWeatherResponse implements ICurrentWeatherResponse {
     }
 
     @Override
+    public String getCityName() {
+        return name;
+    }
+
+    @Override
     public IClouds getClouds() {
         return clouds;
     }
