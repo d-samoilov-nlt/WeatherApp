@@ -24,13 +24,15 @@ import java.util.concurrent.Executors;
 
 public class MainActivity extends WeatherAppActivity implements IMainView {
     private IMainPresenter presenter;
+    private ConnectivityReceiver connectivityReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupActions();
-        registerReceiver(new ConnectivityReceiver(), new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        connectivityReceiver = new ConnectivityReceiver();
+        registerReceiver(connectivityReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
         presenter =
                 new AsyncMainPresenter(
@@ -51,6 +53,12 @@ public class MainActivity extends WeatherAppActivity implements IMainView {
     @Override
     protected ViewGroup getCoordinatorContainerView() {
         return findViewById(R.id.cl_main_container);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(connectivityReceiver);
     }
 
     @Override
