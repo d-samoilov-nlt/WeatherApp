@@ -10,4 +10,9 @@ public interface IOpenWeatherApi {
      */
     ICurrentWeatherResponse getCurrentWeatherByName(Map<String, String> options);
 
+    /**
+     * GET 2.5/weather
+     */
+    ICurrentWeatherResponse getCurrentWeatherByLocation(Map<String, String> options);
+
 }
