@@ -5,11 +5,11 @@ public interface ICurrentWeatherResponse {
 
     String getCityName();
 
-    IClouds getClouds();
+    ICloudsResponse getClouds();
 
-    IMain getMain();
+    IMainResponse getMain();
 
-    IWeather[] getWeatherList();
+    IWeatherResponse[] getWeatherList();
 
-    IWind getWind();
+    IWindResponse getWind();
 }

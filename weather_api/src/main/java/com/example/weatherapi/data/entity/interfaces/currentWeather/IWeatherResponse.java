@@ -1,6 +1,6 @@
 package com.example.weatherapi.data.entity.interfaces.currentWeather;
 
-public interface IWeather {
+public interface IWeatherResponse {
 
     int getId();
 

@@ -1,26 +1,26 @@
 package com.example.weatherapi.data.entity.gson.currentWeather;
 
-import com.example.weatherapi.data.entity.interfaces.currentWeather.IClouds;
+import com.example.weatherapi.data.entity.interfaces.currentWeather.ICloudsResponse;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeatherResponse;
-import com.example.weatherapi.data.entity.interfaces.currentWeather.IMain;
-import com.example.weatherapi.data.entity.interfaces.currentWeather.IWeather;
-import com.example.weatherapi.data.entity.interfaces.currentWeather.IWind;
+import com.example.weatherapi.data.entity.interfaces.currentWeather.IMainResponse;
+import com.example.weatherapi.data.entity.interfaces.currentWeather.IWeatherResponse;
+import com.example.weatherapi.data.entity.interfaces.currentWeather.IWindResponse;
 import com.google.gson.annotations.SerializedName;
 
 public class GsonCurrentWeatherResponse implements ICurrentWeatherResponse {
 
     @SerializedName("weather")
-    private GsonWeather[] weather;
+    private GsonWeatherResponse[] weather;
     @SerializedName("base")
     private String base;
     @SerializedName("main")
-    private GsonMain main;
+    private GsonMainResponse main;
     @SerializedName("visibility")
     private int visibility;
     @SerializedName("wind")
-    private GsonWind wind;
+    private GsonWindResponse wind;
     @SerializedName("clouds")
-    private GsonClouds clouds;
+    private GsonCloudsResponse clouds;
     @SerializedName("dt")
     private int dt;
     @SerializedName("id")
@@ -41,22 +41,22 @@ public class GsonCurrentWeatherResponse implements ICurrentWeatherResponse {
     }
 
     @Override
-    public IClouds getClouds() {
+    public ICloudsResponse getClouds() {
         return clouds;
     }
 
     @Override
-    public IMain getMain() {
+    public IMainResponse getMain() {
         return main;
     }
 
     @Override
-    public IWeather[] getWeatherList() {
+    public IWeatherResponse[] getWeatherList() {
         return weather;
     }
 
     @Override
-    public IWind getWind() {
+    public IWindResponse getWind() {
         return wind;
     }
 }

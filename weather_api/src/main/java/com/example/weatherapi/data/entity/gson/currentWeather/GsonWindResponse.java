@@ -1,9 +1,9 @@
 package com.example.weatherapi.data.entity.gson.currentWeather;
 
-import com.example.weatherapi.data.entity.interfaces.currentWeather.IWind;
+import com.example.weatherapi.data.entity.interfaces.currentWeather.IWindResponse;
 import com.google.gson.annotations.SerializedName;
 
-public class GsonWind implements IWind {
+public class GsonWindResponse implements IWindResponse {
     @SerializedName("speed")
     private double speed;
     @SerializedName("deg")

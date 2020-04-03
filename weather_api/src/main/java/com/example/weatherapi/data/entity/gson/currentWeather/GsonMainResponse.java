@@ -1,9 +1,9 @@
 package com.example.weatherapi.data.entity.gson.currentWeather;
 
-import com.example.weatherapi.data.entity.interfaces.currentWeather.IMain;
+import com.example.weatherapi.data.entity.interfaces.currentWeather.IMainResponse;
 import com.google.gson.annotations.SerializedName;
 
-public class GsonMain implements IMain {
+public class GsonMainResponse implements IMainResponse {
     @SerializedName("temp")
     private double temp;
     @SerializedName("pressure")

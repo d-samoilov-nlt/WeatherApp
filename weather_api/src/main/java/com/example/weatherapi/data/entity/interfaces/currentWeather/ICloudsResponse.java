@@ -1,6 +1,6 @@
 package com.example.weatherapi.data.entity.interfaces.currentWeather;
 
-public interface IClouds {
+public interface ICloudsResponse {
 
     int getAll();
 }

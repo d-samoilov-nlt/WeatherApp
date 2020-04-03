@@ -1,6 +1,6 @@
 package com.example.weatherapi.data.entity.interfaces.currentWeather;
 
-public interface IWind {
+public interface IWindResponse {
     double getSpeed();
     int getDegree();
 }
