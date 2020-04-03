@@ -1,20 +1,159 @@
 package com.example.weatherapp.currenctLocation;
 
+import android.Manifest;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.weatherapi.domain.useCase.GetCurrentWeatherByCityLocationUseCase;
 import com.example.weatherapp.R;
+import com.example.weatherapp.currenctLocation.presenter.AsyncCurrentLocationPresenter;
+import com.example.weatherapp.currenctLocation.presenter.CurrentLocationPresenter;
+import com.example.weatherapp.currenctLocation.presenter.ICurrentLocationPresenter;
+import com.example.weatherapp.currenctLocation.view.ICurrentLocationView;
+import com.example.weatherapp.currenctLocation.view.InMainThreadCurrentLocationView;
+import com.example.weatherapp.data.deviceLocation.IDeviceLocation;
+import com.example.weatherapp.provider.OpenWeatherApiProvider;
+import com.example.weatherapp.service.DeviceLocationService;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
-public class CurrentLocationFragment extends Fragment {
+import java.util.List;
+import java.util.concurrent.Executors;
+
+public class CurrentLocationFragment extends Fragment implements DeviceLocationService.OnLocationUpdateListener, ICurrentLocationView {
+    private View view;
+    private Intent deviceLocationServiceIntent;
+    private DeviceLocationService deviceLocationService;
+    private ICurrentLocationPresenter presenter;
+
+    private TextView tvSearchingProgress;
+    private TextView tvSearchingError;
+    private Button btnTryAgain;
+    private ProgressBar pbSearchingProgress;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_current_location, container, false);
+        view = inflater.inflate(R.layout.fragment_current_location, container, false);
+        deviceLocationServiceIntent = new Intent(view.getContext(), DeviceLocationService.class);
+        setupView();
+
+        presenter =
+                new AsyncCurrentLocationPresenter(
+                        new CurrentLocationPresenter(
+                                new InMainThreadCurrentLocationView(
+                                        this
+                                ),
+                                new GetCurrentWeatherByCityLocationUseCase(
+                                        OpenWeatherApiProvider.get()
+                                )
+                        ),
+                        Executors.newCachedThreadPool()
+                );
+
+        presenter.onCreate();
+
+        return view;
+    }
+
+    private void setupView() {
+        tvSearchingProgress = view.findViewById(R.id.tv_current_location_searching_progress);
+        pbSearchingProgress = view.findViewById(R.id.pb_current_location_searching_progress);
+
+        tvSearchingError = view.findViewById(R.id.tv_current_location_error_msg);
+        btnTryAgain = view.findViewById(R.id.btn_fragment_current_location_try_again);
+
+        btnTryAgain.setOnClickListener(v -> presenter.onTrySearchAgainPressed());
+    }
+
+
+    @Override
+    public void setIsSearchingLocationProcess(boolean isProcess) {
+        int visibility = isProcess ? View.VISIBLE : View.GONE;
+
+        pbSearchingProgress.setVisibility(visibility);
+        tvSearchingProgress.setVisibility(visibility);
+    }
+
+    @Override
+    public void setIsPermissionRequiredError(boolean isError) {
+        int visibility = isError ? View.VISIBLE : View.GONE;
+
+        tvSearchingError.setVisibility(visibility);
+        btnTryAgain.setVisibility(visibility);
+    }
+
+    private void stopLocationService() {
+        try {
+            view.getContext().unbindService(this);
+            view.getContext().stopService(deviceLocationServiceIntent);
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        stopLocationService();
+    }
+
+    @Override
+    public void startLocationService() {
+        Dexter.withActivity(requireActivity())
+                .withPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+                            view.getContext().startService(deviceLocationServiceIntent);
+                            view.getContext().bindService(deviceLocationServiceIntent, CurrentLocationFragment.this, Context.BIND_AUTO_CREATE);
+                        } else {
+                            setIsPermissionRequiredError(true);
+                            setIsSearchingLocationProcess(false);
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                })
+                .check();
+    }
+
+    @Override
+    public void onUpdated(IDeviceLocation deviceLocation) {
+        presenter.onLocationUpdated(deviceLocation);
+    }
+
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        DeviceLocationService.LocalBinder localBinder = (DeviceLocationService.LocalBinder) service;
+        deviceLocationService = localBinder.getServiceInstance();
+        deviceLocationService.attachListener(this);
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+        if (deviceLocationService != null) {
+            deviceLocationService.removeListener();
+        }
     }
 }

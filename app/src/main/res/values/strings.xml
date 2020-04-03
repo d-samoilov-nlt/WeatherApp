@@ -4,8 +4,17 @@
     // common
     <string name="no_connection_msg">No internet connection</string>
 
+    // action
+    <string name="action_try_again">Try again</string>
+
+    // error
+    <string name="error_cant_get_location">Can\'t get your device location data</string>
+
     // main screen
     <string name="main_screen_tab_current_location">Current Location</string>
     <string name="main_screen_tab_all_locations">Locations</string>
+
+    // current location screen
+    <string name="search_location_progress">Turn on device location service in settings.\nSearching device location…</string>
 
 </resources>
