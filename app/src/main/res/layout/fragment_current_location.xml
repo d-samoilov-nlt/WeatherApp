@@ -36,6 +36,21 @@
                 android:src="@drawable/ic_favorite_border_white_24dp"
                 app:layout_constraintEnd_toStartOf="@+id/iv_current_location_toolbar_update"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_current_location_toolbar_short_details"
+                style="@style/TitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_view_margin"
+                android:textColor="@color/colorSimpleTextLight"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_current_location_toolbar_favorite"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Short details data" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.MaterialToolbar>
 

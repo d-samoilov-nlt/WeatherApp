@@ -6,17 +6,21 @@ import com.example.weatherapi.domain.useCase.IGetCurrentWeatherByCityLocationUse
 import com.example.weatherapp.currenctLocation.view.ICurrentLocationView;
 import com.example.weatherapp.data.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.domain.exception.PermissionDeniedException;
+import com.example.weatherapp.domain.mapper.IForecastShortDetailsMapper;
 
 public class CurrentLocationPresenter implements ICurrentLocationPresenter {
     private final ICurrentLocationView view;
     private final IGetCurrentWeatherByCityLocationUseCase getCurrentWeatherByCityLocationUseCase;
+    private final IForecastShortDetailsMapper forecastShortDetailsMapper;
 
     public CurrentLocationPresenter(
             ICurrentLocationView view,
-            IGetCurrentWeatherByCityLocationUseCase getCurrentWeatherByCityLocationUseCase) {
+            IGetCurrentWeatherByCityLocationUseCase getCurrentWeatherByCityLocationUseCase,
+            IForecastShortDetailsMapper forecastShortDetailsMapper) {
 
         this.view = view;
         this.getCurrentWeatherByCityLocationUseCase = getCurrentWeatherByCityLocationUseCase;
+        this.forecastShortDetailsMapper = forecastShortDetailsMapper;
     }
 
     @Override
@@ -28,20 +32,27 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
     @Override
     public void onLocationUpdated(IDeviceLocation deviceLocation) {
         view.setIsPermissionRequiredError(false);
+        ICurrentWeatherResponse currentWeatherResponse = null;
 
         try {
-            ICurrentWeatherResponse currentWeatherResponse =
+            currentWeatherResponse =
                     getCurrentWeatherByCityLocationUseCase.get(
                             new CityLocation(
                                     deviceLocation.getLongitude(),
                                     deviceLocation.getLatitude()));
-
-
         } catch (PermissionDeniedException e) {
             view.setIsPermissionRequiredError(true);
         } finally {
             view.setIsSearchingLocationProcess(false);
         }
+
+        if (currentWeatherResponse == null){
+            // TODO : handle case
+            return;
+        }
+
+        view.showShortForecastDetails(
+                forecastShortDetailsMapper.map(currentWeatherResponse));
     }
 
     @Override

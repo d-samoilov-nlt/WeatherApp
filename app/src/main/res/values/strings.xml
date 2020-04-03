@@ -16,5 +16,6 @@
 
     // current location screen
     <string name="search_location_progress">Turn on device location service in settings.\nSearching device location…</string>
-
+    <string name="current_location_short_data_cel">%1$s - %2$s C, %3$s</string>
+    <string name="current_location_short_data_far">%1$s - %2$s F, %3$s</string>
 </resources>

@@ -25,6 +25,8 @@ import com.example.weatherapp.currenctLocation.presenter.ICurrentLocationPresent
 import com.example.weatherapp.currenctLocation.view.ICurrentLocationView;
 import com.example.weatherapp.currenctLocation.view.InMainThreadCurrentLocationView;
 import com.example.weatherapp.data.deviceLocation.IDeviceLocation;
+import com.example.weatherapp.data.forecast.shortDetails.IForecastShortDetailsDisplayModel;
+import com.example.weatherapp.domain.mapper.ForecastShortDetailsMapper;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
 import com.example.weatherapp.service.DeviceLocationService;
 import com.karumi.dexter.Dexter;
@@ -44,6 +46,8 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
 
     private TextView tvSearchingProgress;
     private TextView tvSearchingError;
+    private TextView tvToolbarShortDetails;
+
     private Button btnTryAgain;
     private ProgressBar pbSearchingProgress;
 
@@ -61,8 +65,8 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
                                 ),
                                 new GetCurrentWeatherByCityLocationUseCase(
                                         OpenWeatherApiProvider.get()
-                                )
-                        ),
+                                ),
+                                new ForecastShortDetailsMapper()),
                         Executors.newCachedThreadPool()
                 );
 
@@ -77,6 +81,8 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
 
         tvSearchingError = view.findViewById(R.id.tv_current_location_error_msg);
         btnTryAgain = view.findViewById(R.id.btn_fragment_current_location_try_again);
+
+        tvToolbarShortDetails = view.findViewById(R.id.tv_current_location_toolbar_short_details);
 
         btnTryAgain.setOnClickListener(v -> presenter.onTrySearchAgainPressed());
     }
@@ -96,6 +102,17 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
 
         tvSearchingError.setVisibility(visibility);
         btnTryAgain.setVisibility(visibility);
+    }
+
+    @Override
+    public void showShortForecastDetails(IForecastShortDetailsDisplayModel dm) {
+        tvToolbarShortDetails.setText(
+                String.format(
+                        view.getContext().getResources().getString(R.string.current_location_short_data_far),
+                        dm.getCityName(),
+                        dm.getTemp(),
+                        dm.getForecast())
+        );
     }
 
     private void stopLocationService() {
