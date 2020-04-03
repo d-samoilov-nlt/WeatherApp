@@ -1,6 +1,6 @@
 package com.example.weatherapi.service.interfaces;
 
-import com.example.weatherapi.service.interfaces.model.ICurrentWeatherResponse;
+import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeatherResponse;
 
 import java.util.Map;
 
