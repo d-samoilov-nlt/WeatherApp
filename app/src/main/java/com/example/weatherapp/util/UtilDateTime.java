@@ -29,7 +29,7 @@ public class UtilDateTime {
         return getNextDayDate(getTodayDate());
     }
 
-    public static Date getNextDayDate(Date origin) {
+    private static Date getNextDayDate(Date origin) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(origin);
         cal.add(Calendar.DAY_OF_MONTH, 1);
@@ -49,7 +49,6 @@ public class UtilDateTime {
     public static String getWeekDayFromDate(Date date) {
         return new SimpleDateFormat("EEEE", Locale.getDefault()).format(date);
     }
-
 
     public static boolean isTodayDate(String date) {
         try {
