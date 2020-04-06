@@ -1,5 +1,6 @@
 package com.example.weatherapp.main;
 
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.example.weatherapp.main.presenter.SafeMainPresenter;
 import com.example.weatherapp.main.view.IMainView;
 import com.example.weatherapp.main.view.InMainThreadMainView;
 import com.example.weatherapp.main.view.LocationTabFragmentAdapter;
+import com.example.weatherapp.searchCity.SearchCityActivity;
 import com.example.weatherapp.service.ConnectivityReceiver;
 import com.google.android.material.tabs.TabLayout;
 
@@ -39,7 +41,7 @@ public class MainActivity extends WeatherAppActivity implements IMainView {
                 new AsyncMainPresenter(
                         new SafeMainPresenter(
                                 new MainPresenter(
-                                        null, // TODO : add SearchCityActivity launching
+                                        () -> startActivity(new Intent(MainActivity.this, SearchCityActivity.class)),
                                         new InMainThreadMainView(this))),
                         Executors.newCachedThreadPool()
                 );
