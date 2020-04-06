@@ -1,11 +1,14 @@
 package com.example.weatherapp.provider;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import com.example.weatherapi.OpenWeatherApiConfig;
 import com.example.weatherapi.service.interfaces.IOpenWeatherApi;
 import com.example.weatherapi.service.retrofit2.IRetrofitOpenWeatherApi;
 import com.example.weatherapi.service.retrofit2.RetrofitToOpenWeatherApiBridge;
+import com.example.weatherapp.service.CheckNetworkAvailabilityOpenWeatherAPI;
 import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
@@ -18,11 +21,11 @@ public class OpenWeatherApiProvider {
     private static final long TIMEOUT_SEC = 60;
     private static IOpenWeatherApi weatherApi;
 
-    public static IOpenWeatherApi get() {
+    public static IOpenWeatherApi get(Context context) {
         if (weatherApi == null) {
             synchronized (OpenWeatherApiProvider.class) {
                 if (weatherApi == null) {
-                    weatherApi = build();
+                    weatherApi = build(context);
                 }
             }
         }
@@ -30,13 +33,15 @@ public class OpenWeatherApiProvider {
         return weatherApi;
     }
 
-    private static IOpenWeatherApi build() {
+    private static IOpenWeatherApi build(Context context) {
         return
-                new RetrofitToOpenWeatherApiBridge(
-                        getCommonRetrofitBuilder()
-                                .client(getCommonClientBuilder().build())
-                                .build()
-                                .create(IRetrofitOpenWeatherApi.class));
+                new CheckNetworkAvailabilityOpenWeatherAPI(
+                        new RetrofitToOpenWeatherApiBridge(
+                                getCommonRetrofitBuilder()
+                                        .client(getCommonClientBuilder().build())
+                                        .build()
+                                        .create(IRetrofitOpenWeatherApi.class)),
+                        context);
     }
 
     @NonNull
