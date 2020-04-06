@@ -6,49 +6,45 @@
 
     <include
         android:id="@+id/cl_forecast_details_toolbar"
-        layout="@layout/forecast_details_toolbar" />
-
-    <include
-        android:id="@+id/ll_forecast_details_description"
-        layout="@layout/forecast_details_description"
+        layout="@layout/forecast_details_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/default_view_margin"
-        android:layout_marginBottom="@dimen/default_view_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/cl_forecast_details_content"
+        layout="@layout/fragment_forecast_details_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/rv_forecast_details_forecast"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_forecast_details_toolbar"
         app:layout_constraintVertical_bias="0" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_forecast_details_forecast"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/default_view_margin"
-        app:layout_constraintBottom_toBottomOf="@+id/ll_forecast_details_description"
+    <include
+        android:id="@+id/cl_forecast_loading_progress"
+        layout="@layout/layout_loading_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ll_forecast_details_description"
-        app:layout_constraintTop_toTopOf="@+id/ll_forecast_details_description"
-        app:layout_constraintVertical_bias="1" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_forecast_details_toolbar" />
 
-    <View
-        android:id="@+id/v_forecast_details_left_gradient"
-        android:layout_width="@dimen/vertical_gradient_wight"
-        android:layout_height="0dp"
-        android:background="@drawable/white_gradient_left_to_right"
-        app:layout_constraintBottom_toBottomOf="@+id/ll_forecast_details_description"
-        app:layout_constraintStart_toEndOf="@+id/ll_forecast_details_description"
-        app:layout_constraintTop_toTopOf="@+id/ll_forecast_details_description" />
 
-    <View
-        android:id="@+id/v_forecast_details_right_gradient"
-        android:layout_width="@dimen/vertical_gradient_wight"
-        android:layout_height="0dp"
-        android:background="@drawable/white_gradient_right_to_left"
-        app:layout_constraintBottom_toBottomOf="@+id/rv_forecast_details_forecast"
-        app:layout_constraintEnd_toEndOf="@+id/rv_forecast_details_forecast"
-        app:layout_constraintTop_toTopOf="@+id/rv_forecast_details_forecast" />
-
+    <include
+        android:id="@+id/cl_forecast_error_message"
+        layout="@layout/layout_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_forecast_details_toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

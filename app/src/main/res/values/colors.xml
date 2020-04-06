@@ -8,6 +8,7 @@
     <color name="colorTabIndicator">#E91E63</color>
     <color name="colorTabAppearanceText">#494949</color>
     <color name="colorBackgroundNoConnectionDialog">#F44336</color>
+    <color name="colorErrorText">#F44336</color>
     <color name="colorOneTimeForecastBackground">#FFFFFF</color>
     <color name="colorEvenOneTimeForecastBackground">#FBFBFB</color>
 </resources>

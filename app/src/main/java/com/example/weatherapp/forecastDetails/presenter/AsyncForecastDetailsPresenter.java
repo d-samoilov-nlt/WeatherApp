@@ -18,4 +18,19 @@ public class AsyncForecastDetailsPresenter implements IForecastDetailsPresenter 
     public void onCreate(IDeviceLocation deviceLocation) {
         service.execute(() -> origin.onCreate(deviceLocation));
     }
+
+    @Override
+    public void onTodayPressed() {
+        service.execute(origin::onTodayPressed);
+    }
+
+    @Override
+    public void onTomorrowPressed() {
+        service.execute(origin::onTomorrowPressed);
+    }
+
+    @Override
+    public void onFiveDaysPressed() {
+        service.execute(origin::onFiveDaysPressed);
+    }
 }

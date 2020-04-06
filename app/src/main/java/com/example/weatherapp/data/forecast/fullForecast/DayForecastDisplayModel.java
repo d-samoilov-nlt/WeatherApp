@@ -4,11 +4,19 @@ import java.util.List;
 
 public class DayForecastDisplayModel implements IDayForecastDisplayModel {
     private final List<IOneTimeForecastDisplayModel> forecastDisplayModels;
+    private final String title;
 
     public DayForecastDisplayModel(
-            List<IOneTimeForecastDisplayModel> forecastDisplayModels) {
+            List<IOneTimeForecastDisplayModel> forecastDisplayModels,
+            String title) {
 
         this.forecastDisplayModels = forecastDisplayModels;
+        this.title = title;
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
     }
 
     @Override

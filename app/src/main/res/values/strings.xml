@@ -3,12 +3,14 @@
 
     // common
     <string name="no_connection_msg">No internet connection</string>
+    <string name="loading_progress">Loading…</string>
 
     // action
     <string name="action_try_again">Try again</string>
 
     // error
     <string name="error_cant_get_location">Can\'t get your device location data</string>
+    <string name="error_while_loading_forecast">Some error happened while the forecast was loading. Please try again.</string>
 
     // main screen
     <string name="main_screen_tab_current_location">Current Location</string>

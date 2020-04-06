@@ -3,7 +3,7 @@
     // common
     <dimen name="default_view_margin">16dp</dimen>
     <dimen name="default_view_padding">16dp</dimen>
-    <dimen name="vertical_gradient_wight">30dp</dimen>
+    <dimen name="vertical_gradient_wight">20dp</dimen>
 
     // text view
     <dimen name="simple_text_size">14sp</dimen>
@@ -14,4 +14,6 @@
 
     // image view
     <dimen name="forecast_icon_size">50dp</dimen>
+    <dimen name="error_icon_size">50dp</dimen>
+
 </resources>

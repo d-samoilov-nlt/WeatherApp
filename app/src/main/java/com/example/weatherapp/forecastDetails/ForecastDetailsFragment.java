@@ -15,12 +15,16 @@ import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.GetSeveralDa
 import com.example.weatherapp.R;
 import com.example.weatherapp.common.view.ForecastDetailsToolbarButton;
 import com.example.weatherapp.data.deviceLocation.SerializableDeviceLocation;
+import com.example.weatherapp.forecastDetails.model.mapper.SeveralDaysForecastMapper;
 import com.example.weatherapp.forecastDetails.model.mapper.TodayForecastMapper;
+import com.example.weatherapp.forecastDetails.model.mapper.TomorrowForecastMapper;
 import com.example.weatherapp.forecastDetails.presenter.AsyncForecastDetailsPresenter;
 import com.example.weatherapp.forecastDetails.presenter.ForecastDetailsPresenter;
 import com.example.weatherapp.forecastDetails.presenter.IForecastDetailsPresenter;
+import com.example.weatherapp.forecastDetails.presenter.SafeForecastDetailsPresenter;
 import com.example.weatherapp.forecastDetails.view.ForecastDetailsRVAdapter;
 import com.example.weatherapp.forecastDetails.view.ForecastDetailsView;
+import com.example.weatherapp.forecastDetails.view.ForecastSeveralDaysDetailsRvAdapter;
 import com.example.weatherapp.forecastDetails.view.InMainThreadForecastDetailsView;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
 
@@ -31,7 +35,11 @@ public class ForecastDetailsFragment extends Fragment implements View.OnClickLis
     private IForecastDetailsPresenter presenter;
 
     private View view;
-    private ForecastDetailsRVAdapter forecastDetailsRVAdapter;
+
+    private RecyclerView rvForecast;
+    private ForecastDetailsRVAdapter todayForecastDetailsRVAdapter;
+    private ForecastDetailsRVAdapter tomorrowForecastDetailsRVAdapter;
+    private ForecastSeveralDaysDetailsRvAdapter forecastSeveralDaysDetailsRvAdapter;
 
     private ForecastDetailsToolbarButton btnToday;
     private ForecastDetailsToolbarButton btnTomorrow;
@@ -47,14 +55,21 @@ public class ForecastDetailsFragment extends Fragment implements View.OnClickLis
 
         presenter =
                 new AsyncForecastDetailsPresenter(
-                        new ForecastDetailsPresenter(
-                                new InMainThreadForecastDetailsView(
-                                        new ForecastDetailsView(
-                                                forecastDetailsRVAdapter
-                                        )
-                                ),
-                                new GetSeveralDaysForecastUseCase(OpenWeatherApiProvider.get()),
-                                new TodayForecastMapper()
+                        new SafeForecastDetailsPresenter(
+                                new ForecastDetailsPresenter(
+                                        new InMainThreadForecastDetailsView(
+                                                new ForecastDetailsView(
+                                                        todayForecastDetailsRVAdapter,
+                                                        tomorrowForecastDetailsRVAdapter,
+                                                        forecastSeveralDaysDetailsRvAdapter,
+                                                        view.findViewById(R.id.cl_forecast_details_content),
+                                                        view.findViewById(R.id.cl_forecast_loading_progress),
+                                                        view.findViewById(R.id.cl_forecast_error_message))
+                                        ),
+                                        new GetSeveralDaysForecastUseCase(OpenWeatherApiProvider.get(getContext().getApplicationContext())),
+                                        new TodayForecastMapper(getResources()),
+                                        new TomorrowForecastMapper(getResources()),
+                                        new SeveralDaysForecastMapper(getResources()))
                         ),
                         Executors.newCachedThreadPool()
                 );
@@ -83,19 +98,21 @@ public class ForecastDetailsFragment extends Fragment implements View.OnClickLis
         btnSeveralDays.setIsSelectedBackground(false);
 
         setupRv();
+
+        rvForecast.setAdapter(todayForecastDetailsRVAdapter);
     }
 
     private void setupRv() {
-        RecyclerView rvForecast = view.findViewById(R.id.rv_forecast_details_forecast);
+        rvForecast = view.findViewById(R.id.rv_forecast_details_forecast);
         rvForecast.setLayoutManager(
                 new LinearLayoutManager(
                         view.getContext(),
                         LinearLayoutManager.HORIZONTAL,
                         false));
 
-        forecastDetailsRVAdapter = new ForecastDetailsRVAdapter(new ArrayList<>());
-
-        rvForecast.setAdapter(forecastDetailsRVAdapter);
+        todayForecastDetailsRVAdapter = new ForecastDetailsRVAdapter(new ArrayList<>());
+        tomorrowForecastDetailsRVAdapter = new ForecastDetailsRVAdapter(new ArrayList<>());
+        forecastSeveralDaysDetailsRvAdapter = new ForecastSeveralDaysDetailsRvAdapter(new ArrayList<>());
     }
 
     @Override
@@ -107,15 +124,27 @@ public class ForecastDetailsFragment extends Fragment implements View.OnClickLis
             btnTomorrow.setIsSelectedBackground(false);
             btnSeveralDays.setIsSelectedBackground(false);
 
+            rvForecast.setAdapter(todayForecastDetailsRVAdapter);
+
+            presenter.onTodayPressed();
+
         } else if (viewId == btnTomorrow.getId()) {
             btnToday.setIsSelectedBackground(false);
             btnTomorrow.setIsSelectedBackground(true);
             btnSeveralDays.setIsSelectedBackground(false);
 
+            rvForecast.setAdapter(tomorrowForecastDetailsRVAdapter);
+
+            presenter.onTomorrowPressed();
+
         } else if (viewId == btnSeveralDays.getId()) {
             btnToday.setIsSelectedBackground(false);
             btnTomorrow.setIsSelectedBackground(false);
             btnSeveralDays.setIsSelectedBackground(true);
+
+            rvForecast.setAdapter(forecastSeveralDaysDetailsRvAdapter);
+
+            presenter.onFiveDaysPressed();
         }
     }
 }
