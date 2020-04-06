@@ -4,18 +4,18 @@ import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveral
 import com.example.weatherapi.data.entity.pojo.CityLocation;
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.IGetSeveralDaysForecastUseCase;
 import com.example.weatherapp.data.deviceLocation.IDeviceLocation;
-import com.example.weatherapp.forecastDetails.model.mapper.ITodayForecastMapper;
+import com.example.weatherapp.forecastDetails.model.mapper.IDayForecastMapper;
 import com.example.weatherapp.forecastDetails.view.IForecastDetailsView;
 
 public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
     private final IForecastDetailsView view;
     private final IGetSeveralDaysForecastUseCase getSeveralDaysForecastUseCase;
-    private final ITodayForecastMapper todayForecastMapper;
+    private final IDayForecastMapper todayForecastMapper;
 
     public ForecastDetailsPresenter(
             IForecastDetailsView view,
             IGetSeveralDaysForecastUseCase getSeveralDaysForecastUseCase,
-            ITodayForecastMapper todayForecastMapper) {
+            IDayForecastMapper todayForecastMapper) {
 
         this.view = view;
         this.getSeveralDaysForecastUseCase = getSeveralDaysForecastUseCase;

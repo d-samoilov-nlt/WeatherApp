@@ -22,7 +22,7 @@ import static com.example.weatherapp.util.UtilWeatherDisplayFormat.formatToDispl
 import static com.example.weatherapp.util.UtilWeatherDisplayFormat.formatToDisplayValueWindSpeed;
 import static com.example.weatherapp.util.UtilWeatherIcon.getOpenWeatherIconUrl;
 
-public class TodayForecastMapper implements ITodayForecastMapper {
+public class TodayForecastMapper implements IDayForecastMapper {
     private Date todayDate;
 
     @Override
