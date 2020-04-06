@@ -11,7 +11,7 @@ import java.util.Locale;
 public class UtilDateTime {
 
     public static String dateToHnMm(Date date) {
-        SimpleDateFormat dateToTime = new SimpleDateFormat("h:mm", Locale.getDefault());
+        SimpleDateFormat dateToTime = new SimpleDateFormat("H:mm", Locale.getDefault());
         return dateToTime.format(date);
     }
 
