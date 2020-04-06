@@ -52,6 +52,7 @@ public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
                                 deviceLocation.getLatitude()));
             }
             view.showForecastToday(todayForecastMapper.map(severalDaysWeatherResponse));
+            view.showDetailsLoadingProgress(false);
         } catch (DamagedForecastResponseException e) {
             e.printStackTrace();
             view.showLoadingError(true);

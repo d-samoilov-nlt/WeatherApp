@@ -25,8 +25,12 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
 
     @Override
     public void onCreate() {
-        view.startLocationService();
         view.setIsSearchingLocationProcess(true);
+    }
+
+    @Override
+    public void onStart() {
+        view.startLocationService();
     }
 
     @Override

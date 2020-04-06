@@ -19,6 +19,11 @@ public class AsyncCurrentLocationPresenter implements ICurrentLocationPresenter 
     }
 
     @Override
+    public void onStart() {
+        service.execute(origin::onStart);
+    }
+
+    @Override
     public void onLocationUpdated(IDeviceLocation deviceLocation) {
         service.execute(() -> origin.onLocationUpdated(deviceLocation));
     }

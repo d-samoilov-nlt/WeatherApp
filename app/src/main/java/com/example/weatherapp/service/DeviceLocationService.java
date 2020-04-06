@@ -24,6 +24,7 @@ public class DeviceLocationService extends Service implements LocationListener {
     private OnLocationUpdateListener onLocationUpdateListener;
     private IBinder binder;
     private IDeviceLocation lastDeviseLocation;
+    private LocationManager locationManager;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -42,8 +43,7 @@ public class DeviceLocationService extends Service implements LocationListener {
             throw new PermissionDeniedException("Location permission denied");
         }
 
-        LocationManager locationManager =
-                (LocationManager) getSystemService(LOCATION_SERVICE);
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         if (locationManager == null) {
             throw new CantGetDeviceLocationException();
@@ -60,6 +60,7 @@ public class DeviceLocationService extends Service implements LocationListener {
 
     public void removeListener() {
         this.onLocationUpdateListener = null;
+        this.locationManager.removeUpdates(this);
     }
 
     @Override
@@ -75,6 +76,10 @@ public class DeviceLocationService extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
+        if (onLocationUpdateListener == null) {
+            return;
+        }
+
         IDeviceLocation currentDeviceLocation =
                 new DeviceLocation(
                         location.getLongitude(),

@@ -19,6 +19,15 @@ public class SafeCurrentLocationPresenter implements ICurrentLocationPresenter {
     }
 
     @Override
+    public void onStart() {
+        try {
+            origin.onStart();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void onLocationUpdated(IDeviceLocation deviceLocation) {
         try {
             origin.onLocationUpdated(deviceLocation);

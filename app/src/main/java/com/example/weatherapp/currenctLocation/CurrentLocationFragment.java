@@ -139,18 +139,26 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
 
     private void stopLocationService() {
         try {
+            if (deviceLocationService != null) {
+                deviceLocationService.removeListener();
+            }
             view.getContext().unbindService(this);
             view.getContext().stopService(deviceLocationServiceIntent);
-
         } catch (RuntimeException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onStop() {
+        super.onStop();
         stopLocationService();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.onStart();
     }
 
     @Override
@@ -179,6 +187,7 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
 
     @Override
     public void onUpdated(IDeviceLocation deviceLocation) {
+        stopLocationService();
         presenter.onLocationUpdated(deviceLocation);
     }
 
