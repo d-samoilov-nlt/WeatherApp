@@ -2,7 +2,7 @@
 <resources>
     <color name="colorAccent">#1FB9E4</color>
     <color name="colorSimpleText">#919191</color>
-    <color name="colorSimpleTextLight">#FFFFFF</color>
+    <color name="colorSimpleTextLight">#FDFDFD</color>
     <color name="colorFocusedSimpleText">#FFFFFF</color>
     <color name="colorScreenBackground">#FFFFFF</color>
     <color name="colorTabIndicator">#E91E63</color>

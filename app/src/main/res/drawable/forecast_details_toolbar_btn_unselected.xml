@@ -4,10 +4,10 @@
     <item>
         <shape android:shape="oval">
             <padding
-                android:bottom="5dp"
-                android:left="5dp"
-                android:right="5dp"
-                android:top="5dp" />
+                android:bottom="10dp"
+                android:left="10dp"
+                android:right="10dp"
+                android:top="10dp" />
 
             <solid android:color="@color/colorScreenBackground" />
         </shape>
@@ -15,10 +15,10 @@
     <item>
         <shape android:shape="oval">
             <padding
-                android:bottom="45dp"
-                android:left="45dp"
-                android:right="45dp"
-                android:top="45dp" />
+                android:bottom="2dp"
+                android:left="2dp"
+                android:right="2dp"
+                android:top="2dp" />
 
             <solid android:color="@color/colorAccent" />
         </shape>

@@ -7,7 +7,6 @@ import com.example.weatherapp.R;
 
 final public class ForecastDetailsToolbarButton extends androidx.appcompat.widget.AppCompatButton {
 
-
     public ForecastDetailsToolbarButton(Context context) {
         super(context);
     }
@@ -16,12 +15,13 @@ final public class ForecastDetailsToolbarButton extends androidx.appcompat.widge
         super(context, attrs);
     }
 
-    @Override
-    public void setSelected(boolean selected) {
+    public void setIsSelectedBackground(boolean selected) {
         if (selected) {
-            setBackgroundResource(R.drawable.forecast_details_toolbar_btn_selected);
+            setTextColor(getResources().getColor(R.color.colorFocusedSimpleText));
+            setBackground(getResources().getDrawable(R.drawable.forecast_details_toolbar_btn_selected));
         } else {
-            setBackgroundResource(R.drawable.forecast_details_toolbar_btn_unselected);
+            setTextColor(getResources().getColor(R.color.colorSimpleTextLight));
+            setBackground(getResources().getDrawable(R.drawable.forecast_details_toolbar_btn_unselected));
         }
     }
 }

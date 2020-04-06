@@ -43,6 +43,5 @@
         <item name="android:layout_width">@dimen/round_button_size</item>
         <item name="android:layout_height">@dimen/round_button_size</item>
         <item name="textAllCaps">false</item>
-        <item name="android:textColor">@color/colorSimpleTextLight</item>
     </style>
 </resources>

@@ -27,7 +27,7 @@ import com.example.weatherapp.provider.OpenWeatherApiProvider;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 
-public class ForecastDetailsFragment extends Fragment {
+public class ForecastDetailsFragment extends Fragment implements View.OnClickListener {
     private IForecastDetailsPresenter presenter;
 
     private View view;
@@ -65,13 +65,22 @@ public class ForecastDetailsFragment extends Fragment {
     }
 
     private void setupActions() {
-        btnToday.setSelected(true);
+        btnToday.setIsSelectedBackground(true);
     }
 
     private void setupView() {
         btnToday = view.findViewById(R.id.btn_forecast_details_toolbar_today);
         btnTomorrow = view.findViewById(R.id.btn_forecast_details_toolbar_tomorrow);
         btnSeveralDays = view.findViewById(R.id.btn_forecast_details_toolbar_several_days);
+
+        btnToday.setOnClickListener(this);
+        btnTomorrow.setOnClickListener(this);
+        btnSeveralDays.setOnClickListener(this);
+
+        // TODO : refactor to use group
+        btnToday.setIsSelectedBackground(true);
+        btnTomorrow.setIsSelectedBackground(false);
+        btnSeveralDays.setIsSelectedBackground(false);
 
         setupRv();
     }
@@ -87,5 +96,26 @@ public class ForecastDetailsFragment extends Fragment {
         forecastDetailsRVAdapter = new ForecastDetailsRVAdapter(new ArrayList<>());
 
         rvForecast.setAdapter(forecastDetailsRVAdapter);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int viewId = v.getId();
+
+        if (viewId == btnToday.getId()) {
+            btnToday.setIsSelectedBackground(true);
+            btnTomorrow.setIsSelectedBackground(false);
+            btnSeveralDays.setIsSelectedBackground(false);
+
+        } else if (viewId == btnTomorrow.getId()) {
+            btnToday.setIsSelectedBackground(false);
+            btnTomorrow.setIsSelectedBackground(true);
+            btnSeveralDays.setIsSelectedBackground(false);
+
+        } else if (viewId == btnSeveralDays.getId()) {
+            btnToday.setIsSelectedBackground(false);
+            btnTomorrow.setIsSelectedBackground(false);
+            btnSeveralDays.setIsSelectedBackground(true);
+        }
     }
 }
