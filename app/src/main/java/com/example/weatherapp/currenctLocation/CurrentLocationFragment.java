@@ -23,6 +23,7 @@ import com.example.weatherapp.R;
 import com.example.weatherapp.currenctLocation.presenter.AsyncCurrentLocationPresenter;
 import com.example.weatherapp.currenctLocation.presenter.CurrentLocationPresenter;
 import com.example.weatherapp.currenctLocation.presenter.ICurrentLocationPresenter;
+import com.example.weatherapp.currenctLocation.presenter.SafeCurrentLocationPresenter;
 import com.example.weatherapp.currenctLocation.view.ICurrentLocationView;
 import com.example.weatherapp.currenctLocation.view.InMainThreadCurrentLocationView;
 import com.example.weatherapp.data.deviceLocation.IDeviceLocation;
@@ -63,14 +64,15 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
 
         presenter =
                 new AsyncCurrentLocationPresenter(
-                        new CurrentLocationPresenter(
-                                new InMainThreadCurrentLocationView(
-                                        this
-                                ),
-                                new GetCurrentWeatherByCityLocationUseCase(
-                                        OpenWeatherApiProvider.get()
-                                ),
-                                new ForecastShortDetailsMapper()),
+                        new SafeCurrentLocationPresenter(
+                                new CurrentLocationPresenter(
+                                        new InMainThreadCurrentLocationView(
+                                                this
+                                        ),
+                                        new GetCurrentWeatherByCityLocationUseCase(
+                                                OpenWeatherApiProvider.get(getContext().getApplicationContext())
+                                        ),
+                                        new ForecastShortDetailsMapper())),
                         Executors.newCachedThreadPool()
                 );
 
