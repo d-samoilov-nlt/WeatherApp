@@ -1,6 +1,7 @@
 package com.example.weatherapi.service.retrofit2;
 
 import com.example.weatherapi.data.entity.gson.currentWeather.GsonCurrentWeatherResponse;
+import com.example.weatherapi.data.entity.gson.severalDaysWeathre.GsonSeveralDaysWeatherResponse;
 
 import java.util.Map;
 
@@ -15,4 +16,6 @@ public interface IRetrofitOpenWeatherApi {
     @GET("2.5/weather")
     Call<GsonCurrentWeatherResponse> getCurrentWeatherByLocation(@QueryMap Map<String, String> options);
 
+    @GET("2.5/forecast")
+    Call<GsonSeveralDaysWeatherResponse> getFiveDaysForecast(@QueryMap Map<String, String> options);
 }
