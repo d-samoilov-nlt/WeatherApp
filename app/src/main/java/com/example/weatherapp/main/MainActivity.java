@@ -14,6 +14,7 @@ import com.example.weatherapp.locationList.LocationListFragment;
 import com.example.weatherapp.main.presenter.AsyncMainPresenter;
 import com.example.weatherapp.main.presenter.IMainPresenter;
 import com.example.weatherapp.main.presenter.MainPresenter;
+import com.example.weatherapp.main.presenter.SafeMainPresenter;
 import com.example.weatherapp.main.view.IMainView;
 import com.example.weatherapp.main.view.InMainThreadMainView;
 import com.example.weatherapp.main.view.LocationTabFragmentAdapter;
@@ -36,9 +37,10 @@ public class MainActivity extends WeatherAppActivity implements IMainView {
 
         presenter =
                 new AsyncMainPresenter(
-                        new MainPresenter(
-                                null, // TODO : add SearchCityActivity launching
-                                new InMainThreadMainView(this)),
+                        new SafeMainPresenter(
+                                new MainPresenter(
+                                        null, // TODO : add SearchCityActivity launching
+                                        new InMainThreadMainView(this))),
                         Executors.newCachedThreadPool()
                 );
 
