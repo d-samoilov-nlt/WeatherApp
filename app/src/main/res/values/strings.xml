@@ -18,4 +18,16 @@
     <string name="search_location_progress">Turn on device location service in settings.\nSearching device location…</string>
     <string name="current_location_short_data_cel">%1$s - %2$s C, %3$s</string>
     <string name="current_location_short_data_far">%1$s - %2$s F, %3$s</string>
+
+    // forecast details
+    <string name="forecast_details_today">Today</string>
+    <string name="forecast_details_tomorrow">Tomorrow</string>
+    <string name="forecast_details_five_days">5 days</string>
+    <string name="forecast_details_description_time">Time:</string>
+    <string name="forecast_details_description_view">View:</string>
+    <string name="forecast_details_description_temp">Temperature:</string>
+    <string name="forecast_details_description_pressure">Pressure:</string>
+    <string name="forecast_details_description_wind">Wind, m/s:</string>
+    <string name="forecast_details_description_humidity">Humidity, %:</string>
+
 </resources>

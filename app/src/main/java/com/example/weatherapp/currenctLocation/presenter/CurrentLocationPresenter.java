@@ -32,7 +32,7 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
     @Override
     public void onLocationUpdated(IDeviceLocation deviceLocation) {
         view.setIsPermissionRequiredError(false);
-        ICurrentWeatherResponse currentWeatherResponse = null;
+        ICurrentWeatherResponse currentWeatherResponse;
 
         try {
             currentWeatherResponse =
@@ -40,19 +40,15 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
                             new CityLocation(
                                     deviceLocation.getLongitude(),
                                     deviceLocation.getLatitude()));
+
+            view.showShortForecastDetails(forecastShortDetailsMapper.map(currentWeatherResponse));
+            view.showForecastDetails(deviceLocation);
+
         } catch (PermissionDeniedException e) {
             view.setIsPermissionRequiredError(true);
         } finally {
             view.setIsSearchingLocationProcess(false);
         }
-
-        if (currentWeatherResponse == null){
-            // TODO : handle case
-            return;
-        }
-
-        view.showShortForecastDetails(
-                forecastShortDetailsMapper.map(currentWeatherResponse));
     }
 
     @Override

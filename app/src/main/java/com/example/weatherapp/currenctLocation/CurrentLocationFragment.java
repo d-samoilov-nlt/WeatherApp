@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.weatherapi.domain.useCase.GetCurrentWeatherByCityLocationUseCase;
 import com.example.weatherapp.R;
@@ -25,8 +26,11 @@ import com.example.weatherapp.currenctLocation.presenter.ICurrentLocationPresent
 import com.example.weatherapp.currenctLocation.view.ICurrentLocationView;
 import com.example.weatherapp.currenctLocation.view.InMainThreadCurrentLocationView;
 import com.example.weatherapp.data.deviceLocation.IDeviceLocation;
+import com.example.weatherapp.data.deviceLocation.SerializableDeviceLocation;
 import com.example.weatherapp.data.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 import com.example.weatherapp.domain.mapper.ForecastShortDetailsMapper;
+import com.example.weatherapp.forecastDetails.ForecastDetailsBundleKeys;
+import com.example.weatherapp.forecastDetails.ForecastDetailsFragment;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
 import com.example.weatherapp.service.DeviceLocationService;
 import com.karumi.dexter.Dexter;
@@ -113,6 +117,22 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
                         dm.getTemp(),
                         dm.getForecast())
         );
+    }
+
+    @Override
+    public void showForecastDetails(IDeviceLocation deviceLocation) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(
+                ForecastDetailsBundleKeys.DEVICE_LOCATION_KEY,
+                new SerializableDeviceLocation(deviceLocation));
+
+        ForecastDetailsFragment detailsFragment = new ForecastDetailsFragment();
+        detailsFragment.setArguments(bundle);
+
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        transaction.replace(R.id.fl_forecast_details, detailsFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     private void stopLocationService() {

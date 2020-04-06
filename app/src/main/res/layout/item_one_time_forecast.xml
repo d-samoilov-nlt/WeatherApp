@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_one_time_forecast_container"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/default_view_padding"
+    android:paddingEnd="@dimen/default_view_padding"
+    tools:ignore="UseCompoundDrawables">
+
+    <TextView
+        android:id="@+id/tv_one_time_forecast_time"
+        style="@style/SimpleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="12:00" />
+
+    <ImageView
+        android:id="@+id/iv_one_time_forecast_icon"
+        android:layout_width="@dimen/forecast_icon_size"
+        android:layout_height="@dimen/forecast_icon_size"
+        android:layout_marginTop="@dimen/default_view_margin"
+        tools:src="@android:drawable/btn_star" />
+
+    <TextView
+        android:id="@+id/tv_one_time_forecast_temp"
+        style="@style/SimpleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_view_margin"
+        tools:text="+10" />
+
+    <TextView
+        android:id="@+id/tv_one_time_forecast_pressure"
+        style="@style/SimpleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_view_margin"
+        tools:text="500" />
+
+    <TextView
+        android:id="@+id/tv_one_time_forecast_wind"
+        style="@style/SimpleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_view_margin"
+        tools:text="0" />
+
+    <TextView
+        android:id="@+id/tv_one_time_forecast_humidity"
+        style="@style/SimpleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_view_margin"
+        tools:text="24" />
+</LinearLayout>

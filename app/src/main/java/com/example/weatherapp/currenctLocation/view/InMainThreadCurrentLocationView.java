@@ -3,6 +3,7 @@ package com.example.weatherapp.currenctLocation.view;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.example.weatherapp.data.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.data.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 
 public class InMainThreadCurrentLocationView implements ICurrentLocationView {
@@ -32,5 +33,10 @@ public class InMainThreadCurrentLocationView implements ICurrentLocationView {
     @Override
     public void showShortForecastDetails(IForecastShortDetailsDisplayModel dm) {
         handler.post(() -> origin.showShortForecastDetails(dm));
+    }
+
+    @Override
+    public void showForecastDetails(IDeviceLocation deviceLocation) {
+        handler.post(() -> origin.showForecastDetails(deviceLocation));
     }
 }
