@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".searchCity.SearchCityActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/tb_search_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_current_location_toolbar_short_details"
+            style="@style/TitleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_view_margin"
+            android:text="@string/search_city_screen_title"
+            android:textColor="@color/colorSimpleTextLight" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <EditText
+        android:id="@+id/et_search_city_location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_view_margin"
+        android:layout_marginTop="@dimen/default_view_margin"
+        android:layout_marginEnd="@dimen/default_view_margin"
+        android:background="@drawable/edit_text_background_border"
+        android:drawableEnd="@drawable/ic_my_location_24dp"
+        android:hint="@string/search_city_screen_location_hint"
+        android:padding="@dimen/default_view_padding"
+        app:layout_constraintBottom_toTopOf="@+id/tv_search_city_utils_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tb_search_city"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tv_search_city_utils_text"
+        style="@style/TitleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_view_margin"
+        android:layout_marginTop="@dimen/default_view_margin"
+        android:background="@drawable/text_view_background_border"
+        android:padding="@dimen/default_view_padding"
+        android:text="@string/search_city_screen_utils_type"
+        app:layout_constraintBottom_toTopOf="@+id/tv_search_city_favorite_text"
+        app:layout_constraintEnd_toEndOf="@+id/tv_search_city_favorite_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_search_city_location" />
+
+    <Switch
+        android:id="@+id/switch_search_city_utils_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_view_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_search_city_utils_text"
+        app:layout_constraintStart_toEndOf="@+id/tv_search_city_utils_text"
+        app:layout_constraintTop_toTopOf="@+id/tv_search_city_utils_text" />
+
+    <TextView
+        android:id="@+id/tv_search_city_favorite_text"
+        style="@style/TitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_view_margin"
+        android:layout_marginTop="@dimen/default_view_margin"
+        android:layout_marginEnd="@dimen/default_view_margin"
+        android:background="@drawable/text_view_background_border"
+        android:padding="@dimen/default_view_padding"
+        android:text="@string/search_city_screen_favorite"
+        app:layout_constraintBottom_toTopOf="@+id/btn_search_city_view_weather"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_search_city_utils_text" />
+
+    <Switch
+        android:id="@+id/switch_search_city_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_view_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_search_city_favorite_text"
+        app:layout_constraintStart_toEndOf="@+id/tv_search_city_favorite_text"
+        app:layout_constraintTop_toTopOf="@+id/tv_search_city_favorite_text" />
+
+    <Button
+        android:id="@+id/btn_search_city_view_weather"
+        style="@style/ActionButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_view_margin"
+        android:layout_marginTop="@dimen/default_view_margin"
+        android:layout_marginEnd="@dimen/default_view_margin"
+        android:text="@string/action_view_weather"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_search_city_favorite_text" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,4 +11,6 @@
     <color name="colorErrorText">#F44336</color>
     <color name="colorOneTimeForecastBackground">#FFFFFF</color>
     <color name="colorEvenOneTimeForecastBackground">#FBFBFB</color>
+    <color name="colorViewBorder">#DFDFDF</color>
+    <color name="colorGreyLight">#F8F8F8</color>
 </resources>

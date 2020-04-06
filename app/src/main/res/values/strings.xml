@@ -7,6 +7,7 @@
 
     // action
     <string name="action_try_again">Try again</string>
+    <string name="action_view_weather">View weather</string>
 
     // error
     <string name="error_cant_get_location">Can\'t get your device location data</string>
@@ -31,5 +32,11 @@
     <string name="forecast_details_description_pressure">Pressure:</string>
     <string name="forecast_details_description_wind">Wind, m/s:</string>
     <string name="forecast_details_description_humidity">Humidity, %:</string>
+
+    // search city screen
+    <string name="search_city_screen_title">Check weather for</string>
+    <string name="search_city_screen_location_hint">Location</string>
+    <string name="search_city_screen_utils_type">°C/°F</string>
+    <string name="search_city_screen_favorite">Favorite</string>
 
 </resources>
