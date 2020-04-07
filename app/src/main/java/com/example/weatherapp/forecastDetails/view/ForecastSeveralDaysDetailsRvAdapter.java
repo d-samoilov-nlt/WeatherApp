@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weatherapp.R;
-import com.example.weatherapp.data.forecast.fullForecast.IDayForecastDisplayModel;
+import com.example.weatherapp.data.model.forecast.fullForecast.IDayForecastDisplayModel;
 
 import java.util.ArrayList;
 import java.util.List;

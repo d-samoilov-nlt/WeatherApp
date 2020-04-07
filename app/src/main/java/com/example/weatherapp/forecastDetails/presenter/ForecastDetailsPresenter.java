@@ -3,7 +3,7 @@ package com.example.weatherapp.forecastDetails.presenter;
 import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysWeatherResponse;
 import com.example.weatherapi.data.entity.pojo.CityLocation;
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.IGetSeveralDaysForecastUseCase;
-import com.example.weatherapp.data.deviceLocation.IDeviceLocation;
+import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.forecastDetails.model.mapper.IDayForecastMapper;
 import com.example.weatherapp.forecastDetails.model.mapper.ISeveralDaysForecastMapper;
 import com.example.weatherapp.forecastDetails.model.mapper.exception.DamagedForecastResponseException;

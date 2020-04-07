@@ -1,7 +1,7 @@
 package com.example.weatherapp.forecastDetails.view;
 
-import com.example.weatherapp.data.forecast.fullForecast.IDayForecastDisplayModel;
-import com.example.weatherapp.data.forecast.fullForecast.ISeveralDaysForecastDisplayModel;
+import com.example.weatherapp.data.model.forecast.fullForecast.IDayForecastDisplayModel;
+import com.example.weatherapp.data.model.forecast.fullForecast.ISeveralDaysForecastDisplayModel;
 
 public interface IForecastDetailsView {
     void showForecastToday(IDayForecastDisplayModel dm);

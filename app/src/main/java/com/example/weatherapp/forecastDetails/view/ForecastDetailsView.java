@@ -5,8 +5,8 @@ import android.widget.LinearLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.weatherapp.data.forecast.fullForecast.IDayForecastDisplayModel;
-import com.example.weatherapp.data.forecast.fullForecast.ISeveralDaysForecastDisplayModel;
+import com.example.weatherapp.data.model.forecast.fullForecast.IDayForecastDisplayModel;
+import com.example.weatherapp.data.model.forecast.fullForecast.ISeveralDaysForecastDisplayModel;
 
 public class ForecastDetailsView implements IForecastDetailsView {
     private final ForecastDetailsRVAdapter todayForecastDetailsRVAdapter;

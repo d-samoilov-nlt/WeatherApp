@@ -5,12 +5,12 @@ import android.content.res.Resources;
 import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysOneTimeWeatherForecastResponse;
 import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysWeatherResponse;
 import com.example.weatherapp.R;
-import com.example.weatherapp.data.forecast.fullForecast.DayForecastDisplayModel;
-import com.example.weatherapp.data.forecast.fullForecast.IDayForecastDisplayModel;
-import com.example.weatherapp.data.forecast.fullForecast.IOneTimeForecastDisplayModel;
-import com.example.weatherapp.data.forecast.fullForecast.ISeveralDaysForecastDisplayModel;
-import com.example.weatherapp.data.forecast.fullForecast.OneTimeForecastDisplayModel;
-import com.example.weatherapp.data.forecast.fullForecast.SeveralDaysForecastDisplayModel;
+import com.example.weatherapp.data.model.forecast.fullForecast.DayForecastDisplayModel;
+import com.example.weatherapp.data.model.forecast.fullForecast.IDayForecastDisplayModel;
+import com.example.weatherapp.data.model.forecast.fullForecast.IOneTimeForecastDisplayModel;
+import com.example.weatherapp.data.model.forecast.fullForecast.ISeveralDaysForecastDisplayModel;
+import com.example.weatherapp.data.model.forecast.fullForecast.OneTimeForecastDisplayModel;
+import com.example.weatherapp.data.model.forecast.fullForecast.SeveralDaysForecastDisplayModel;
 import com.example.weatherapp.forecastDetails.model.mapper.exception.DamagedForecastResponseException;
 
 import java.text.ParseException;

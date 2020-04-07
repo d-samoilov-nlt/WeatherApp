@@ -14,8 +14,8 @@ import android.os.IBinder;
 
 import androidx.core.app.ActivityCompat;
 
-import com.example.weatherapp.data.deviceLocation.DeviceLocation;
-import com.example.weatherapp.data.deviceLocation.IDeviceLocation;
+import com.example.weatherapp.data.model.deviceLocation.DeviceLocation;
+import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.domain.exception.CantGetDeviceLocationException;
 import com.example.weatherapp.domain.exception.PermissionDeniedException;
 

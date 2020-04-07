@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.GetSeveralDaysForecastUseCase;
 import com.example.weatherapp.R;
 import com.example.weatherapp.common.view.ForecastDetailsToolbarButton;
-import com.example.weatherapp.data.deviceLocation.SerializableDeviceLocation;
+import com.example.weatherapp.data.model.deviceLocation.SerializableDeviceLocation;
 import com.example.weatherapp.forecastDetails.model.mapper.SeveralDaysForecastMapper;
 import com.example.weatherapp.forecastDetails.model.mapper.TodayForecastMapper;
 import com.example.weatherapp.forecastDetails.model.mapper.TomorrowForecastMapper;

@@ -3,8 +3,8 @@ package com.example.weatherapp.forecastDetails.view;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.weatherapp.data.forecast.fullForecast.IDayForecastDisplayModel;
-import com.example.weatherapp.data.forecast.fullForecast.ISeveralDaysForecastDisplayModel;
+import com.example.weatherapp.data.model.forecast.fullForecast.IDayForecastDisplayModel;
+import com.example.weatherapp.data.model.forecast.fullForecast.ISeveralDaysForecastDisplayModel;
 
 public class InMainThreadForecastDetailsView implements IForecastDetailsView {
     private final IForecastDetailsView origin;

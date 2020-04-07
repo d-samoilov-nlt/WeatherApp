@@ -4,7 +4,7 @@ import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeat
 import com.example.weatherapi.data.entity.pojo.CityLocation;
 import com.example.weatherapi.domain.useCase.IGetCurrentWeatherByCityLocationUseCase;
 import com.example.weatherapp.currenctLocation.view.ICurrentLocationView;
-import com.example.weatherapp.data.deviceLocation.IDeviceLocation;
+import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.domain.exception.PermissionDeniedException;
 import com.example.weatherapp.domain.mapper.IForecastShortDetailsMapper;
 

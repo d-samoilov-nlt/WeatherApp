@@ -1,6 +1,6 @@
 package com.example.weatherapp.forecastDetails.presenter;
 
-import com.example.weatherapp.data.deviceLocation.IDeviceLocation;
+import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 
 public class SafeForecastDetailsPresenter implements IForecastDetailsPresenter {
     private final IForecastDetailsPresenter origin;

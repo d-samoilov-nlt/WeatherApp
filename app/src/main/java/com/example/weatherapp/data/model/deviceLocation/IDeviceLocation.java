@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.deviceLocation;
+package com.example.weatherapp.data.model.deviceLocation;
 
 public interface IDeviceLocation {
     double getLongitude();

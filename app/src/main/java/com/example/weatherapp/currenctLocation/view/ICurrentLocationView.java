@@ -1,7 +1,7 @@
 package com.example.weatherapp.currenctLocation.view;
 
-import com.example.weatherapp.data.deviceLocation.IDeviceLocation;
-import com.example.weatherapp.data.forecast.shortDetails.IForecastShortDetailsDisplayModel;
+import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
+import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 
 public interface ICurrentLocationView {
     void startLocationService();

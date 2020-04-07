@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.forecast.fullForecast;
+package com.example.weatherapp.data.model.forecast.fullForecast;
 
 import java.util.List;
 

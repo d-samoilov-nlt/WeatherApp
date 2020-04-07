@@ -1,6 +1,6 @@
 package com.example.weatherapp.currenctLocation.presenter;
 
-import com.example.weatherapp.data.deviceLocation.IDeviceLocation;
+import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 
 import java.util.concurrent.ExecutorService;
 

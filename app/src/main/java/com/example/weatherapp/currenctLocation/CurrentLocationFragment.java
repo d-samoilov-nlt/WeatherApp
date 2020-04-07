@@ -26,9 +26,9 @@ import com.example.weatherapp.currenctLocation.presenter.ICurrentLocationPresent
 import com.example.weatherapp.currenctLocation.presenter.SafeCurrentLocationPresenter;
 import com.example.weatherapp.currenctLocation.view.ICurrentLocationView;
 import com.example.weatherapp.currenctLocation.view.InMainThreadCurrentLocationView;
-import com.example.weatherapp.data.deviceLocation.IDeviceLocation;
-import com.example.weatherapp.data.deviceLocation.SerializableDeviceLocation;
-import com.example.weatherapp.data.forecast.shortDetails.IForecastShortDetailsDisplayModel;
+import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
+import com.example.weatherapp.data.model.deviceLocation.SerializableDeviceLocation;
+import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 import com.example.weatherapp.domain.mapper.ForecastShortDetailsMapper;
 import com.example.weatherapp.forecastDetails.ForecastDetailsBundleKeys;
 import com.example.weatherapp.forecastDetails.ForecastDetailsFragment;

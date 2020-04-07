@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.forecast.shortDetails;
+package com.example.weatherapp.data.model.forecast.shortDetails;
 
 public class ForecastShortDetailsDisplayModel implements IForecastShortDetailsDisplayModel {
     private final String cityName;

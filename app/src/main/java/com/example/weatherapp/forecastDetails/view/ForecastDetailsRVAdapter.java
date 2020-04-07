@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.weatherapp.R;
-import com.example.weatherapp.data.forecast.fullForecast.IOneTimeForecastDisplayModel;
+import com.example.weatherapp.data.model.forecast.fullForecast.IOneTimeForecastDisplayModel;
 
 import java.util.List;
 
