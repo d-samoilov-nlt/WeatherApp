@@ -30,7 +30,7 @@ import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.data.model.deviceLocation.SerializableDeviceLocation;
 import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 import com.example.weatherapp.domain.mapper.ForecastShortDetailsMapper;
-import com.example.weatherapp.forecastDetails.ForecastDetailsBundleKeys;
+import com.example.weatherapp.forecastDetails.ForecastDetailsConst;
 import com.example.weatherapp.forecastDetails.fragment.ForecastDetailsFragment;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
 import com.example.weatherapp.service.DeviceLocationService;
@@ -125,7 +125,7 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
     public void showForecastDetails(IDeviceLocation deviceLocation) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(
-                ForecastDetailsBundleKeys.DEVICE_LOCATION_KEY,
+                ForecastDetailsConst.DEVICE_LOCATION_KEY,
                 new SerializableDeviceLocation(deviceLocation));
 
         ForecastDetailsFragment detailsFragment = new ForecastDetailsFragment();

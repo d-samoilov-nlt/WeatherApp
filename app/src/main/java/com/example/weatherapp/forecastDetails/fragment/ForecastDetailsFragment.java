@@ -15,7 +15,7 @@ import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.GetSeveralDa
 import com.example.weatherapp.R;
 import com.example.weatherapp.common.view.ForecastDetailsToolbarButton;
 import com.example.weatherapp.data.model.deviceLocation.SerializableDeviceLocation;
-import com.example.weatherapp.forecastDetails.ForecastDetailsBundleKeys;
+import com.example.weatherapp.forecastDetails.ForecastDetailsConst;
 import com.example.weatherapp.forecastDetails.fragment.model.mapper.SeveralDaysForecastMapper;
 import com.example.weatherapp.forecastDetails.fragment.model.mapper.TodayForecastMapper;
 import com.example.weatherapp.forecastDetails.fragment.model.mapper.TomorrowForecastMapper;
@@ -76,7 +76,7 @@ public class ForecastDetailsFragment extends Fragment implements View.OnClickLis
                 );
 
         // TODO : refactor to use ICityLocation
-        presenter.onCreate((SerializableDeviceLocation) getArguments().getSerializable(ForecastDetailsBundleKeys.DEVICE_LOCATION_KEY));
+        presenter.onCreate((SerializableDeviceLocation) getArguments().getSerializable(ForecastDetailsConst.DEVICE_LOCATION_KEY));
 
         return view;
     }
