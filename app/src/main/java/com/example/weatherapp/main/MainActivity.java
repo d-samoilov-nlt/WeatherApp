@@ -11,7 +11,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.weatherapp.R;
 import com.example.weatherapp.common.view.WeatherAppActivity;
 import com.example.weatherapp.currenctLocation.CurrentLocationFragment;
-import com.example.weatherapp.locationList.LocationListFragment;
+import com.example.weatherapp.locationList.FavoriteLocationListFragment;
 import com.example.weatherapp.main.presenter.AsyncMainPresenter;
 import com.example.weatherapp.main.presenter.IMainPresenter;
 import com.example.weatherapp.main.presenter.MainPresenter;
@@ -75,7 +75,7 @@ public class MainActivity extends WeatherAppActivity implements IMainView {
                 new LocationTabFragmentAdapter(
                         getSupportFragmentManager());
 
-        tabFragmentAdapter.addFragment(new LocationListFragment(), getString(R.string.main_screen_tab_all_locations));
+        tabFragmentAdapter.addFragment(new FavoriteLocationListFragment(), getString(R.string.main_screen_tab_all_locations));
         tabFragmentAdapter.addFragment(new CurrentLocationFragment(), getString(R.string.main_screen_tab_current_location));
 
         viewPager.setAdapter(tabFragmentAdapter);
