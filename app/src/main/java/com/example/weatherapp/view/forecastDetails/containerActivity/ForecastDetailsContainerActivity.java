@@ -7,10 +7,10 @@ import android.widget.TextView;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapi.domain.useCase.GetCurrentWeatherByCityNameUseCase;
 import com.example.weatherapp.R;
-import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
-import com.example.weatherapp.data.model.deviceLocation.SerializableDeviceLocation;
+import com.example.weatherapp.data.model.cityLocation.SerializableCityLocation;
 import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 import com.example.weatherapp.domain.mapper.ForecastShortDetailsMapper;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
@@ -67,11 +67,11 @@ public class ForecastDetailsContainerActivity extends WeatherAppActivity impleme
     }
 
     @Override
-    public void showForecastDetails(IDeviceLocation deviceLocation) {
+    public void showForecastDetails(ICityLocation cityLocation) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(
-                ForecastDetailsConst.DEVICE_LOCATION_KEY,
-                new SerializableDeviceLocation(deviceLocation));
+                ForecastDetailsConst.CITY_LOCATION_KEY,
+                new SerializableCityLocation(cityLocation));
 
         ForecastDetailsFragment forecastDetailsFragment = new ForecastDetailsFragment();
         forecastDetailsFragment.setArguments(bundle);
@@ -83,11 +83,11 @@ public class ForecastDetailsContainerActivity extends WeatherAppActivity impleme
     }
 
     @Override
-    public void updateForecastDetails(IDeviceLocation deviceLocation) {
+    public void updateForecastDetails(ICityLocation cityLocation) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(
-                ForecastDetailsConst.DEVICE_LOCATION_KEY,
-                new SerializableDeviceLocation(deviceLocation));
+                ForecastDetailsConst.CITY_LOCATION_KEY,
+                new SerializableCityLocation(cityLocation));
 
         ForecastDetailsFragment forecastDetailsFragment = new ForecastDetailsFragment();
         forecastDetailsFragment.setArguments(bundle);

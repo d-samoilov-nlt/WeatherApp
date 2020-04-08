@@ -1,5 +1,6 @@
 package com.example.weatherapp.view.currenctLocation.presenter;
 
+import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeatherResponse;
 import com.example.weatherapi.data.entity.pojo.CityLocation;
 import com.example.weatherapi.domain.useCase.IGetCurrentWeatherByCityLocationUseCase;
@@ -36,17 +37,20 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
     @Override
     public void onLocationUpdated(IDeviceLocation deviceLocation) {
         view.setIsPermissionRequiredError(false);
+
+        ICityLocation cityLocation =
+                new CityLocation(
+                        deviceLocation.getLongitude(),
+                        deviceLocation.getLatitude());
+
         ICurrentWeatherResponse currentWeatherResponse;
 
         try {
             currentWeatherResponse =
-                    getCurrentWeatherByCityLocationUseCase.get(
-                            new CityLocation(
-                                    deviceLocation.getLongitude(),
-                                    deviceLocation.getLatitude()));
+                    getCurrentWeatherByCityLocationUseCase.get(cityLocation);
 
             view.showShortForecastDetails(forecastShortDetailsMapper.map(currentWeatherResponse));
-            view.showForecastDetails(deviceLocation);
+            view.showForecastDetails(cityLocation);
 
         } catch (PermissionDeniedException e) {
             view.setIsPermissionRequiredError(true);

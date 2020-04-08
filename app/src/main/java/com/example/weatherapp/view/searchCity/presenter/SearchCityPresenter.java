@@ -26,7 +26,6 @@ public class SearchCityPresenter implements ISearchCityPresenter {
     private boolean isFavoriteSelected = false;
     private int locationUnitType;
 
-    private IDeviceLocation deviceLocation; // TODO
     private ICurrentWeatherResponse currentWeatherResponse;
 
     public SearchCityPresenter(
@@ -62,7 +61,6 @@ public class SearchCityPresenter implements ISearchCityPresenter {
 
     @Override
     public void onLocationUpdated(IDeviceLocation deviceLocation) {
-        this.deviceLocation = deviceLocation;
         try {
             this.currentWeatherResponse =
                     getCurrentWeatherByCityLocationUseCase.get(

@@ -1,9 +1,9 @@
 package com.example.weatherapp.view.favoriteLocationForecastDetails.presenter;
 
+import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapi.data.entity.pojo.CityLocation;
 import com.example.weatherapi.domain.useCase.IGetCurrentWeatherByCityNameUseCase;
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.IGetSeveralDaysForecastUseCase;
-import com.example.weatherapp.data.model.deviceLocation.DeviceLocation;
 import com.example.weatherapp.data.model.favoriteLocation.FavoriteLocationCacheData;
 import com.example.weatherapp.data.model.favoriteLocation.IFavoriteLocationCacheData;
 import com.example.weatherapp.data.repository.IFavoriteLocationRepository;
@@ -19,6 +19,7 @@ public class FavoriteLocationForecastDetailsPresenter implements IFavoriteLocati
     private final IForecastShortDetailsMapper forecastShortDetailsMapper;
 
     private boolean isFavoriteSelected;
+    private ICityLocation cityLocation;
 
     private IFavoriteLocationCacheData locationCacheData;
 
@@ -42,11 +43,12 @@ public class FavoriteLocationForecastDetailsPresenter implements IFavoriteLocati
     @Override
     public void onCreate() {
         locationCacheData = favoriteLocationRepository.loadByCityName(cityName);
-        view.showForecastDetails(
-                new DeviceLocation(
+        cityLocation =
+                new CityLocation(
                         locationCacheData.getCurrentWeather().getCoordinate().getLongitude(),
-                        locationCacheData.getCurrentWeather().getCoordinate().getLatitude()
-                ));
+                        locationCacheData.getCurrentWeather().getCoordinate().getLatitude());
+
+        view.showForecastDetails(cityLocation);
         view.setIsFavoriteSelected(isFavoriteSelected);
         view.showShortForecastDetails(
                 forecastShortDetailsMapper.map(
@@ -74,21 +76,12 @@ public class FavoriteLocationForecastDetailsPresenter implements IFavoriteLocati
                         locationCacheData.getForecastUnitType(),
                         locationCacheData.getCityName(),
                         getCurrentWeatherByCityNameUseCase.get(cityName),
-                        getSeveralDaysForecastUseCase.get(
-                                new CityLocation(
-                                        locationCacheData.getCurrentWeather().getCoordinate().getLongitude(),
-                                        locationCacheData.getCurrentWeather().getCoordinate().getLatitude()
-                                )));
+                        getSeveralDaysForecastUseCase.get(cityLocation));
 
         locationCacheData = updatedLocationCacheData;
         favoriteLocationRepository.save(updatedLocationCacheData);
 
-        view.showForecastDetails(
-                new DeviceLocation(
-                        locationCacheData.getCurrentWeather().getCoordinate().getLongitude(),
-                        locationCacheData.getCurrentWeather().getCoordinate().getLatitude()
-                ));
-
+        view.showForecastDetails(cityLocation);
         view.showShortForecastDetails(
                 forecastShortDetailsMapper.map(
                         locationCacheData.getCurrentWeather()));

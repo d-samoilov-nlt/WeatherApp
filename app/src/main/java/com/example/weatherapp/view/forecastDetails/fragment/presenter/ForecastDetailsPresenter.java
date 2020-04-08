@@ -1,9 +1,8 @@
 package com.example.weatherapp.view.forecastDetails.fragment.presenter;
 
+import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysWeatherResponse;
-import com.example.weatherapi.data.entity.pojo.CityLocation;
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.IGetSeveralDaysForecastUseCase;
-import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.view.forecastDetails.fragment.model.mapper.IDayForecastMapper;
 import com.example.weatherapp.view.forecastDetails.fragment.model.mapper.ISeveralDaysForecastMapper;
 import com.example.weatherapp.view.forecastDetails.fragment.model.mapper.exception.DamagedForecastResponseException;
@@ -17,7 +16,7 @@ public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
     private final ISeveralDaysForecastMapper severalDaysForecastMapper;
 
     private ISeveralDaysWeatherResponse severalDaysWeatherResponse;
-    private IDeviceLocation deviceLocation;
+    private ICityLocation cityLocation;
 
     public ForecastDetailsPresenter(
             IForecastDetailsView view,
@@ -34,8 +33,8 @@ public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
     }
 
     @Override
-    public void onCreate(IDeviceLocation deviceLocation) {
-        this.deviceLocation = deviceLocation;
+    public void onCreate(ICityLocation cityLocation) {
+        this.cityLocation = cityLocation;
         this.onTodayPressed();
     }
 
@@ -47,9 +46,7 @@ public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
         try {
             if (severalDaysWeatherResponse == null) {
                 severalDaysWeatherResponse =
-                        getSeveralDaysForecastUseCase.get(new CityLocation(
-                                deviceLocation.getLongitude(),
-                                deviceLocation.getLatitude()));
+                        getSeveralDaysForecastUseCase.get(cityLocation);
             }
             view.showForecastToday(todayForecastMapper.map(severalDaysWeatherResponse));
             view.showDetailsLoadingProgress(false);
@@ -68,9 +65,7 @@ public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
 
             if (severalDaysWeatherResponse == null) {
                 severalDaysWeatherResponse =
-                        getSeveralDaysForecastUseCase.get(new CityLocation(
-                                deviceLocation.getLongitude(),
-                                deviceLocation.getLatitude()));
+                        getSeveralDaysForecastUseCase.get(cityLocation);
             }
             view.showForecastTomorrow(tomorrowForecastMapper.map(severalDaysWeatherResponse));
             view.showDetailsLoadingProgress(false);
@@ -88,9 +83,7 @@ public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
         try {
             if (severalDaysWeatherResponse == null) {
                 severalDaysWeatherResponse =
-                        getSeveralDaysForecastUseCase.get(new CityLocation(
-                                deviceLocation.getLongitude(),
-                                deviceLocation.getLatitude()));
+                        getSeveralDaysForecastUseCase.get(cityLocation);
             }
 
             view.showForecastForSeveralDays(severalDaysForecastMapper.map(severalDaysWeatherResponse));

@@ -1,6 +1,6 @@
 package com.example.weatherapp.view.currenctLocation.view;
 
-import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
+import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 
 public interface ICurrentLocationView {
@@ -12,5 +12,5 @@ public interface ICurrentLocationView {
 
     void showShortForecastDetails(IForecastShortDetailsDisplayModel dm);
 
-    void showForecastDetails(IDeviceLocation deviceLocation);
+    void showForecastDetails(ICityLocation cityLocation);
 }

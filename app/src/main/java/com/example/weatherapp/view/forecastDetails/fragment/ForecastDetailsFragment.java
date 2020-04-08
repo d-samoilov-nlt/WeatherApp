@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.GetSeveralDaysForecastUseCase;
 import com.example.weatherapp.R;
-import com.example.weatherapp.data.model.deviceLocation.SerializableDeviceLocation;
+import com.example.weatherapp.data.model.cityLocation.SerializableCityLocation;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
 import com.example.weatherapp.view.common.ForecastDetailsToolbarButton;
 import com.example.weatherapp.view.forecastDetails.ForecastDetailsConst;
@@ -75,8 +75,7 @@ public class ForecastDetailsFragment extends Fragment implements View.OnClickLis
                         Executors.newCachedThreadPool()
                 );
 
-        // TODO : refactor to use ICityLocation
-        presenter.onCreate((SerializableDeviceLocation) getArguments().getSerializable(ForecastDetailsConst.DEVICE_LOCATION_KEY));
+        presenter.onCreate((SerializableCityLocation) getArguments().getSerializable(ForecastDetailsConst.CITY_LOCATION_KEY));
 
         return view;
     }

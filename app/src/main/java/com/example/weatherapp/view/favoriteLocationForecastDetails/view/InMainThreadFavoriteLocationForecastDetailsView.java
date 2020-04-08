@@ -3,7 +3,7 @@ package com.example.weatherapp.view.favoriteLocationForecastDetails.view;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
+import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 
 public class InMainThreadFavoriteLocationForecastDetailsView implements IFavoriteLocationForecastDetailsView {
@@ -16,8 +16,8 @@ public class InMainThreadFavoriteLocationForecastDetailsView implements IFavorit
     }
 
     @Override
-    public void showForecastDetails(IDeviceLocation deviceLocation) {
-        handler.post(() -> origin.showForecastDetails(deviceLocation));
+    public void showForecastDetails(ICityLocation cityLocation) {
+        handler.post(() -> origin.showForecastDetails(cityLocation));
     }
 
     @Override

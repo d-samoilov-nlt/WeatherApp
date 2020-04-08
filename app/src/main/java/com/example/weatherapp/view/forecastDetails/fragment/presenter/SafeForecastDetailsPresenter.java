@@ -1,6 +1,6 @@
 package com.example.weatherapp.view.forecastDetails.fragment.presenter;
 
-import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
+import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 
 public class SafeForecastDetailsPresenter implements IForecastDetailsPresenter {
     private final IForecastDetailsPresenter origin;
@@ -10,9 +10,9 @@ public class SafeForecastDetailsPresenter implements IForecastDetailsPresenter {
     }
 
     @Override
-    public void onCreate(IDeviceLocation deviceLocation) {
+    public void onCreate(ICityLocation cityLocation) {
         try {
-            origin.onCreate(deviceLocation);
+            origin.onCreate(cityLocation);
         } catch (Exception e) {
             e.printStackTrace();
         }

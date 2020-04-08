@@ -3,7 +3,7 @@ package com.example.weatherapp.view.forecastDetails.containerActivity.view;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
+import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 
 public class InMainForecastDetailsContainerView implements IForecastDetailsContainerView {
@@ -16,13 +16,13 @@ public class InMainForecastDetailsContainerView implements IForecastDetailsConta
     }
 
     @Override
-    public void showForecastDetails(IDeviceLocation deviceLocation) {
-        handler.post(() -> origin.showForecastDetails(deviceLocation));
+    public void showForecastDetails(ICityLocation cityLocation) {
+        handler.post(() -> origin.showForecastDetails(cityLocation));
     }
 
     @Override
-    public void updateForecastDetails(IDeviceLocation deviceLocation) {
-        handler.post(() -> origin.updateForecastDetails(deviceLocation));
+    public void updateForecastDetails(ICityLocation cityLocation) {
+        handler.post(() -> origin.updateForecastDetails(cityLocation));
 
     }
 
