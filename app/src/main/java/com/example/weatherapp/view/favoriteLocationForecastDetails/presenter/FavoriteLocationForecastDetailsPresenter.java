@@ -71,7 +71,7 @@ public class FavoriteLocationForecastDetailsPresenter implements IFavoriteLocati
         IFavoriteLocationCacheData
                 updatedLocationCacheData =
                 new FavoriteLocationCacheData(
-                        locationCacheData.getUtilType(),
+                        locationCacheData.getForecastUnitType(),
                         locationCacheData.getCityName(),
                         getCurrentWeatherByCityNameUseCase.get(cityName),
                         getSeveralDaysForecastUseCase.get(

@@ -4,18 +4,18 @@ import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeat
 import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysWeatherResponse;
 
 public class FavoriteLocationCacheData implements IFavoriteLocationCacheData {
-    private final int utilType;
+    private final int unitType;
     private final String cityName;
     private final ICurrentWeatherResponse currentWeatherResponse;
     private final ISeveralDaysWeatherResponse severalDaysWeatherResponse;
 
     public FavoriteLocationCacheData(
-            int utilType,
+            int unitType,
             String cityName,
             ICurrentWeatherResponse currentWeatherResponse,
             ISeveralDaysWeatherResponse severalDaysWeatherResponse) {
 
-        this.utilType = utilType;
+        this.unitType = unitType;
         this.cityName = cityName;
         this.currentWeatherResponse = currentWeatherResponse;
         this.severalDaysWeatherResponse = severalDaysWeatherResponse;
@@ -27,8 +27,8 @@ public class FavoriteLocationCacheData implements IFavoriteLocationCacheData {
     }
 
     @Override
-    public int getUtilType() {
-        return utilType;
+    public int getForecastUnitType() {
+        return unitType;
     }
 
     @Override

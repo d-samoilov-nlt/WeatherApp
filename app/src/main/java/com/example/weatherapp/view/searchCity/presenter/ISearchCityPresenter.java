@@ -13,5 +13,5 @@ public interface ISearchCityPresenter {
 
     void onFavoriteSelected(boolean isSelected);
 
-    void onUtilsTypeSelected(boolean isSelected);
+    void onUnitTypeSelected(boolean isSelected);
 }

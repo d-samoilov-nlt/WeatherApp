@@ -39,7 +39,7 @@ public class AsyncSearchCityPresenter implements ISearchCityPresenter {
     }
 
     @Override
-    public void onUtilsTypeSelected(boolean isSelected) {
-        service.execute(() -> origin.onUtilsTypeSelected(isSelected));
+    public void onUnitTypeSelected(boolean isSelected) {
+        service.execute(() -> origin.onUnitTypeSelected(isSelected));
     }
 }

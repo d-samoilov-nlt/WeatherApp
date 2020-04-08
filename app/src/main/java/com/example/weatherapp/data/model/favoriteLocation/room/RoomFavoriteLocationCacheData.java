@@ -19,8 +19,8 @@ public class RoomFavoriteLocationCacheData implements IFavoriteLocationCacheData
     @ColumnInfo(name = "cityName")
     private String cityName;
 
-    @ColumnInfo(name = "utilType")
-    private int utilType;
+    @ColumnInfo(name = "unitType")
+    private int forecastUnitType;
 
     @ColumnInfo(name = "currentWeatherResponse")
     @TypeConverters({CurrentWeatherResponseConverter.class})
@@ -31,27 +31,28 @@ public class RoomFavoriteLocationCacheData implements IFavoriteLocationCacheData
     private RoomSeveralDaysWeatherResponse severalDaysForecast;
 
     public RoomFavoriteLocationCacheData(IFavoriteLocationCacheData origin) {
-        this.utilType = origin.getUtilType();
+        this.forecastUnitType = origin.getForecastUnitType();
         this.cityName = origin.getCityName();
         this.currentWeather = new RoomCurrentWeatherResponse(origin.getCurrentWeather());
         this.severalDaysForecast = new RoomSeveralDaysWeatherResponse(origin.getSeveralDaysForecast());
     }
 
-    public RoomFavoriteLocationCacheData(String cityName, int utilType, RoomCurrentWeatherResponse currentWeather, RoomSeveralDaysWeatherResponse severalDaysForecast) {
+    public RoomFavoriteLocationCacheData(@NonNull String cityName, int forecastUnitType, RoomCurrentWeatherResponse currentWeather, RoomSeveralDaysWeatherResponse severalDaysForecast) {
         this.cityName = cityName;
-        this.utilType = utilType;
+        this.forecastUnitType = forecastUnitType;
         this.currentWeather = currentWeather;
         this.severalDaysForecast = severalDaysForecast;
     }
 
+    @NonNull
     @Override
     public String getCityName() {
         return cityName;
     }
 
     @Override
-    public int getUtilType() {
-        return utilType;
+    public int getForecastUnitType() {
+        return forecastUnitType;
     }
 
     @Override

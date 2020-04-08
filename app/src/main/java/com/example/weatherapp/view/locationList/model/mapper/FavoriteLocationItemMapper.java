@@ -24,7 +24,7 @@ public class FavoriteLocationItemMapper implements IFavoriteLocationItemMapper {
                                     cacheData.getCityName(),
                                     UtilWeatherDisplayFormat.formatToDisplayValueTemp(cacheData.getCurrentWeather().getMain().getTemp()),
                                     cacheData.getCurrentWeather().getWeatherList()[0].getDescription(),
-                                    cacheData.getUtilType()
+                                    cacheData.getForecastUnitType()
                             )
                     );
 

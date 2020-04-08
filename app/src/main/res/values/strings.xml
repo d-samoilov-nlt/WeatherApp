@@ -43,7 +43,7 @@
     <string name="search_city_screen_title">Check weather for</string>
     <string name="search_city_screen_location_hint">Enter location</string>
     <string name="search_city_screen_searching_location_hint">Searching location…</string>
-    <string name="search_city_screen_utils_type">°C/°F</string>
+    <string name="search_city_screen_unit_type">°C/°F</string>
     <string name="search_city_screen_favorite">Favorite</string>
 
 </resources>

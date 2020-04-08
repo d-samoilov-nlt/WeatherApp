@@ -6,7 +6,7 @@ import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveral
 public interface IFavoriteLocationCacheData {
     String getCityName();
 
-    int getUtilType();
+    int getForecastUnitType();
 
     ICurrentWeatherResponse getCurrentWeather();
 

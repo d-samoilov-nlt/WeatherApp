@@ -48,7 +48,7 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
     private ISearchCityPresenter presenter;
 
     private LocationEditText etEnterLocationData;
-    private Switch switchUtilsType;
+    private Switch switchUnitType;
     private Switch switchIsFavorite;
     private Button btnViewWeather;
 
@@ -94,7 +94,7 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
 
     private void setupView() {
         etEnterLocationData = findViewById(R.id.et_search_city_location);
-        switchUtilsType = findViewById(R.id.switch_search_city_utils_type);
+        switchUnitType = findViewById(R.id.switch_search_city_unit_type);
         switchIsFavorite = findViewById(R.id.switch_search_city_favorite);
         btnViewWeather = findViewById(R.id.btn_search_city_view_weather);
     }
@@ -129,8 +129,8 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
         switchIsFavorite.setOnCheckedChangeListener((buttonView, isChecked) -> {
             presenter.onFavoriteSelected(isChecked);
         });
-        switchUtilsType.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            presenter.onUtilsTypeSelected(isChecked);
+        switchUnitType.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            presenter.onUnitTypeSelected(isChecked);
         });
 
     }

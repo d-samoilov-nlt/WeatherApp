@@ -7,5 +7,5 @@ public interface IForecastShortDetailsDisplayModel {
 
     String getForecast();
 
-    int getUtilsType();
+    int getForecastUnitType();
 }

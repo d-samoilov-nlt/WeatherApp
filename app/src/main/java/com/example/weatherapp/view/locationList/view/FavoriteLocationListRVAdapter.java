@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.weatherapp.R;
-import com.example.weatherapp.data.model.favoriteLocation.FavoriteLocationUtilsType;
+import com.example.weatherapp.data.model.favoriteLocation.ForecastUnitsType;
 import com.example.weatherapp.view.locationList.model.IFavoriteLocationItemDisplayModel;
 
 import java.util.List;
@@ -52,23 +52,23 @@ public class FavoriteLocationListRVAdapter extends RecyclerView.Adapter<Favorite
     public void onBindViewHolder(@NonNull FavoriteLocationListRVAdapter.LocationItemViewHolder holder, int position) {
         IFavoriteLocationItemDisplayModel dm = displayModels.get(position);
 
-        int utilsType = dm.getShortDetailsDisplayModel().getUtilsType();
+        int unitsType = dm.getShortDetailsDisplayModel().getForecastUnitType();
 
-        if (utilsType == FavoriteLocationUtilsType.CELSIUS.getValue()) {
+        if (unitsType == ForecastUnitsType.CELSIUS.getValue()) {
             holder.tvSortDetails.setText(
                     String.format(
                             resources.getString(R.string.favorite_location_short_data_cel),
                             dm.getShortDetailsDisplayModel().getTemp(),
                             dm.getShortDetailsDisplayModel().getForecast()));
 
-        } else if (utilsType == FavoriteLocationUtilsType.FAHRENHEIT.getValue()) {
+        } else if (unitsType == ForecastUnitsType.FAHRENHEIT.getValue()) {
             holder.tvSortDetails.setText(
                     String.format(
                             resources.getString(R.string.favorite_location_short_data_far),
                             dm.getShortDetailsDisplayModel().getTemp(),
                             dm.getShortDetailsDisplayModel().getForecast()));
         } else {
-            throw new IllegalArgumentException("Unsupported FavoriteLocationUtilsType - " + utilsType);
+            throw new IllegalArgumentException("Unsupported FavoriteLocationUtilsType - " + unitsType);
         }
 
         holder.tvCityName.setText(dm.getShortDetailsDisplayModel().getCityName());

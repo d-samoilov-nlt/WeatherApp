@@ -1,25 +1,25 @@
 package com.example.weatherapp.data.model.forecast.shortDetails;
 
-import com.example.weatherapp.data.model.favoriteLocation.FavoriteLocationUtilsType;
+import com.example.weatherapp.data.model.favoriteLocation.ForecastUnitsType;
 
 public class ForecastShortDetailsDisplayModel implements IForecastShortDetailsDisplayModel {
     private final String cityName;
     private final String temperature;
     private final String forecast;
-    private final int utilsType;
+    private final int forecastUnitType;
 
     public ForecastShortDetailsDisplayModel(String cityName, String temperature, String forecast) {
         this.cityName = cityName;
         this.temperature = temperature;
         this.forecast = forecast;
-        this.utilsType = FavoriteLocationUtilsType.CELSIUS.getValue();
+        this.forecastUnitType = ForecastUnitsType.CELSIUS.getValue();
     }
 
-    public ForecastShortDetailsDisplayModel(String cityName, String temperature, String forecast, int utilsType) {
+    public ForecastShortDetailsDisplayModel(String cityName, String temperature, String forecast, int forecastUnitType) {
         this.cityName = cityName;
         this.temperature = temperature;
         this.forecast = forecast;
-        this.utilsType = utilsType;
+        this.forecastUnitType = forecastUnitType;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ForecastShortDetailsDisplayModel implements IForecastShortDetailsDi
     }
 
     @Override
-    public int getUtilsType() {
-        return utilsType;
+    public int getForecastUnitType() {
+        return forecastUnitType;
     }
 }

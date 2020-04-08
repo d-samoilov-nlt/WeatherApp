@@ -8,7 +8,7 @@ import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.IGetSeveralD
 import com.example.weatherapi.service.exception.RequestFailedException;
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.data.model.favoriteLocation.FavoriteLocationCacheData;
-import com.example.weatherapp.data.model.favoriteLocation.FavoriteLocationUtilsType;
+import com.example.weatherapp.data.model.favoriteLocation.ForecastUnitsType;
 import com.example.weatherapp.data.repository.IFavoriteLocationRepository;
 import com.example.weatherapp.view.searchCity.model.ILaunchForecastDetailsScreenUseCase;
 import com.example.weatherapp.view.searchCity.view.ISearchCityView;
@@ -24,7 +24,7 @@ public class SearchCityPresenter implements ISearchCityPresenter {
 
     private boolean isLocationServiceEnabled = false;
     private boolean isFavoriteSelected = false;
-    private int locationUtilsType;
+    private int locationUnitType;
 
     private IDeviceLocation deviceLocation; // TODO
     private ICurrentWeatherResponse currentWeatherResponse;
@@ -46,7 +46,7 @@ public class SearchCityPresenter implements ISearchCityPresenter {
         this.launchFavoriteLocationForecastDetailsUseCase = launchFavoriteLocationForecastDetailsUseCase;
         this.launchForecastDetailsUseCase = launchForecastDetailsUseCase;
 
-        locationUtilsType = FavoriteLocationUtilsType.CELSIUS.getValue();
+        locationUnitType = ForecastUnitsType.CELSIUS.getValue();
     }
 
     @Override
@@ -107,7 +107,7 @@ public class SearchCityPresenter implements ISearchCityPresenter {
 
             favoriteLocationRepository.save(
                     new FavoriteLocationCacheData(
-                            locationUtilsType,
+                            locationUnitType,
                             currentWeatherResponse.getCityName(),
                             currentWeatherResponse,
                             getSeveralDaysForecastUseCase.get(
@@ -127,10 +127,10 @@ public class SearchCityPresenter implements ISearchCityPresenter {
     }
 
     @Override
-    public void onUtilsTypeSelected(boolean isSelected) {
-        locationUtilsType =
+    public void onUnitTypeSelected(boolean isSelected) {
+        locationUnitType =
                 isSelected ?
-                        FavoriteLocationUtilsType.FAHRENHEIT.getValue()
-                        : FavoriteLocationUtilsType.CELSIUS.getValue();
+                        ForecastUnitsType.FAHRENHEIT.getValue()
+                        : ForecastUnitsType.CELSIUS.getValue();
     }
 }
