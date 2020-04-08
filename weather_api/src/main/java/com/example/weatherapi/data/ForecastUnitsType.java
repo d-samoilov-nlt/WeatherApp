@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.model.favoriteLocation;
+package com.example.weatherapi.data;
 
 public enum ForecastUnitsType {
     CELSIUS(10),

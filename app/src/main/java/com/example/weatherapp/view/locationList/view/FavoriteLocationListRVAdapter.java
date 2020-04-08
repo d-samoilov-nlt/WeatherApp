@@ -13,8 +13,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.weatherapi.data.ForecastUnitsType;
 import com.example.weatherapp.R;
-import com.example.weatherapp.data.model.favoriteLocation.ForecastUnitsType;
 import com.example.weatherapp.view.locationList.model.IFavoriteLocationItemDisplayModel;
 
 import java.util.List;

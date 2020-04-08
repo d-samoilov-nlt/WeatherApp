@@ -23,8 +23,8 @@ import com.example.weatherapp.service.DeviceLocationService;
 import com.example.weatherapp.view.common.DelayedAfterTextChangedWatcher;
 import com.example.weatherapp.view.common.LocationEditText;
 import com.example.weatherapp.view.common.WeatherAppActivity;
-import com.example.weatherapp.view.favoriteLocationForecastDetails.FavoriteLocationForecasDetailsConst;
 import com.example.weatherapp.view.favoriteLocationForecastDetails.FavoriteLocationForecastDetailsActivity;
+import com.example.weatherapp.view.favoriteLocationForecastDetails.FavoriteLocationForecastDetailsConst;
 import com.example.weatherapp.view.forecastDetails.ForecastDetailsConst;
 import com.example.weatherapp.view.forecastDetails.containerActivity.ForecastDetailsContainerActivity;
 import com.example.weatherapp.view.searchCity.presenter.AsyncSearchCityPresenter;
@@ -79,7 +79,7 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
                                 cityName -> {
                                     Intent intent =
                                             new Intent(SearchCityActivity.this, FavoriteLocationForecastDetailsActivity.class);
-                                    intent.putExtra(FavoriteLocationForecasDetailsConst.CITY_NAME_KEY, cityName);
+                                    intent.putExtra(FavoriteLocationForecastDetailsConst.CITY_NAME_KEY, cityName);
                                     SearchCityActivity.this.startActivity(intent);
                                 },
                                 cityName -> {

@@ -1,5 +1,6 @@
 package com.example.weatherapp.view.searchCity.presenter;
 
+import com.example.weatherapi.data.ForecastUnitsType;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeatherResponse;
 import com.example.weatherapi.data.entity.pojo.CityLocation;
 import com.example.weatherapi.domain.useCase.IGetCurrentWeatherByCityLocationUseCase;
@@ -8,7 +9,6 @@ import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.IGetSeveralD
 import com.example.weatherapi.service.exception.RequestFailedException;
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.data.model.favoriteLocation.FavoriteLocationCacheData;
-import com.example.weatherapp.data.model.favoriteLocation.ForecastUnitsType;
 import com.example.weatherapp.data.repository.IFavoriteLocationRepository;
 import com.example.weatherapp.view.searchCity.model.ILaunchForecastDetailsScreenUseCase;
 import com.example.weatherapp.view.searchCity.view.ISearchCityView;

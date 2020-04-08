@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.weatherapp.R;
 import com.example.weatherapp.provider.FavoriteLocationRepositoryProvider;
 import com.example.weatherapp.view.common.DelayedAfterTextChangedWatcher;
-import com.example.weatherapp.view.favoriteLocationForecastDetails.FavoriteLocationForecasDetailsConst;
 import com.example.weatherapp.view.favoriteLocationForecastDetails.FavoriteLocationForecastDetailsActivity;
+import com.example.weatherapp.view.favoriteLocationForecastDetails.FavoriteLocationForecastDetailsConst;
 import com.example.weatherapp.view.locationList.model.mapper.FavoriteLocationItemMapper;
 import com.example.weatherapp.view.locationList.model.useCase.FilterFavoriteLocationListByCityNameUseCase;
 import com.example.weatherapp.view.locationList.presenter.AsyncFavoriteLocationListPresenter;
@@ -66,7 +66,7 @@ public class FavoriteLocationListFragment extends Fragment {
                                 cityName -> {
                                     Intent intent =
                                             new Intent(getContext(), FavoriteLocationForecastDetailsActivity.class);
-                                    intent.putExtra(FavoriteLocationForecasDetailsConst.CITY_NAME_KEY, cityName);
+                                    intent.putExtra(FavoriteLocationForecastDetailsConst.CITY_NAME_KEY, cityName);
                                     getActivity().startActivity(intent);
                                 }
                         ),

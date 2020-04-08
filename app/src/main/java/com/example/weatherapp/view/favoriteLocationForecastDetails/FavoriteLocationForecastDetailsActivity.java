@@ -55,7 +55,7 @@ public class FavoriteLocationForecastDetailsActivity extends WeatherAppActivity 
                 new AsyncFavoriteLocationForecastDetailsPresenter(
                         new FavoriteLocationForecastDetailsPresenter(
                                 new InMainThreadFavoriteLocationForecastDetailsView(this),
-                                getIntent().getStringExtra(FavoriteLocationForecasDetailsConst.CITY_NAME_KEY),
+                                getIntent().getStringExtra(FavoriteLocationForecastDetailsConst.CITY_NAME_KEY),
                                 FavoriteLocationRepositoryProvider.get(getApplicationContext()),
                                 new GetCurrentWeatherByCityNameUseCase(OpenWeatherApiProvider.get(getApplicationContext())),
                                 new GetSeveralDaysForecastUseCase(OpenWeatherApiProvider.get(getApplicationContext())),

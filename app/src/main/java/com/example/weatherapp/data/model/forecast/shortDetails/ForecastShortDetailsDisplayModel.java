@@ -1,6 +1,6 @@
 package com.example.weatherapp.data.model.forecast.shortDetails;
 
-import com.example.weatherapp.data.model.favoriteLocation.ForecastUnitsType;
+import com.example.weatherapi.data.ForecastUnitsType;
 
 public class ForecastShortDetailsDisplayModel implements IForecastShortDetailsDisplayModel {
     private final String cityName;
