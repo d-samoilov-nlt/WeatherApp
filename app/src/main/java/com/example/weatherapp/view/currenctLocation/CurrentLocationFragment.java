@@ -145,7 +145,6 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
 
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.fl_forecast_details, detailsFragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 

@@ -95,7 +95,6 @@ public class FavoriteLocationForecastDetailsActivity extends WeatherAppActivity 
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fl_favorite_location_forecast_details, detailsFragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 

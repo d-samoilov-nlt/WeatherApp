@@ -79,7 +79,6 @@ public class ForecastDetailsContainerActivity extends WeatherAppActivity impleme
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.fl_forecast_details, forecastDetailsFragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 
@@ -95,7 +94,6 @@ public class ForecastDetailsContainerActivity extends WeatherAppActivity impleme
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fl_forecast_details, forecastDetailsFragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 
