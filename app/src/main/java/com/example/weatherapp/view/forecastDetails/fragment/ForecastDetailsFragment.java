@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.weatherapi.data.ForecastUnitsType;
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.GetSeveralDaysForecastUseCase;
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.model.cityLocation.SerializableCityLocation;
@@ -70,12 +71,14 @@ public class ForecastDetailsFragment extends Fragment implements View.OnClickLis
                                         new GetSeveralDaysForecastUseCase(OpenWeatherApiProvider.get(getContext().getApplicationContext())),
                                         new TodayForecastMapper(getResources()),
                                         new TomorrowForecastMapper(getResources()),
-                                        new SeveralDaysForecastMapper(getResources()))
+                                        new SeveralDaysForecastMapper(getResources()),
+                                        (SerializableCityLocation) getArguments().getSerializable(ForecastDetailsConst.CITY_LOCATION_KEY),
+                                        getArguments().getInt(ForecastDetailsConst.UNIT_TYPE_KEY, ForecastUnitsType.CELSIUS.getValue()))
                         ),
                         Executors.newCachedThreadPool()
                 );
 
-        presenter.onCreate((SerializableCityLocation) getArguments().getSerializable(ForecastDetailsConst.CITY_LOCATION_KEY));
+        presenter.onCreate();
 
         return view;
     }

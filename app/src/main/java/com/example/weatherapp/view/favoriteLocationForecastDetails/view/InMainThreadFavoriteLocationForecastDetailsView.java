@@ -16,8 +16,8 @@ public class InMainThreadFavoriteLocationForecastDetailsView implements IFavorit
     }
 
     @Override
-    public void showForecastDetails(ICityLocation cityLocation) {
-        handler.post(() -> origin.showForecastDetails(cityLocation));
+    public void showForecastDetails(ICityLocation cityLocation, int unitType) {
+        handler.post(() -> origin.showForecastDetails(cityLocation, unitType));
     }
 
     @Override

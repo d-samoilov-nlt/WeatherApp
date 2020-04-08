@@ -14,28 +14,32 @@ public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
     private final IDayForecastMapper todayForecastMapper;
     private final IDayForecastMapper tomorrowForecastMapper;
     private final ISeveralDaysForecastMapper severalDaysForecastMapper;
+    private final ICityLocation cityLocation;
+    private final int forecastUnitType;
 
     private ISeveralDaysWeatherResponse severalDaysWeatherResponse;
-    private ICityLocation cityLocation;
 
     public ForecastDetailsPresenter(
             IForecastDetailsView view,
             IGetSeveralDaysForecastUseCase getSeveralDaysForecastUseCase,
             IDayForecastMapper todayForecastMapper,
             IDayForecastMapper tomorrowForecastMapper,
-            ISeveralDaysForecastMapper severalDaysForecastMapper) {
+            ISeveralDaysForecastMapper severalDaysForecastMapper,
+            ICityLocation cityLocation,
+            int forecastUnitType) {
 
         this.view = view;
         this.getSeveralDaysForecastUseCase = getSeveralDaysForecastUseCase;
         this.todayForecastMapper = todayForecastMapper;
         this.tomorrowForecastMapper = tomorrowForecastMapper;
         this.severalDaysForecastMapper = severalDaysForecastMapper;
+        this.cityLocation = cityLocation;
+        this.forecastUnitType = forecastUnitType;
     }
 
     @Override
-    public void onCreate(ICityLocation cityLocation) {
-        this.cityLocation = cityLocation;
-        this.onTodayPressed();
+    public void onCreate() {
+        onTodayPressed();
     }
 
     @Override
@@ -46,7 +50,7 @@ public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
         try {
             if (severalDaysWeatherResponse == null) {
                 severalDaysWeatherResponse =
-                        getSeveralDaysForecastUseCase.get(cityLocation);
+                        getSeveralDaysForecastUseCase.get(cityLocation, forecastUnitType);
             }
             view.showForecastToday(todayForecastMapper.map(severalDaysWeatherResponse));
             view.showDetailsLoadingProgress(false);
@@ -65,7 +69,7 @@ public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
 
             if (severalDaysWeatherResponse == null) {
                 severalDaysWeatherResponse =
-                        getSeveralDaysForecastUseCase.get(cityLocation);
+                        getSeveralDaysForecastUseCase.get(cityLocation, forecastUnitType);
             }
             view.showForecastTomorrow(tomorrowForecastMapper.map(severalDaysWeatherResponse));
             view.showDetailsLoadingProgress(false);
@@ -83,7 +87,7 @@ public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
         try {
             if (severalDaysWeatherResponse == null) {
                 severalDaysWeatherResponse =
-                        getSeveralDaysForecastUseCase.get(cityLocation);
+                        getSeveralDaysForecastUseCase.get(cityLocation, forecastUnitType);
             }
 
             view.showForecastForSeveralDays(severalDaysForecastMapper.map(severalDaysWeatherResponse));

@@ -81,11 +81,14 @@ public class FavoriteLocationForecastDetailsActivity extends WeatherAppActivity 
     }
 
     @Override
-    public void showForecastDetails(ICityLocation cityLocation) {
+    public void showForecastDetails(ICityLocation cityLocation, int unitType) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(
                 ForecastDetailsConst.CITY_LOCATION_KEY,
                 new SerializableCityLocation(cityLocation));
+        bundle.putInt(
+                ForecastDetailsConst.UNIT_TYPE_KEY,
+                unitType);
 
         ForecastDetailsFragment detailsFragment = new ForecastDetailsFragment();
         detailsFragment.setArguments(bundle);

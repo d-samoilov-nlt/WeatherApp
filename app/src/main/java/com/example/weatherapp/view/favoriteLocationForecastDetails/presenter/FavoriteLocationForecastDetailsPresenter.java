@@ -50,7 +50,7 @@ public class FavoriteLocationForecastDetailsPresenter implements IFavoriteLocati
                         locationCacheData.getCurrentWeather().getCoordinate().getLongitude(),
                         locationCacheData.getCurrentWeather().getCoordinate().getLatitude());
 
-        view.showForecastDetails(cityLocation);
+        view.showForecastDetails(cityLocation, unitType);
         view.setIsFavoriteSelected(isFavoriteSelected);
         view.showShortForecastDetails(
                 forecastShortDetailsMapper.map(
@@ -84,7 +84,7 @@ public class FavoriteLocationForecastDetailsPresenter implements IFavoriteLocati
         locationCacheData = updatedLocationCacheData;
         favoriteLocationRepository.save(updatedLocationCacheData);
 
-        view.showForecastDetails(cityLocation);
+        view.showForecastDetails(cityLocation, unitType);
         view.showShortForecastDetails(
                 forecastShortDetailsMapper.map(
                         locationCacheData.getCurrentWeather(),
