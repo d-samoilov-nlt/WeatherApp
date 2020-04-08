@@ -1,6 +1,5 @@
 package com.example.weatherapi.service.retrofit2;
 
-import com.example.weatherapi.OpenWeatherResponseCode;
 import com.example.weatherapi.data.entity.gson.currentWeather.GsonCurrentWeatherResponse;
 import com.example.weatherapi.data.entity.gson.severalDaysWeathre.GsonSeveralDaysWeatherResponse;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeatherResponse;
@@ -26,7 +25,7 @@ public class RetrofitToOpenWeatherApiBridge implements IOpenWeatherApi {
             Response<GsonCurrentWeatherResponse> response =
                     retrofitApi.getCurrentWeatherByName(options).execute();
 
-            if (response.body().getResponseCode() == OpenWeatherResponseCode.SUCCESS.getValue()) {
+            if (response.isSuccessful()) {
                 return response.body();
             } else {
                 throw new RequestFailedException(response);
@@ -42,7 +41,7 @@ public class RetrofitToOpenWeatherApiBridge implements IOpenWeatherApi {
             Response<GsonCurrentWeatherResponse> response =
                     retrofitApi.getCurrentWeatherByLocation(options).execute();
 
-            if (response.body().getResponseCode() == OpenWeatherResponseCode.SUCCESS.getValue()) {
+            if (response.isSuccessful()) {
                 return response.body();
             } else {
                 throw new RequestFailedException(response);
@@ -58,7 +57,7 @@ public class RetrofitToOpenWeatherApiBridge implements IOpenWeatherApi {
             Response<GsonSeveralDaysWeatherResponse> response =
                     retrofitApi.getFiveDaysForecast(options).execute();
 
-            if (response.body().getResponseCode() == OpenWeatherResponseCode.SUCCESS.getValue()) {
+            if (response.isSuccessful()) {
                 return response.body();
             } else {
                 throw new RequestFailedException(response);

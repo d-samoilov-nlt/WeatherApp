@@ -1,5 +1,7 @@
 package com.example.weatherapi.data.entity.gson.currentWeather;
 
+import com.example.weatherapi.data.entity.gson.cityLocation.GsonCityCoordinateResponse;
+import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityCoordinateResponse;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.ICloudsResponse;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeatherResponse;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.IMainResponse;
@@ -29,6 +31,8 @@ public class GsonCurrentWeatherResponse implements ICurrentWeatherResponse {
     private String name;
     @SerializedName("cod")
     private int responseCode;
+    @SerializedName("coord")
+    private GsonCityCoordinateResponse coordinateResponse;
 
     @Override
     public int getResponseCode() {
@@ -38,6 +42,11 @@ public class GsonCurrentWeatherResponse implements ICurrentWeatherResponse {
     @Override
     public String getCityName() {
         return name;
+    }
+
+    @Override
+    public ICityCoordinateResponse getCoordinate() {
+        return coordinateResponse;
     }
 
     @Override
