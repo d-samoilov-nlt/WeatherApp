@@ -1,4 +1,4 @@
-package com.example.weatherapp.forecastDetails.model.mapper.exception;
+package com.example.weatherapp.forecastDetails.fragment.model.mapper.exception;
 
 public class UnsupportedForecastDateException extends RuntimeException {
     public UnsupportedForecastDateException() {

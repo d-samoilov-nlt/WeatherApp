@@ -1,4 +1,4 @@
-package com.example.weatherapp.forecastDetails.model.mapper;
+package com.example.weatherapp.forecastDetails.fragment.model.mapper;
 
 import android.content.res.Resources;
 
@@ -11,7 +11,7 @@ import com.example.weatherapp.data.model.forecast.fullForecast.IOneTimeForecastD
 import com.example.weatherapp.data.model.forecast.fullForecast.ISeveralDaysForecastDisplayModel;
 import com.example.weatherapp.data.model.forecast.fullForecast.OneTimeForecastDisplayModel;
 import com.example.weatherapp.data.model.forecast.fullForecast.SeveralDaysForecastDisplayModel;
-import com.example.weatherapp.forecastDetails.model.mapper.exception.DamagedForecastResponseException;
+import com.example.weatherapp.forecastDetails.fragment.model.mapper.exception.DamagedForecastResponseException;
 
 import java.text.ParseException;
 import java.util.ArrayList;

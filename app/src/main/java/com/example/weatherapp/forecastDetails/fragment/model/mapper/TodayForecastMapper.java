@@ -1,4 +1,4 @@
-package com.example.weatherapp.forecastDetails.model.mapper;
+package com.example.weatherapp.forecastDetails.fragment.model.mapper;
 
 import android.content.res.Resources;
 
@@ -9,7 +9,7 @@ import com.example.weatherapp.data.model.forecast.fullForecast.DayForecastDispla
 import com.example.weatherapp.data.model.forecast.fullForecast.IDayForecastDisplayModel;
 import com.example.weatherapp.data.model.forecast.fullForecast.IOneTimeForecastDisplayModel;
 import com.example.weatherapp.data.model.forecast.fullForecast.OneTimeForecastDisplayModel;
-import com.example.weatherapp.forecastDetails.model.mapper.exception.UnsupportedForecastDateException;
+import com.example.weatherapp.forecastDetails.fragment.model.mapper.exception.UnsupportedForecastDateException;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -17,8 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 import static com.example.weatherapp.util.UtilDateTime.dateToHnMm;
-import static com.example.weatherapp.util.UtilDateTime.getTomorrowDayDate;
-import static com.example.weatherapp.util.UtilDateTime.isTodayDate;
+import static com.example.weatherapp.util.UtilDateTime.getTodayDate;
 import static com.example.weatherapp.util.UtilDateTime.parseToLocalDate;
 import static com.example.weatherapp.util.UtilDateTime.parseToLocalDateTime;
 import static com.example.weatherapp.util.UtilWeatherDisplayFormat.formatToDisplayValueHumidity;
@@ -27,19 +26,18 @@ import static com.example.weatherapp.util.UtilWeatherDisplayFormat.formatToDispl
 import static com.example.weatherapp.util.UtilWeatherDisplayFormat.formatToDisplayValueWindSpeed;
 import static com.example.weatherapp.util.UtilWeatherIcon.getOpenWeatherIconUrl;
 
-public class TomorrowForecastMapper implements IDayForecastMapper {
+public class TodayForecastMapper implements IDayForecastMapper {
     private final Resources resources;
 
-    private Date tomorrowDate;
+    private Date todayDate;
 
-    public TomorrowForecastMapper(Resources resources) {
+    public TodayForecastMapper(Resources resources) {
         this.resources = resources;
     }
 
     @Override
     public IDayForecastDisplayModel map(ISeveralDaysWeatherResponse response) {
-        tomorrowDate = getTomorrowDayDate();
-
+        todayDate = getTodayDate();
         return getModel(response);
     }
 
@@ -47,16 +45,11 @@ public class TomorrowForecastMapper implements IDayForecastMapper {
         List<IOneTimeForecastDisplayModel> forecastDisplayModels = new ArrayList<>();
 
         for (int i = 0; i < response.getForecastList().length; i++) {
-            ISeveralDaysOneTimeWeatherForecastResponse
-                    oneTimeWeatherForecastResponse = response.getForecastList()[i];
-
             try {
-                if (!isTodayDate(oneTimeWeatherForecastResponse.getDate())) {
-                    forecastDisplayModels.add(
-                            getOneTimeForecast(oneTimeWeatherForecastResponse));
-                }
-
+                forecastDisplayModels.add(
+                        getOneTimeForecast(response.getForecastList()[i]));
             } catch (UnsupportedForecastDateException e) {
+
                 return new DayForecastDisplayModel(forecastDisplayModels, getTitle());
             }
         }
@@ -74,7 +67,7 @@ public class TomorrowForecastMapper implements IDayForecastMapper {
         } catch (ParseException e) {
             throw new UnsupportedForecastDateException(e.getMessage());
         }
-        if (!tomorrowDate.equals(forecastDate)) {
+        if (forecastDate == null || forecastDate.after(todayDate)) {
             throw new UnsupportedForecastDateException();
         }
 
@@ -97,6 +90,6 @@ public class TomorrowForecastMapper implements IDayForecastMapper {
     }
 
     private String getTitle() {
-        return resources.getString(R.string.forecast_details_tomorrow);
+        return resources.getString(R.string.forecast_details_today);
     }
 }

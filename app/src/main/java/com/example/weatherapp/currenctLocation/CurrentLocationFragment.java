@@ -31,7 +31,7 @@ import com.example.weatherapp.data.model.deviceLocation.SerializableDeviceLocati
 import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 import com.example.weatherapp.domain.mapper.ForecastShortDetailsMapper;
 import com.example.weatherapp.forecastDetails.ForecastDetailsBundleKeys;
-import com.example.weatherapp.forecastDetails.ForecastDetailsFragment;
+import com.example.weatherapp.forecastDetails.fragment.ForecastDetailsFragment;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
 import com.example.weatherapp.service.DeviceLocationService;
 import com.karumi.dexter.Dexter;

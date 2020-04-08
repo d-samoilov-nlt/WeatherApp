@@ -1,4 +1,4 @@
-package com.example.weatherapp.forecastDetails.presenter;
+package com.example.weatherapp.forecastDetails.fragment.presenter;
 
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 

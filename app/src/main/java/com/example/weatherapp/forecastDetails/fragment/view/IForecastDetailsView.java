@@ -1,4 +1,4 @@
-package com.example.weatherapp.forecastDetails.view;
+package com.example.weatherapp.forecastDetails.fragment.view;
 
 import com.example.weatherapp.data.model.forecast.fullForecast.IDayForecastDisplayModel;
 import com.example.weatherapp.data.model.forecast.fullForecast.ISeveralDaysForecastDisplayModel;

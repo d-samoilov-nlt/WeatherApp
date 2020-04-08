@@ -1,13 +1,13 @@
-package com.example.weatherapp.forecastDetails.presenter;
+package com.example.weatherapp.forecastDetails.fragment.presenter;
 
 import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysWeatherResponse;
 import com.example.weatherapi.data.entity.pojo.CityLocation;
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.IGetSeveralDaysForecastUseCase;
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
-import com.example.weatherapp.forecastDetails.model.mapper.IDayForecastMapper;
-import com.example.weatherapp.forecastDetails.model.mapper.ISeveralDaysForecastMapper;
-import com.example.weatherapp.forecastDetails.model.mapper.exception.DamagedForecastResponseException;
-import com.example.weatherapp.forecastDetails.view.IForecastDetailsView;
+import com.example.weatherapp.forecastDetails.fragment.model.mapper.IDayForecastMapper;
+import com.example.weatherapp.forecastDetails.fragment.model.mapper.ISeveralDaysForecastMapper;
+import com.example.weatherapp.forecastDetails.fragment.model.mapper.exception.DamagedForecastResponseException;
+import com.example.weatherapp.forecastDetails.fragment.view.IForecastDetailsView;
 
 public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
     private final IForecastDetailsView view;

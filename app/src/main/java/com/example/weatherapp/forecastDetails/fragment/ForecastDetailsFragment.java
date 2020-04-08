@@ -1,4 +1,4 @@
-package com.example.weatherapp.forecastDetails;
+package com.example.weatherapp.forecastDetails.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,17 +15,18 @@ import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.GetSeveralDa
 import com.example.weatherapp.R;
 import com.example.weatherapp.common.view.ForecastDetailsToolbarButton;
 import com.example.weatherapp.data.model.deviceLocation.SerializableDeviceLocation;
-import com.example.weatherapp.forecastDetails.model.mapper.SeveralDaysForecastMapper;
-import com.example.weatherapp.forecastDetails.model.mapper.TodayForecastMapper;
-import com.example.weatherapp.forecastDetails.model.mapper.TomorrowForecastMapper;
-import com.example.weatherapp.forecastDetails.presenter.AsyncForecastDetailsPresenter;
-import com.example.weatherapp.forecastDetails.presenter.ForecastDetailsPresenter;
-import com.example.weatherapp.forecastDetails.presenter.IForecastDetailsPresenter;
-import com.example.weatherapp.forecastDetails.presenter.SafeForecastDetailsPresenter;
-import com.example.weatherapp.forecastDetails.view.ForecastDetailsRVAdapter;
-import com.example.weatherapp.forecastDetails.view.ForecastDetailsView;
-import com.example.weatherapp.forecastDetails.view.ForecastSeveralDaysDetailsRvAdapter;
-import com.example.weatherapp.forecastDetails.view.InMainThreadForecastDetailsView;
+import com.example.weatherapp.forecastDetails.ForecastDetailsBundleKeys;
+import com.example.weatherapp.forecastDetails.fragment.model.mapper.SeveralDaysForecastMapper;
+import com.example.weatherapp.forecastDetails.fragment.model.mapper.TodayForecastMapper;
+import com.example.weatherapp.forecastDetails.fragment.model.mapper.TomorrowForecastMapper;
+import com.example.weatherapp.forecastDetails.fragment.presenter.AsyncForecastDetailsPresenter;
+import com.example.weatherapp.forecastDetails.fragment.presenter.ForecastDetailsPresenter;
+import com.example.weatherapp.forecastDetails.fragment.presenter.IForecastDetailsPresenter;
+import com.example.weatherapp.forecastDetails.fragment.presenter.SafeForecastDetailsPresenter;
+import com.example.weatherapp.forecastDetails.fragment.view.ForecastDetailsRVAdapter;
+import com.example.weatherapp.forecastDetails.fragment.view.ForecastDetailsView;
+import com.example.weatherapp.forecastDetails.fragment.view.ForecastSeveralDaysDetailsRvAdapter;
+import com.example.weatherapp.forecastDetails.fragment.view.InMainThreadForecastDetailsView;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
 
 import java.util.ArrayList;
@@ -74,6 +75,7 @@ public class ForecastDetailsFragment extends Fragment implements View.OnClickLis
                         Executors.newCachedThreadPool()
                 );
 
+        // TODO : refactor to use ICityLocation
         presenter.onCreate((SerializableDeviceLocation) getArguments().getSerializable(ForecastDetailsBundleKeys.DEVICE_LOCATION_KEY));
 
         return view;

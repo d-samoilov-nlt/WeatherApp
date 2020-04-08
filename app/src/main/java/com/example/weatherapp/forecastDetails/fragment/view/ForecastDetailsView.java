@@ -1,4 +1,4 @@
-package com.example.weatherapp.forecastDetails.view;
+package com.example.weatherapp.forecastDetails.fragment.view;
 
 import android.view.View;
 import android.widget.LinearLayout;

@@ -1,4 +1,4 @@
-package com.example.weatherapp.forecastDetails.model.mapper;
+package com.example.weatherapp.forecastDetails.fragment.model.mapper;
 
 import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysWeatherResponse;
 import com.example.weatherapp.data.model.forecast.fullForecast.ISeveralDaysForecastDisplayModel;
