@@ -20,6 +20,7 @@ public class FavoriteLocationForecastDetailsPresenter implements IFavoriteLocati
 
     private boolean isFavoriteSelected;
     private ICityLocation cityLocation;
+    private int unitType;
 
     private IFavoriteLocationCacheData locationCacheData;
 
@@ -43,6 +44,7 @@ public class FavoriteLocationForecastDetailsPresenter implements IFavoriteLocati
     @Override
     public void onCreate() {
         locationCacheData = favoriteLocationRepository.loadByCityName(cityName);
+        unitType = locationCacheData.getForecastUnitType();
         cityLocation =
                 new CityLocation(
                         locationCacheData.getCurrentWeather().getCoordinate().getLongitude(),
@@ -52,7 +54,8 @@ public class FavoriteLocationForecastDetailsPresenter implements IFavoriteLocati
         view.setIsFavoriteSelected(isFavoriteSelected);
         view.showShortForecastDetails(
                 forecastShortDetailsMapper.map(
-                        locationCacheData.getCurrentWeather()));
+                        locationCacheData.getCurrentWeather(),
+                        locationCacheData.getForecastUnitType()));
     }
 
     @Override
@@ -75,8 +78,8 @@ public class FavoriteLocationForecastDetailsPresenter implements IFavoriteLocati
                 new FavoriteLocationCacheData(
                         locationCacheData.getForecastUnitType(),
                         locationCacheData.getCityName(),
-                        getCurrentWeatherByCityNameUseCase.get(cityName),
-                        getSeveralDaysForecastUseCase.get(cityLocation));
+                        getCurrentWeatherByCityNameUseCase.get(cityName, unitType),
+                        getSeveralDaysForecastUseCase.get(cityLocation, unitType));
 
         locationCacheData = updatedLocationCacheData;
         favoriteLocationRepository.save(updatedLocationCacheData);
@@ -84,7 +87,8 @@ public class FavoriteLocationForecastDetailsPresenter implements IFavoriteLocati
         view.showForecastDetails(cityLocation);
         view.showShortForecastDetails(
                 forecastShortDetailsMapper.map(
-                        locationCacheData.getCurrentWeather()));
+                        locationCacheData.getCurrentWeather(),
+                        unitType));
         view.setLoadingProcess(false);
     }
 }

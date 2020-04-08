@@ -5,4 +5,7 @@ import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDet
 
 public interface IForecastShortDetailsMapper {
     IForecastShortDetailsDisplayModel map(ICurrentWeatherResponse response);
+
+    IForecastShortDetailsDisplayModel map(ICurrentWeatherResponse response, int unitType);
+
 }

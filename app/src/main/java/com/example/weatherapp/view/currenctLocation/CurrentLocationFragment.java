@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.weatherapi.data.ForecastUnitsType;
 import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapi.domain.useCase.getCurrentWeatherByLocation.GetCurrentWeatherByCityLocationUseCase;
 import com.example.weatherapp.R;
@@ -113,13 +114,23 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
 
     @Override
     public void showShortForecastDetails(IForecastShortDetailsDisplayModel dm) {
+        int stringResId;
+
+        if (dm.getForecastUnitType() == ForecastUnitsType.CELSIUS.getValue()) {
+            stringResId = R.string.current_location_short_data_cel;
+
+        } else if (dm.getForecastUnitType() == ForecastUnitsType.FAHRENHEIT.getValue()) {
+            stringResId = R.string.current_location_short_data_far;
+        } else {
+            throw new IllegalStateException("Unsupported ForecastUnitsType - " + dm.getForecastUnitType());
+        }
+
         tvToolbarShortDetails.setText(
                 String.format(
-                        view.getContext().getResources().getString(R.string.current_location_short_data_far),
+                        getResources().getString(stringResId),
                         dm.getCityName(),
                         dm.getTemp(),
-                        dm.getForecast())
-        );
+                        dm.getForecast()));
     }
 
     @Override

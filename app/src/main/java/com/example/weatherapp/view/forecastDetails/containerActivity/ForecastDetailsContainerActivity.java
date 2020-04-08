@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.weatherapi.data.ForecastUnitsType;
 import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapi.domain.useCase.getCurrentWeatherByName.GetCurrentWeatherByCityNameUseCase;
 import com.example.weatherapp.R;
@@ -100,9 +101,19 @@ public class ForecastDetailsContainerActivity extends WeatherAppActivity impleme
 
     @Override
     public void showShortForecastDetails(IForecastShortDetailsDisplayModel dm) {
+        int stringResId;
+
+        if (dm.getForecastUnitType() == ForecastUnitsType.CELSIUS.getValue()) {
+            stringResId = R.string.current_location_short_data_cel;
+        } else if (dm.getForecastUnitType() == ForecastUnitsType.FAHRENHEIT.getValue()) {
+            stringResId = R.string.current_location_short_data_far;
+        } else {
+            throw new IllegalStateException("Unsupported ForecastUnitsType - " + dm.getForecastUnitType());
+        }
+
         tvShortForecastDetails.setText(
                 String.format(
-                        getResources().getString(R.string.current_location_short_data_far),
+                        getResources().getString(stringResId),
                         dm.getCityName(),
                         dm.getTemp(),
                         dm.getForecast()));
