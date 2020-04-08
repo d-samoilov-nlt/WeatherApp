@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".searchCity.SearchCityActivity">
+        tools:context=".view.searchCity.SearchCityActivity">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/tb_search_city"
@@ -29,7 +29,7 @@
 
         </com.google.android.material.appbar.MaterialToolbar>
 
-        <com.example.weatherapp.common.view.LocationEditText
+        <com.example.weatherapp.view.common.LocationEditText
             android:id="@+id/et_search_city_location"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

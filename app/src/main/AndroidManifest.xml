@@ -13,12 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".forecastDetails.containerActivity.ForecastDetailsContainerActivity"></activity>
-        <activity android:name=".favoriteLocationForecastDetails.FavoriteLocationForecastDetailsActivity" />
+        <activity android:name=".view.forecastDetails.containerActivity.ForecastDetailsContainerActivity"></activity>
+        <activity android:name=".view.favoriteLocationForecastDetails.FavoriteLocationForecastDetailsActivity" />
         <activity
-            android:name=".searchCity.SearchCityActivity"
+            android:name=".view.searchCity.SearchCityActivity"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".main.MainActivity">
+        <activity android:name=".view.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

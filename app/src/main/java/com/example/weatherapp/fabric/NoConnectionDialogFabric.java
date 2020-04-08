@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.example.weatherapp.R;
-import com.example.weatherapp.common.view.INoConnectionDialog;
-import com.example.weatherapp.common.view.NoConnectionSnackBarDialog;
+import com.example.weatherapp.view.common.INoConnectionDialog;
+import com.example.weatherapp.view.common.NoConnectionSnackBarDialog;
 
 import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE;
 

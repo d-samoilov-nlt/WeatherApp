@@ -5,12 +5,12 @@
     android:id="@+id/cl_main_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.MainActivity">
+    tools:context=".view.main.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".main.MainActivity">
+        tools:context=".view.main.MainActivity">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_main_location_tabs"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.example.weatherapp.common.view.ForecastDetailsToolbarButton
+    <com.example.weatherapp.view.common.ForecastDetailsToolbarButton
         android:id="@+id/btn_forecast_details_toolbar_today"
         style="@style/ForecastDetailsToolbarButton"
         android:layout_margin="@dimen/default_view_margin"
@@ -17,7 +17,7 @@
         tools:background="@drawable/forecast_details_toolbar_btn_selected"
         tools:textColor="@color/colorSimpleText" />
 
-    <com.example.weatherapp.common.view.ForecastDetailsToolbarButton
+    <com.example.weatherapp.view.common.ForecastDetailsToolbarButton
         android:id="@+id/btn_forecast_details_toolbar_tomorrow"
         style="@style/ForecastDetailsToolbarButton"
         android:layout_marginTop="@dimen/default_view_margin"
@@ -30,7 +30,7 @@
         tools:background="@drawable/forecast_details_toolbar_btn_unselected"
         tools:textColor="@color/colorFocusedSimpleText" />
 
-    <com.example.weatherapp.common.view.ForecastDetailsToolbarButton
+    <com.example.weatherapp.view.common.ForecastDetailsToolbarButton
         android:id="@+id/btn_forecast_details_toolbar_several_days"
         style="@style/ForecastDetailsToolbarButton"
         android:layout_margin="@dimen/default_view_margin"
