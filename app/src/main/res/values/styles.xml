@@ -41,7 +41,7 @@
         <item name="textAllCaps">false</item>
         <item name="android:textSize">@dimen/title_text_size</item>
         <item name="android:textColor">@color/colorSimpleTextLight</item>
-        <item name="backgroundTint">@color/colorAccent</item>
+        <item name="android:background">@drawable/action_button_selector</item>
     </style>
 
     <style name="ForecastDetailsToolbarButton" parent="TextAppearance.AppCompat.Button">

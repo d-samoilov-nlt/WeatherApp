@@ -11,6 +11,7 @@
 
     // error
     <string name="error_cant_get_location">Can\'t get your device location data</string>
+    <string name="error_city_not_found">Not found</string>
     <string name="error_while_loading_forecast">Some error happened while the forecast was loading. Please try again.</string>
 
     // main screen
@@ -35,7 +36,8 @@
 
     // search city screen
     <string name="search_city_screen_title">Check weather for</string>
-    <string name="search_city_screen_location_hint">Location</string>
+    <string name="search_city_screen_location_hint">Enter location</string>
+    <string name="search_city_screen_searching_location_hint">Searching location…</string>
     <string name="search_city_screen_utils_type">°C/°F</string>
     <string name="search_city_screen_favorite">Favorite</string>
 
