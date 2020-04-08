@@ -2,7 +2,7 @@ package com.example.weatherapp.view.favoriteLocationForecastDetails.presenter;
 
 import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapi.data.entity.pojo.CityLocation;
-import com.example.weatherapi.domain.useCase.IGetCurrentWeatherByCityNameUseCase;
+import com.example.weatherapi.domain.useCase.getCurrentWeatherByName.IGetCurrentWeatherByCityNameUseCase;
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.IGetSeveralDaysForecastUseCase;
 import com.example.weatherapp.data.model.favoriteLocation.FavoriteLocationCacheData;
 import com.example.weatherapp.data.model.favoriteLocation.IFavoriteLocationCacheData;

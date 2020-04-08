@@ -3,7 +3,7 @@ package com.example.weatherapp.view.forecastDetails.containerActivity.presenter;
 import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeatherResponse;
 import com.example.weatherapi.data.entity.pojo.CityLocation;
-import com.example.weatherapi.domain.useCase.IGetCurrentWeatherByCityNameUseCase;
+import com.example.weatherapi.domain.useCase.getCurrentWeatherByName.IGetCurrentWeatherByCityNameUseCase;
 import com.example.weatherapp.domain.mapper.IForecastShortDetailsMapper;
 import com.example.weatherapp.view.forecastDetails.containerActivity.view.IForecastDetailsContainerView;
 

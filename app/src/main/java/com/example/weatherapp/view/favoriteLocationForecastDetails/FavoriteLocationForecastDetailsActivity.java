@@ -11,7 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
-import com.example.weatherapi.domain.useCase.GetCurrentWeatherByCityNameUseCase;
+import com.example.weatherapi.domain.useCase.getCurrentWeatherByName.GetCurrentWeatherByCityNameUseCase;
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.GetSeveralDaysForecastUseCase;
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.model.cityLocation.SerializableCityLocation;

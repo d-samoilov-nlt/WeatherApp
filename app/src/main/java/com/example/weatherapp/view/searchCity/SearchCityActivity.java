@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
 
-import com.example.weatherapi.domain.useCase.GetCurrentWeatherByCityLocationUseCase;
-import com.example.weatherapi.domain.useCase.GetCurrentWeatherByCityNameUseCase;
+import com.example.weatherapi.domain.useCase.getCurrentWeatherByLocation.GetCurrentWeatherByCityLocationUseCase;
+import com.example.weatherapi.domain.useCase.getCurrentWeatherByName.GetCurrentWeatherByCityNameUseCase;
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.GetSeveralDaysForecastUseCase;
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;

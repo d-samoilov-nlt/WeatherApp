@@ -3,7 +3,7 @@ package com.example.weatherapp.view.currenctLocation.presenter;
 import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeatherResponse;
 import com.example.weatherapi.data.entity.pojo.CityLocation;
-import com.example.weatherapi.domain.useCase.IGetCurrentWeatherByCityLocationUseCase;
+import com.example.weatherapi.domain.useCase.getCurrentWeatherByLocation.IGetCurrentWeatherByCityLocationUseCase;
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.domain.exception.PermissionDeniedException;
 import com.example.weatherapp.domain.mapper.IForecastShortDetailsMapper;

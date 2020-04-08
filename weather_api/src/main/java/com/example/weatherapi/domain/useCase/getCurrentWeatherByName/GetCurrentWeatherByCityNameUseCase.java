@@ -1,4 +1,4 @@
-package com.example.weatherapi.domain.useCase;
+package com.example.weatherapi.domain.useCase.getCurrentWeatherByName;
 
 import com.example.weatherapi.data.ForecastUnitsType;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeatherResponse;

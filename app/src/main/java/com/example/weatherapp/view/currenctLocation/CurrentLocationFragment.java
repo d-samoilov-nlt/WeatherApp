@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
-import com.example.weatherapi.domain.useCase.GetCurrentWeatherByCityLocationUseCase;
+import com.example.weatherapi.domain.useCase.getCurrentWeatherByLocation.GetCurrentWeatherByCityLocationUseCase;
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.model.cityLocation.SerializableCityLocation;
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
