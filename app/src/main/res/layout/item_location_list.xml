@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_item_location_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_item_location_icon"
+        android:layout_width="@dimen/forecast_icon_size"
+        android:layout_height="@dimen/forecast_icon_size"
+        android:layout_margin="@dimen/default_view_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/tv_item_location_short_details"
+        style="@style/TitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_view_margin"
+        android:layout_marginTop="@dimen/default_view_margin"
+        android:layout_marginEnd="@dimen/default_view_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@+id/iv_item_location_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="23, weather info" />
+
+    <ImageView
+        android:id="@+id/iv_item_location_city_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_view_margin"
+        android:layout_marginTop="@dimen/small_view_margin"
+        android:src="@drawable/ic_location_on_grey_24dp"
+        app:layout_constraintStart_toEndOf="@+id/iv_item_location_icon"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_location_short_details" />
+
+    <TextView
+        android:id="@+id/tv_item_location_city_name"
+        style="@style/SimpleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_view_margin"
+        android:layout_marginEnd="@dimen/default_view_margin"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_item_location_city_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@+id/iv_item_location_city_icon"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_location_short_details"
+        tools:text="London" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:background="@color/colorSimpleText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

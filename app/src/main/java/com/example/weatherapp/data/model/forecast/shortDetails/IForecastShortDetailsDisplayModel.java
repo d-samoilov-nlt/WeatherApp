@@ -6,4 +6,6 @@ public interface IForecastShortDetailsDisplayModel {
     String getTemp();
 
     String getForecast();
+
+    int getUtilsType();
 }
