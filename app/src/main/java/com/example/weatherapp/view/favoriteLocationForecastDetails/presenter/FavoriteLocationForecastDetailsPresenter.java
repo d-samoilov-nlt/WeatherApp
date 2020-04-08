@@ -82,13 +82,15 @@ public class FavoriteLocationForecastDetailsPresenter implements IFavoriteLocati
                         getSeveralDaysForecastUseCase.get(cityLocation, unitType));
 
         locationCacheData = updatedLocationCacheData;
-        favoriteLocationRepository.save(updatedLocationCacheData);
 
         view.showForecastDetails(cityLocation, unitType);
         view.showShortForecastDetails(
                 forecastShortDetailsMapper.map(
                         locationCacheData.getCurrentWeather(),
                         unitType));
+        if (isFavoriteSelected) {
+            favoriteLocationRepository.save(updatedLocationCacheData);
+        }
         view.setLoadingProcess(false);
     }
 }
