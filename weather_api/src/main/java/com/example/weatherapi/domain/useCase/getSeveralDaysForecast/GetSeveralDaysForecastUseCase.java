@@ -1,12 +1,11 @@
 package com.example.weatherapi.domain.useCase.getSeveralDaysForecast;
 
-import com.example.weatherapi.OpenWeatherApiConfig;
+import com.example.weatherapi.data.ForecastUnitsType;
 import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysWeatherResponse;
 import com.example.weatherapi.service.interfaces.IOpenWeatherApi;
 
-import java.util.HashMap;
-import java.util.Map;
+import static com.example.weatherapi.util.UtilsRequestUrlOptions.getUrlOptions;
 
 public class GetSeveralDaysForecastUseCase implements IGetSeveralDaysForecastUseCase {
     private final IOpenWeatherApi openWeatherApi;
@@ -17,17 +16,11 @@ public class GetSeveralDaysForecastUseCase implements IGetSeveralDaysForecastUse
 
     @Override
     public ISeveralDaysWeatherResponse get(ICityLocation location) {
-        return openWeatherApi.getFiveDaysForecast(getUrlOptions(location));
+        return get(location, ForecastUnitsType.CELSIUS.getValue());
     }
 
-    private Map<String, String> getUrlOptions(ICityLocation cityLocation) {
-
-        Map<String, String> urlOptions = new HashMap<>();
-
-        urlOptions.put("lat", String.valueOf(cityLocation.getLatitude()));
-        urlOptions.put("lon", String.valueOf(cityLocation.getLongitude()));
-        urlOptions.put("appid", OpenWeatherApiConfig.API_KEY);
-
-        return urlOptions;
+    @Override
+    public ISeveralDaysWeatherResponse get(ICityLocation location, int unitType) {
+        return openWeatherApi.getFiveDaysForecast(getUrlOptions(location, unitType));
     }
 }

@@ -5,4 +5,6 @@ import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveral
 
 public interface IGetSeveralDaysForecastUseCase {
     ISeveralDaysWeatherResponse get(ICityLocation location);
+
+    ISeveralDaysWeatherResponse get(ICityLocation location, int unitType);
 }

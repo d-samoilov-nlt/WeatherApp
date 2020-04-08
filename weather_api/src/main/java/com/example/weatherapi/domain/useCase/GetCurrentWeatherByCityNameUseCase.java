@@ -1,11 +1,10 @@
 package com.example.weatherapi.domain.useCase;
 
-import com.example.weatherapi.OpenWeatherApiConfig;
+import com.example.weatherapi.data.ForecastUnitsType;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeatherResponse;
 import com.example.weatherapi.service.interfaces.IOpenWeatherApi;
 
-import java.util.HashMap;
-import java.util.Map;
+import static com.example.weatherapi.util.UtilsRequestUrlOptions.getUrlOptions;
 
 public class GetCurrentWeatherByCityNameUseCase implements IGetCurrentWeatherByCityNameUseCase {
     private final IOpenWeatherApi openWeatherApi;
@@ -16,16 +15,11 @@ public class GetCurrentWeatherByCityNameUseCase implements IGetCurrentWeatherByC
 
     @Override
     public ICurrentWeatherResponse get(String cityName) {
-        return openWeatherApi.getCurrentWeatherByName(getUrlOptions(cityName));
+        return get(cityName, ForecastUnitsType.CELSIUS.getValue());
     }
 
-    private Map<String, String> getUrlOptions(String cityName) {
-
-        Map<String, String> urlOptions = new HashMap<>();
-
-        urlOptions.put("q", cityName);
-        urlOptions.put("appid", OpenWeatherApiConfig.API_KEY);
-
-        return urlOptions;
+    @Override
+    public ICurrentWeatherResponse get(String cityName, int unitType) {
+        return openWeatherApi.getCurrentWeatherByName(getUrlOptions(cityName, unitType));
     }
 }

@@ -4,4 +4,6 @@ import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeat
 
 public interface IGetCurrentWeatherByCityNameUseCase {
     ICurrentWeatherResponse get(String cityName);
+
+    ICurrentWeatherResponse get(String cityName, int unitType);
 }
