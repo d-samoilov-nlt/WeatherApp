@@ -11,13 +11,14 @@ import java.util.List;
 
 public class ConnectivityReceiver extends BroadcastReceiver {
     private static List<ConnectivityReceiverListener> connectivityReceiverListeners;
+    private static boolean isNetworkAvailable = true;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Boolean isConnected = UtilDeviceNetwork.isDeviceOnline(context.getApplicationContext());
+        isNetworkAvailable = UtilDeviceNetwork.isDeviceOnline(context.getApplicationContext());
 
         for (ConnectivityReceiverListener listener : getConnectivityReceiverListeners()) {
-            listener.onNetworkConnectionChanged(isConnected);
+            listener.onNetworkConnectionChanged(isNetworkAvailable);
         }
     }
 
@@ -30,6 +31,8 @@ public class ConnectivityReceiver extends BroadcastReceiver {
     }
 
     public static void addConnectivityReceiverListener(ConnectivityReceiverListener listener) {
+        listener.onNetworkConnectionChanged(isNetworkAvailable);
+
         getConnectivityReceiverListeners().add(listener);
     }
 
