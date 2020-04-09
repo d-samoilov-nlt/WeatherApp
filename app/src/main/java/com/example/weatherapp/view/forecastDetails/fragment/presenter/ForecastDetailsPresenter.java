@@ -8,6 +8,7 @@ import com.example.weatherapp.data.model.deviceLocation.DeviceLocation;
 import com.example.weatherapp.data.model.favoriteLocation.FavoriteLocationCacheData;
 import com.example.weatherapp.data.model.favoriteLocation.IFavoriteLocationCacheData;
 import com.example.weatherapp.data.repository.IFavoriteLocationRepository;
+import com.example.weatherapp.domain.exception.InternetUnreachableException;
 import com.example.weatherapp.domain.exception.NotFoundException;
 import com.example.weatherapp.view.forecastDetails.fragment.model.mapper.IDayForecastMapper;
 import com.example.weatherapp.view.forecastDetails.fragment.model.mapper.ISeveralDaysForecastMapper;
@@ -69,7 +70,7 @@ public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
         } catch (DamagedForecastResponseException e) {
             e.printStackTrace();
             view.showLoadingError(true);
-        } catch (RequestFailedException e) {
+        } catch (InternetUnreachableException | RequestFailedException e) {
             e.printStackTrace();
 
             if (severalDaysWeatherResponse != null) {
