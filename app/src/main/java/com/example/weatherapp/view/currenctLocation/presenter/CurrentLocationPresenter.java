@@ -1,12 +1,18 @@
 package com.example.weatherapp.view.currenctLocation.presenter;
 
+import com.example.weatherapi.data.ForecastUnitsType;
 import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeatherResponse;
+import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysWeatherResponse;
 import com.example.weatherapi.data.entity.pojo.CityLocation;
 import com.example.weatherapi.domain.useCase.getCurrentWeatherByLocation.IGetCurrentWeatherByCityLocationUseCase;
+import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.IGetSeveralDaysForecastUseCase;
+import com.example.weatherapi.service.exception.RequestFailedException;
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
+import com.example.weatherapp.data.model.favoriteLocation.FavoriteLocationCacheData;
 import com.example.weatherapp.data.repository.IFavoriteLocationRepository;
 import com.example.weatherapp.data.repository.deviceLocation.ILastDeviceLocationRepository;
+import com.example.weatherapp.domain.exception.InternetUnreachableException;
 import com.example.weatherapp.domain.exception.NotFoundException;
 import com.example.weatherapp.domain.mapper.IForecastShortDetailsMapper;
 import com.example.weatherapp.view.currenctLocation.view.ICurrentLocationView;
@@ -17,22 +23,28 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
     private final IForecastShortDetailsMapper forecastShortDetailsMapper;
     private final ILastDeviceLocationRepository lastDeviceLocationRepository;
     private final IFavoriteLocationRepository favoriteLocationRepository;
+    private final IGetSeveralDaysForecastUseCase getSeveralDaysForecastUseCase;
 
     private IDeviceLocation deviceLocation;
     private boolean isCurrentLocationFavorite;
+
+    private ICurrentWeatherResponse currentWeatherResponse;
+    private ISeveralDaysWeatherResponse severalDaysWeatherResponse;
 
     public CurrentLocationPresenter(
             ICurrentLocationView view,
             IGetCurrentWeatherByCityLocationUseCase getCurrentWeatherByCityLocationUseCase,
             IForecastShortDetailsMapper forecastShortDetailsMapper,
             ILastDeviceLocationRepository lastDeviceLocationRepository,
-            IFavoriteLocationRepository favoriteLocationRepository) {
+            IFavoriteLocationRepository favoriteLocationRepository,
+            IGetSeveralDaysForecastUseCase getSeveralDaysForecastUseCase) {
 
         this.view = view;
         this.getCurrentWeatherByCityLocationUseCase = getCurrentWeatherByCityLocationUseCase;
         this.forecastShortDetailsMapper = forecastShortDetailsMapper;
         this.lastDeviceLocationRepository = lastDeviceLocationRepository;
         this.favoriteLocationRepository = favoriteLocationRepository;
+        this.getSeveralDaysForecastUseCase = getSeveralDaysForecastUseCase;
     }
 
     @Override
@@ -40,7 +52,19 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
         view.setIsSearchingLocationProcess(true);
         try {
             deviceLocation = lastDeviceLocationRepository.load();
-            updateForecastDetails();
+
+
+            view.showShortForecastDetails(forecastShortDetailsMapper.map(
+                    favoriteLocationRepository.loadByDeviceLocation(deviceLocation).getCurrentWeather()));
+
+            isCurrentLocationFavorite = true;
+
+            view.showForecastDetails(
+                    new CityLocation(
+                            deviceLocation.getLongitude(),
+                            deviceLocation.getLatitude()));
+            view.setIsSearchingLocationProcess(false);
+            view.setIsFavoriteSelected(true);
         } catch (NotFoundException ignore) {
             //nop
         }
@@ -53,7 +77,10 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
 
     @Override
     public void onLocationUpdated(IDeviceLocation deviceLocation) {
+        this.deviceLocation = deviceLocation;
+
         view.setIsPermissionRequiredError(false);
+        lastDeviceLocationRepository.save(deviceLocation);
         updateForecastDetails();
     }
 
@@ -63,13 +90,18 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
                         deviceLocation.getLongitude(),
                         deviceLocation.getLatitude());
 
-        ICurrentWeatherResponse currentWeatherResponse =
-                getCurrentWeatherByCityLocationUseCase.get(cityLocation);
+        try {
+            currentWeatherResponse =
+                    getCurrentWeatherByCityLocationUseCase.get(cityLocation);
 
-        view.showShortForecastDetails(forecastShortDetailsMapper.map(currentWeatherResponse));
-        view.showForecastDetails(cityLocation);
+            view.showShortForecastDetails(forecastShortDetailsMapper.map(currentWeatherResponse));
+        } catch (InternetUnreachableException | RequestFailedException e) {
+            e.printStackTrace();
+        } finally {
+            view.showForecastDetails(cityLocation);
 
-        lastDeviceLocationRepository.save(deviceLocation);
+            view.setIsSearchingLocationProcess(false);
+        }
     }
 
     @Override
@@ -81,8 +113,34 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
 
     @Override
     public void onAddToFavoritePressed() {
+        if (deviceLocation == null) {
+            return;
+        }
         isCurrentLocationFavorite = !isCurrentLocationFavorite;
-        // TODO : add to favorite
+
+        view.setIsFavoriteSelected(isCurrentLocationFavorite);
+
+        ICityLocation cityLocation =
+                new CityLocation(
+                        deviceLocation.getLongitude(),
+                        deviceLocation.getLatitude());
+
+        if (currentWeatherResponse == null) {
+            currentWeatherResponse = getCurrentWeatherByCityLocationUseCase.get(cityLocation);
+        }
+        if (severalDaysWeatherResponse == null) {
+            severalDaysWeatherResponse = getSeveralDaysForecastUseCase.get(cityLocation);
+        }
+        if (isCurrentLocationFavorite) {
+            favoriteLocationRepository.save(
+                    new FavoriteLocationCacheData(
+                            ForecastUnitsType.CELSIUS.getValue(),
+                            currentWeatherResponse.getCityName(),
+                            currentWeatherResponse,
+                            severalDaysWeatherResponse));
+        } else {
+            favoriteLocationRepository.deleteByCityName(currentWeatherResponse.getCityName());
+        }
     }
 
     @Override

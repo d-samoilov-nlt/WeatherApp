@@ -13,4 +13,6 @@ public interface ICurrentLocationView {
     void showShortForecastDetails(IForecastShortDetailsDisplayModel dm);
 
     void showForecastDetails(ICityLocation cityLocation);
+
+    void setIsFavoriteSelected(boolean isSelected);
 }

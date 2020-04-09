@@ -39,4 +39,9 @@ public class InMainThreadCurrentLocationView implements ICurrentLocationView {
     public void showForecastDetails(ICityLocation cityLocation) {
         handler.post(() -> origin.showForecastDetails(cityLocation));
     }
+
+    @Override
+    public void setIsFavoriteSelected(boolean isSelected) {
+        handler.post(() -> origin.setIsFavoriteSelected(isSelected));
+    }
 }

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.weatherapi.data.ForecastUnitsType;
 import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapi.domain.useCase.getCurrentWeatherByLocation.GetCurrentWeatherByCityLocationUseCase;
+import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.GetSeveralDaysForecastUseCase;
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.model.cityLocation.SerializableCityLocation;
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
@@ -57,6 +59,9 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
     private TextView tvSearchingError;
     private TextView tvToolbarShortDetails;
 
+    private ImageView ivFavoriteLocation;
+    private ImageView ivRefresh;
+
     private Button btnTryAgain;
     private ProgressBar pbSearchingProgress;
 
@@ -78,7 +83,9 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
                                         ),
                                         new ForecastShortDetailsMapper(),
                                         LastDeviceLocationRepositoryProvider.get(getContext().getApplicationContext()),
-                                        FavoriteLocationRepositoryProvider.get(getContext().getApplicationContext()))),
+                                        FavoriteLocationRepositoryProvider.get(getContext().getApplicationContext()),
+                                        new GetSeveralDaysForecastUseCase(
+                                                OpenWeatherApiProvider.get(getContext().getApplicationContext())))),
                         Executors.newCachedThreadPool()
                 );
 
@@ -96,7 +103,12 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
 
         tvToolbarShortDetails = view.findViewById(R.id.tv_current_location_toolbar_short_details);
 
+        ivFavoriteLocation = view.findViewById(R.id.iv_current_location_toolbar_favorite);
+        ivRefresh = view.findViewById(R.id.iv_current_location_toolbar_update);
+
         btnTryAgain.setOnClickListener(v -> presenter.onTrySearchAgainPressed());
+        ivFavoriteLocation.setOnClickListener(v -> presenter.onAddToFavoritePressed());
+        ivRefresh.setOnClickListener(v -> presenter.onRefreshPressed());
     }
 
 
@@ -150,6 +162,15 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         transaction.replace(R.id.fl_forecast_details, detailsFragment);
         transaction.commit();
+    }
+
+    @Override
+    public void setIsFavoriteSelected(boolean isSelected) {
+        if (isSelected) {
+            ivFavoriteLocation.setImageResource(R.drawable.ic_favorite_white_24dp);
+        } else {
+            ivFavoriteLocation.setImageResource(R.drawable.ic_favorite_border_white_24dp);
+        }
     }
 
     private void stopLocationService() {

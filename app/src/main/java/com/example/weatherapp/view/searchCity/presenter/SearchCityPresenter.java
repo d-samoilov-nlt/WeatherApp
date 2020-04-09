@@ -108,11 +108,13 @@ public class SearchCityPresenter implements ISearchCityPresenter {
                     new FavoriteLocationCacheData(
                             locationUnitType,
                             currentWeatherResponse.getCityName(),
-                            currentWeatherResponse,
+                            getCurrentWeatherByCityNameUseCase.get(currentWeatherResponse.getCityName(),
+                                    locationUnitType),
                             getSeveralDaysForecastUseCase.get(
                                     new CityLocation(
                                             currentWeatherResponse.getCoordinate().getLongitude(),
-                                            currentWeatherResponse.getCoordinate().getLatitude()))));
+                                            currentWeatherResponse.getCoordinate().getLatitude()),
+                                    locationUnitType)));
 
             launchFavoriteLocationForecastDetailsUseCase.launch(currentWeatherResponse.getCityName());
         } else {
