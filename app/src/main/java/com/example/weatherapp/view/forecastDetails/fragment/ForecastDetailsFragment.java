@@ -15,6 +15,7 @@ import com.example.weatherapi.data.ForecastUnitsType;
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.GetSeveralDaysForecastUseCase;
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.model.cityLocation.SerializableCityLocation;
+import com.example.weatherapp.provider.FavoriteLocationRepositoryProvider;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
 import com.example.weatherapp.view.common.ForecastDetailsToolbarButton;
 import com.example.weatherapp.view.forecastDetails.ForecastDetailsConst;
@@ -73,7 +74,8 @@ public class ForecastDetailsFragment extends Fragment implements View.OnClickLis
                                         new TomorrowForecastMapper(getResources()),
                                         new SeveralDaysForecastMapper(getResources()),
                                         (SerializableCityLocation) getArguments().getSerializable(ForecastDetailsConst.CITY_LOCATION_KEY),
-                                        getArguments().getInt(ForecastDetailsConst.UNIT_TYPE_KEY, ForecastUnitsType.CELSIUS.getValue()))
+                                        getArguments().getInt(ForecastDetailsConst.UNIT_TYPE_KEY, ForecastUnitsType.CELSIUS.getValue()),
+                                        FavoriteLocationRepositoryProvider.get(getContext().getApplicationContext()))
                         ),
                         Executors.newCachedThreadPool()
                 );
