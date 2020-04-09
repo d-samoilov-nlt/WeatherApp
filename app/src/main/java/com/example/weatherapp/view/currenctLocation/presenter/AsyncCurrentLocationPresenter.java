@@ -32,4 +32,14 @@ public class AsyncCurrentLocationPresenter implements ICurrentLocationPresenter 
     public void onTrySearchAgainPressed() {
         service.execute(origin::onTrySearchAgainPressed);
     }
+
+    @Override
+    public void onAddToFavoritePressed() {
+        service.execute(origin::onAddToFavoritePressed);
+    }
+
+    @Override
+    public void onRefreshPressed() {
+        service.execute(origin::onRefreshPressed);
+    }
 }

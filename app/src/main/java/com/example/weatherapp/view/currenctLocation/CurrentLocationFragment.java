@@ -26,6 +26,8 @@ import com.example.weatherapp.data.model.cityLocation.SerializableCityLocation;
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 import com.example.weatherapp.domain.mapper.ForecastShortDetailsMapper;
+import com.example.weatherapp.provider.FavoriteLocationRepositoryProvider;
+import com.example.weatherapp.provider.LastDeviceLocationRepositoryProvider;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
 import com.example.weatherapp.service.DeviceLocationService;
 import com.example.weatherapp.view.currenctLocation.presenter.AsyncCurrentLocationPresenter;
@@ -74,7 +76,9 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
                                         new GetCurrentWeatherByCityLocationUseCase(
                                                 OpenWeatherApiProvider.get(getContext().getApplicationContext())
                                         ),
-                                        new ForecastShortDetailsMapper())),
+                                        new ForecastShortDetailsMapper(),
+                                        LastDeviceLocationRepositoryProvider.get(getContext().getApplicationContext()),
+                                        FavoriteLocationRepositoryProvider.get(getContext().getApplicationContext()))),
                         Executors.newCachedThreadPool()
                 );
 

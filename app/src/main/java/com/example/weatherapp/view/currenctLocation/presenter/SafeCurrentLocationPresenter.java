@@ -44,4 +44,22 @@ public class SafeCurrentLocationPresenter implements ICurrentLocationPresenter {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void onAddToFavoritePressed() {
+        try {
+            origin.onAddToFavoritePressed();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onRefreshPressed() {
+        try {
+            origin.onRefreshPressed();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

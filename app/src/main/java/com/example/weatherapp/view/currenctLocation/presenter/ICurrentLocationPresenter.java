@@ -10,4 +10,8 @@ public interface ICurrentLocationPresenter {
     void onLocationUpdated(IDeviceLocation deviceLocation);
 
     void onTrySearchAgainPressed();
+
+    void onAddToFavoritePressed();
+
+    void onRefreshPressed();
 }
