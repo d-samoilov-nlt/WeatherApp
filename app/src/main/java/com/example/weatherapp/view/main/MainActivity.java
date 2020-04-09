@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.weatherapp.R;
+import com.example.weatherapp.domain.useCase.updateFavoriteLocation.EnqueueUpdatingFavoriteLocationWorkerUseCase;
 import com.example.weatherapp.service.ConnectivityReceiver;
 import com.example.weatherapp.view.common.WeatherAppActivity;
 import com.example.weatherapp.view.currenctLocation.CurrentLocationFragment;
@@ -42,7 +43,8 @@ public class MainActivity extends WeatherAppActivity implements IMainView {
                         new SafeMainPresenter(
                                 new MainPresenter(
                                         () -> startActivity(new Intent(MainActivity.this, SearchCityActivity.class)),
-                                        new InMainThreadMainView(this))),
+                                        new InMainThreadMainView(this),
+                                        new EnqueueUpdatingFavoriteLocationWorkerUseCase())),
                         Executors.newCachedThreadPool()
                 );
 
