@@ -10,6 +10,7 @@ import com.example.weatherapi.service.exception.RequestFailedException;
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.data.model.favoriteLocation.FavoriteLocationCacheData;
 import com.example.weatherapp.data.repository.IFavoriteLocationRepository;
+import com.example.weatherapp.domain.exception.InternetUnreachableException;
 import com.example.weatherapp.view.searchCity.model.ILaunchForecastDetailsScreenUseCase;
 import com.example.weatherapp.view.searchCity.view.ISearchCityView;
 
@@ -93,7 +94,7 @@ public class SearchCityPresenter implements ISearchCityPresenter {
                     getCurrentWeatherByCityNameUseCase.get(location);
 
             view.setViewWeatherBtnEnabled(true);
-        } catch (RequestFailedException e) {
+        } catch (InternetUnreachableException | RequestFailedException e) {
             view.showCityNotFoundError(true);
         }
     }

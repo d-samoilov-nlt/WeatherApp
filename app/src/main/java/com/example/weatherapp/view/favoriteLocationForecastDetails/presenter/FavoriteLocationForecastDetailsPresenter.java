@@ -4,9 +4,11 @@ import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapi.data.entity.pojo.CityLocation;
 import com.example.weatherapi.domain.useCase.getCurrentWeatherByName.IGetCurrentWeatherByCityNameUseCase;
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.IGetSeveralDaysForecastUseCase;
+import com.example.weatherapi.service.exception.RequestFailedException;
 import com.example.weatherapp.data.model.favoriteLocation.FavoriteLocationCacheData;
 import com.example.weatherapp.data.model.favoriteLocation.IFavoriteLocationCacheData;
 import com.example.weatherapp.data.repository.IFavoriteLocationRepository;
+import com.example.weatherapp.domain.exception.InternetUnreachableException;
 import com.example.weatherapp.domain.mapper.IForecastShortDetailsMapper;
 import com.example.weatherapp.view.favoriteLocationForecastDetails.view.IFavoriteLocationForecastDetailsView;
 
@@ -73,24 +75,29 @@ public class FavoriteLocationForecastDetailsPresenter implements IFavoriteLocati
     public void onRefreshPressed() {
         view.setLoadingProcess(true);
 
-        IFavoriteLocationCacheData
-                updatedLocationCacheData =
-                new FavoriteLocationCacheData(
-                        locationCacheData.getForecastUnitType(),
-                        locationCacheData.getCityName(),
-                        getCurrentWeatherByCityNameUseCase.get(cityName, unitType),
-                        getSeveralDaysForecastUseCase.get(cityLocation, unitType));
+        try {
+            IFavoriteLocationCacheData
+                    updatedLocationCacheData =
+                    new FavoriteLocationCacheData(
+                            locationCacheData.getForecastUnitType(),
+                            locationCacheData.getCityName(),
+                            getCurrentWeatherByCityNameUseCase.get(cityName, unitType),
+                            getSeveralDaysForecastUseCase.get(cityLocation, unitType));
 
-        locationCacheData = updatedLocationCacheData;
+            locationCacheData = updatedLocationCacheData;
 
-        view.showForecastDetails(cityLocation, unitType);
-        view.showShortForecastDetails(
-                forecastShortDetailsMapper.map(
-                        locationCacheData.getCurrentWeather(),
-                        unitType));
-        if (isFavoriteSelected) {
-            favoriteLocationRepository.save(updatedLocationCacheData);
+            view.showForecastDetails(cityLocation, unitType);
+            view.showShortForecastDetails(
+                    forecastShortDetailsMapper.map(
+                            locationCacheData.getCurrentWeather(),
+                            unitType));
+            if (isFavoriteSelected) {
+                favoriteLocationRepository.save(updatedLocationCacheData);
+            }
+        } catch (RequestFailedException | InternetUnreachableException e) {
+            e.printStackTrace();
+        } finally {
+            view.setLoadingProcess(false);
         }
-        view.setLoadingProcess(false);
     }
 }
