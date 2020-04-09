@@ -2,7 +2,6 @@ package com.example.weatherapp.data.repository;
 
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.data.model.favoriteLocation.IFavoriteLocationCacheData;
-import com.example.weatherapp.data.model.favoriteLocation.room.RoomFavoriteLocation;
 import com.example.weatherapp.data.model.favoriteLocation.room.forecast.currentWeather.RoomCurrentWeatherResponse;
 import com.example.weatherapp.data.model.favoriteLocation.room.forecast.relation.RoomFavoriteLocationWithWeather;
 import com.example.weatherapp.data.model.favoriteLocation.room.forecast.severalDaysWeather.RoomSeveralDaysWeatherResponse;
@@ -22,10 +21,8 @@ public class RoomFavoriteLocationRepository implements IFavoriteLocationReposito
     public void save(IFavoriteLocationCacheData data) {
         dao.save(
                 new RoomFavoriteLocationWithWeather(
-                        new RoomFavoriteLocation(
-                                data.getCityName(),
-                                data.getForecastUnitType()
-                        ),
+                        data.getCityName(),
+                        data.getForecastUnitType(),
                         new RoomCurrentWeatherResponse(data.getCurrentWeather()),
                         new RoomSeveralDaysWeatherResponse(data.getSeveralDaysForecast())
                 ));

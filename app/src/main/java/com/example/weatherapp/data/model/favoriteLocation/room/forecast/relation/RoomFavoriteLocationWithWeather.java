@@ -1,22 +1,25 @@
 package com.example.weatherapp.data.model.favoriteLocation.room.forecast.relation;
 
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.example.weatherapp.data.model.favoriteLocation.IFavoriteLocationCacheData;
-import com.example.weatherapp.data.model.favoriteLocation.room.RoomFavoriteLocation;
 import com.example.weatherapp.data.model.favoriteLocation.room.forecast.currentWeather.RoomCurrentWeatherResponse;
 import com.example.weatherapp.data.model.favoriteLocation.room.forecast.severalDaysWeather.RoomSeveralDaysWeatherResponse;
 
 @Entity
 public class RoomFavoriteLocationWithWeather implements IFavoriteLocationCacheData {
-    @PrimaryKey(autoGenerate = true)
-    public int id;
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "city_name")
+    private String cityName;
 
-    @Embedded
-    public RoomFavoriteLocation cacheData;
+    @ColumnInfo(name = "unit_type")
+    private int forecastUnitType;
 
     @Embedded
     public RoomCurrentWeatherResponse currentWeather;
@@ -24,45 +27,34 @@ public class RoomFavoriteLocationWithWeather implements IFavoriteLocationCacheDa
     @Embedded
     public RoomSeveralDaysWeatherResponse severalDaysForecast;
 
-    public RoomFavoriteLocationWithWeather(RoomFavoriteLocation cacheData, RoomCurrentWeatherResponse currentWeather, RoomSeveralDaysWeatherResponse severalDaysForecast) {
-        this.cacheData = cacheData;
+    public RoomFavoriteLocationWithWeather(@NonNull String cityName, int forecastUnitType, RoomCurrentWeatherResponse currentWeather, RoomSeveralDaysWeatherResponse severalDaysForecast) {
+        this.cityName = cityName;
+        this.forecastUnitType = forecastUnitType;
         this.currentWeather = currentWeather;
         this.severalDaysForecast = severalDaysForecast;
     }
 
-    public int getId() {
-        return id;
+    public void setCityName(@NonNull String cityName) {
+        this.cityName = cityName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setForecastUnitType(int forecastUnitType) {
+        this.forecastUnitType = forecastUnitType;
     }
 
     public void setCurrentWeather(RoomCurrentWeatherResponse currentWeather) {
         this.currentWeather = currentWeather;
     }
 
-    public RoomFavoriteLocation getCacheData() {
-        return cacheData;
-    }
-
-    public void setCacheData(RoomFavoriteLocation cacheData) {
-        this.cacheData = cacheData;
-    }
-
-
-    public void setCurrentWeatherResponse(RoomCurrentWeatherResponse currentWeather) {
-        this.currentWeather = currentWeather;
-    }
-
+    @NonNull
     @Override
     public String getCityName() {
-        return cacheData.getCityName();
+        return cityName;
     }
 
     @Override
     public int getForecastUnitType() {
-        return cacheData.getForecastUnitType();
+        return forecastUnitType;
     }
 
     @Override
