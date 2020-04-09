@@ -1,5 +1,6 @@
 package com.example.weatherapp.data.repository;
 
+import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.data.model.favoriteLocation.IFavoriteLocationCacheData;
 import com.example.weatherapp.data.model.favoriteLocation.room.RoomFavoriteLocationCacheData;
 import com.example.weatherapp.domain.exception.NotFoundException;
@@ -35,6 +36,11 @@ public class RoomFavoriteLocationRepository implements IFavoriteLocationReposito
         } catch (Exception e) {
             throw new NotFoundException(e.getMessage());
         }
+    }
+
+    @Override
+    public IFavoriteLocationCacheData loadByDeviceLocation(IDeviceLocation deviceLocation) throws NotFoundException {
+        return null; // TODO : get from dao
     }
 
     @Override

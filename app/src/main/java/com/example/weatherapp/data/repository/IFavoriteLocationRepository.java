@@ -1,5 +1,6 @@
 package com.example.weatherapp.data.repository;
 
+import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.data.model.favoriteLocation.IFavoriteLocationCacheData;
 import com.example.weatherapp.domain.exception.NotFoundException;
 
@@ -11,6 +12,8 @@ public interface IFavoriteLocationRepository {
     List<IFavoriteLocationCacheData> loadAll() throws NotFoundException;
 
     IFavoriteLocationCacheData loadByCityName(String cityName) throws NotFoundException;
+
+    IFavoriteLocationCacheData loadByDeviceLocation(IDeviceLocation deviceLocation) throws NotFoundException;
 
     void deleteByCityName(String cityName);
 }
