@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">WeatherApp</string>
 
+    //notification
+    <string name="notification_update_favorite_forecast_title">Weather App</string>
+    <string name="notification_update_favorite_forecast_content">Updating forecast fore favorite locations…</string>
+
     // common
     <string name="no_connection_msg">No internet connection</string>
     <string name="loading_progress">Loading…</string>
