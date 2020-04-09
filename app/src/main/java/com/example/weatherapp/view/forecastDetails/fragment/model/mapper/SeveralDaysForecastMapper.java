@@ -97,7 +97,7 @@ public class SeveralDaysForecastMapper implements ISeveralDaysForecastMapper {
                         formatToDisplayValuePressure(response.getMain().getPressure()),
                         formatToDisplayValueWindSpeed(response.getWind().getSpeed()),
                         formatToDisplayValueHumidity(response.getMain().getHumidity()),
-                        getOpenWeatherIconUrl(response.getWeather()[0].getIconName()));
+                        getOpenWeatherIconUrl(response.getWeatherList()[0].getIconName()));
     }
 
     private String getTitleByDate(Date date) {
