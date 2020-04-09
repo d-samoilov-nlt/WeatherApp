@@ -1,16 +1,15 @@
 package com.example.weatherapp.data.model.favoriteLocation.room.forecast.currentWeather;
 
 import androidx.room.ColumnInfo;
-import androidx.room.PrimaryKey;
+import androidx.room.Entity;
 
 import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityCoordinateResponse;
 
 import java.io.Serializable;
 
+@Entity
 public class RoomCoordinateResponse implements ICityCoordinateResponse, Serializable {
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private int id;
+
     @ColumnInfo(name = "longitude")
     private double longitude;
     @ColumnInfo(name = "latitude")
@@ -21,8 +20,7 @@ public class RoomCoordinateResponse implements ICityCoordinateResponse, Serializ
         this.latitude = origin.getLatitude();
     }
 
-    public RoomCoordinateResponse(int id, double longitude, double latitude) {
-        this.id = id;
+    public RoomCoordinateResponse(double longitude, double latitude) {
         this.longitude = longitude;
         this.latitude = latitude;
     }

@@ -2,7 +2,6 @@ package com.example.weatherapp.data.model.favoriteLocation.room.forecast.weather
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 import com.example.weatherapi.data.entity.interfaces.currentWeather.IWindResponse;
 
@@ -10,9 +9,7 @@ import java.io.Serializable;
 
 @Entity
 public class RoomWindResponse implements IWindResponse, Serializable {
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private int id;
+
     @ColumnInfo(name = "speed")
     private double speed;
     @ColumnInfo(name = "degree")
@@ -23,8 +20,7 @@ public class RoomWindResponse implements IWindResponse, Serializable {
         this.degree = origin.getDegree();
     }
 
-    public RoomWindResponse(int id, double speed, int degree) {
-        this.id = id;
+    public RoomWindResponse(double speed, int degree) {
         this.speed = speed;
         this.degree = degree;
     }
@@ -34,8 +30,16 @@ public class RoomWindResponse implements IWindResponse, Serializable {
         return speed;
     }
 
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
     @Override
     public int getDegree() {
         return degree;
+    }
+
+    public void setDegree(int degree) {
+        this.degree = degree;
     }
 }

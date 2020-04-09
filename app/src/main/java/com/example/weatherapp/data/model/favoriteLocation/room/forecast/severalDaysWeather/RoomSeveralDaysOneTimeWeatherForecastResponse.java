@@ -1,66 +1,94 @@
 package com.example.weatherapp.data.model.favoriteLocation.room.forecast.severalDaysWeather;
 
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.example.weatherapi.data.entity.interfaces.currentWeather.ICloudsResponse;
-import com.example.weatherapi.data.entity.interfaces.currentWeather.IMainResponse;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.IWeatherResponse;
-import com.example.weatherapi.data.entity.interfaces.currentWeather.IWindResponse;
 import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysOneTimeWeatherForecastResponse;
 import com.example.weatherapp.data.model.favoriteLocation.room.forecast.weatherCondition.RoomCloudsResponse;
 import com.example.weatherapp.data.model.favoriteLocation.room.forecast.weatherCondition.RoomMainWeatherResponse;
 import com.example.weatherapp.data.model.favoriteLocation.room.forecast.weatherCondition.RoomWeatherResponse;
 import com.example.weatherapp.data.model.favoriteLocation.room.forecast.weatherCondition.RoomWindResponse;
-import com.example.weatherapp.data.model.favoriteLocation.room.typeConverter.CloudsResponseConverter;
-import com.example.weatherapp.data.model.favoriteLocation.room.typeConverter.MainWeatherResponseConverter;
 import com.example.weatherapp.data.model.favoriteLocation.room.typeConverter.WeatherResponseConverter;
-import com.example.weatherapp.data.model.favoriteLocation.room.typeConverter.WindResponseConverter;
 
 import java.io.Serializable;
 
 @Entity
 public class RoomSeveralDaysOneTimeWeatherForecastResponse implements ISeveralDaysOneTimeWeatherForecastResponse, Serializable {
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private int id;
+    @PrimaryKey
+    @ColumnInfo(name = "city_name")
+    private String cityName;
 
-    @ColumnInfo(name = "main")
-    @TypeConverters({MainWeatherResponseConverter.class})
+    @Embedded
     private RoomMainWeatherResponse main;
 
-    @ColumnInfo(name = "weatherArray")
+    @ColumnInfo(name = "weather_list")
     @TypeConverters({WeatherResponseConverter.class})
-    private RoomWeatherResponse[] weatherArray;
+    private RoomWeatherResponse[] weatherList;
 
-    @ColumnInfo(name = "clouds")
-    @TypeConverters({CloudsResponseConverter.class})
+    @Embedded
     private RoomCloudsResponse clouds;
 
-    @ColumnInfo(name = "wind")
-    @TypeConverters({WindResponseConverter.class})
+    @Embedded
     private RoomWindResponse wind;
 
     @ColumnInfo(name = "date")
     private String date;
 
-    public RoomSeveralDaysOneTimeWeatherForecastResponse(ISeveralDaysOneTimeWeatherForecastResponse origin) {
-        this.weatherArray = getWeatherResponseFromOrigin(origin.getWeather());
+    public RoomSeveralDaysOneTimeWeatherForecastResponse(ISeveralDaysOneTimeWeatherForecastResponse origin, String cityName) {
+        this.weatherList = getWeatherResponseFromOrigin(origin.getWeatherList());
         this.main = new RoomMainWeatherResponse(origin.getMain());
         this.wind = new RoomWindResponse(origin.getWind());
         this.clouds = new RoomCloudsResponse(origin.getClouds());
         this.date = origin.getDate();
+        this.cityName = cityName;
     }
 
-    public RoomSeveralDaysOneTimeWeatherForecastResponse(int id, RoomMainWeatherResponse main, RoomWeatherResponse[] weatherArray, RoomCloudsResponse clouds, RoomWindResponse wind, String date) {
-        this.id = id;
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    @Override
+    public RoomMainWeatherResponse getMain() {
+        return main;
+    }
+
+    public void setMain(RoomMainWeatherResponse main) {
         this.main = main;
-        this.weatherArray = weatherArray;
+    }
+
+    @Override
+    public RoomWeatherResponse[] getWeatherList() {
+        return weatherList;
+    }
+
+    public void setWeatherList(RoomWeatherResponse[] weatherList) {
+        this.weatherList = weatherList;
+    }
+
+    @Override
+    public RoomCloudsResponse getClouds() {
+        return clouds;
+    }
+
+    public void setClouds(RoomCloudsResponse clouds) {
         this.clouds = clouds;
+    }
+
+    @Override
+    public RoomWindResponse getWind() {
+        return wind;
+    }
+
+    public void setWind(RoomWindResponse wind) {
         this.wind = wind;
-        this.date = date;
     }
 
     @Override
@@ -68,24 +96,8 @@ public class RoomSeveralDaysOneTimeWeatherForecastResponse implements ISeveralDa
         return date;
     }
 
-    @Override
-    public IMainResponse getMain() {
-        return main;
-    }
-
-    @Override
-    public IWeatherResponse[] getWeather() {
-        return weatherArray;
-    }
-
-    @Override
-    public ICloudsResponse getClouds() {
-        return clouds;
-    }
-
-    @Override
-    public IWindResponse getWind() {
-        return wind;
+    public void setDate(String date) {
+        this.date = date;
     }
 
     private RoomWeatherResponse[] getWeatherResponseFromOrigin(IWeatherResponse[] origin) {

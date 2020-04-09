@@ -1,79 +1,114 @@
 package com.example.weatherapp.data.model.favoriteLocation.room.forecast.currentWeather;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
-import androidx.room.Entity;
+import androidx.room.Embedded;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityCoordinateResponse;
-import com.example.weatherapi.data.entity.interfaces.currentWeather.ICloudsResponse;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeatherResponse;
-import com.example.weatherapi.data.entity.interfaces.currentWeather.IMainResponse;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.IWeatherResponse;
-import com.example.weatherapi.data.entity.interfaces.currentWeather.IWindResponse;
 import com.example.weatherapp.data.model.favoriteLocation.room.forecast.weatherCondition.RoomCloudsResponse;
 import com.example.weatherapp.data.model.favoriteLocation.room.forecast.weatherCondition.RoomMainWeatherResponse;
 import com.example.weatherapp.data.model.favoriteLocation.room.forecast.weatherCondition.RoomWeatherResponse;
 import com.example.weatherapp.data.model.favoriteLocation.room.forecast.weatherCondition.RoomWindResponse;
-import com.example.weatherapp.data.model.favoriteLocation.room.typeConverter.CloudsResponseConverter;
-import com.example.weatherapp.data.model.favoriteLocation.room.typeConverter.CoordinateResponseConverter;
-import com.example.weatherapp.data.model.favoriteLocation.room.typeConverter.MainWeatherResponseConverter;
 import com.example.weatherapp.data.model.favoriteLocation.room.typeConverter.WeatherResponseConverter;
-import com.example.weatherapp.data.model.favoriteLocation.room.typeConverter.WindResponseConverter;
 
 import java.io.Serializable;
 
-@Entity
 public class RoomCurrentWeatherResponse implements ICurrentWeatherResponse, Serializable {
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private int id;
 
-    @ColumnInfo(name = "weather")
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "weather_city_name")
+    private String weatherResponseCityName;
+
+    @ColumnInfo(name = "weather_list")
     @TypeConverters({WeatherResponseConverter.class})
-    private RoomWeatherResponse[] weather;
+    private RoomWeatherResponse[] weatherList;
 
-    @ColumnInfo(name = "main")
-    @TypeConverters({MainWeatherResponseConverter.class})
+    @Embedded
     private RoomMainWeatherResponse main;
 
-    @ColumnInfo(name = "wind")
-    @TypeConverters({WindResponseConverter.class})
+    @Embedded
     private RoomWindResponse wind;
 
-    @ColumnInfo(name = "clouds")
-    @TypeConverters({CloudsResponseConverter.class})
+    @Embedded
     private RoomCloudsResponse clouds;
 
-    @ColumnInfo(name = "name")
-    private String cityName;
-
-    @ColumnInfo(name = "responseCode")
+    @ColumnInfo(name = "response_code")
     private int responseCode;
 
-    @ColumnInfo(name = "coordinate")
-    @TypeConverters({CoordinateResponseConverter.class})
-    private RoomCoordinateResponse coordinateResponse;
+    @Embedded
+    public RoomCoordinateResponse coordinate;
 
     public RoomCurrentWeatherResponse(ICurrentWeatherResponse origin) {
-        this.weather = getWeatherResponseFromOrigin(origin.getWeatherList());
+        this.weatherResponseCityName = origin.getCityName();
+        this.weatherList = getWeatherResponseFromOrigin(origin.getWeatherList());
         this.main = new RoomMainWeatherResponse(origin.getMain());
         this.wind = new RoomWindResponse(origin.getWind());
         this.clouds = new RoomCloudsResponse(origin.getClouds());
-        this.cityName = origin.getCityName();
         this.responseCode = origin.getResponseCode();
-        this.coordinateResponse = new RoomCoordinateResponse(origin.getCoordinate());
+        this.coordinate = new RoomCoordinateResponse(origin.getCoordinate());
     }
 
-    public RoomCurrentWeatherResponse(int id, RoomWeatherResponse[] weather, RoomMainWeatherResponse main, RoomWindResponse wind, RoomCloudsResponse clouds, String cityName, int responseCode, RoomCoordinateResponse coordinateResponse) {
-        this.id = id;
-        this.weather = weather;
+    public RoomCurrentWeatherResponse(@NonNull String weatherResponseCityName, RoomWeatherResponse[] weatherList, RoomMainWeatherResponse main, RoomWindResponse wind, RoomCloudsResponse clouds, int responseCode, RoomCoordinateResponse coordinate) {
+        this.weatherResponseCityName = weatherResponseCityName;
+        this.weatherList = weatherList;
         this.main = main;
         this.wind = wind;
         this.clouds = clouds;
-        this.cityName = cityName;
         this.responseCode = responseCode;
-        this.coordinateResponse = coordinateResponse;
+        this.coordinate = coordinate;
+    }
+
+    @NonNull
+    public String getWeatherResponseCityName() {
+        return weatherResponseCityName;
+    }
+
+    public void setWeatherResponseCityName(@NonNull String weatherResponseCityName) {
+        this.weatherResponseCityName = weatherResponseCityName;
+    }
+
+    public void setCityName(@NonNull String cityName) {
+        this.weatherResponseCityName = cityName;
+    }
+
+    @Override
+    public RoomMainWeatherResponse getMain() {
+        return main;
+    }
+
+    @Override
+    public RoomWeatherResponse[] getWeatherList() {
+        return weatherList;
+    }
+
+    public void setWeatherList(RoomWeatherResponse[] weatherList) {
+        this.weatherList = weatherList;
+    }
+
+    public void setMain(RoomMainWeatherResponse main) {
+        this.main = main;
+    }
+
+    @Override
+    public RoomWindResponse getWind() {
+        return wind;
+    }
+
+    public void setWind(RoomWindResponse wind) {
+        this.wind = wind;
+    }
+
+    @Override
+    public RoomCloudsResponse getClouds() {
+        return clouds;
+    }
+
+    public void setClouds(RoomCloudsResponse clouds) {
+        this.clouds = clouds;
     }
 
     @Override
@@ -83,32 +118,20 @@ public class RoomCurrentWeatherResponse implements ICurrentWeatherResponse, Seri
 
     @Override
     public String getCityName() {
-        return cityName;
+        return weatherResponseCityName;
+    }
+
+    public void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
     }
 
     @Override
-    public ICityCoordinateResponse getCoordinate() {
-        return coordinateResponse;
+    public RoomCoordinateResponse getCoordinate() {
+        return coordinate;
     }
 
-    @Override
-    public ICloudsResponse getClouds() {
-        return clouds;
-    }
-
-    @Override
-    public IMainResponse getMain() {
-        return main;
-    }
-
-    @Override
-    public IWeatherResponse[] getWeatherList() {
-        return weather;
-    }
-
-    @Override
-    public IWindResponse getWind() {
-        return wind;
+    public void setCoordinate(RoomCoordinateResponse coordinate) {
+        this.coordinate = coordinate;
     }
 
     private RoomWeatherResponse[] getWeatherResponseFromOrigin(IWeatherResponse[] origin) {

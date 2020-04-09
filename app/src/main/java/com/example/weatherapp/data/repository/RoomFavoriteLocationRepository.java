@@ -2,7 +2,10 @@ package com.example.weatherapp.data.repository;
 
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.data.model.favoriteLocation.IFavoriteLocationCacheData;
-import com.example.weatherapp.data.model.favoriteLocation.room.RoomFavoriteLocationCacheData;
+import com.example.weatherapp.data.model.favoriteLocation.room.RoomFavoriteLocation;
+import com.example.weatherapp.data.model.favoriteLocation.room.forecast.currentWeather.RoomCurrentWeatherResponse;
+import com.example.weatherapp.data.model.favoriteLocation.room.forecast.relation.RoomFavoriteLocationWithWeather;
+import com.example.weatherapp.data.model.favoriteLocation.room.forecast.severalDaysWeather.RoomSeveralDaysWeatherResponse;
 import com.example.weatherapp.domain.exception.NotFoundException;
 
 import java.util.ArrayList;
@@ -17,7 +20,15 @@ public class RoomFavoriteLocationRepository implements IFavoriteLocationReposito
 
     @Override
     public void save(IFavoriteLocationCacheData data) {
-        dao.save(new RoomFavoriteLocationCacheData(data));
+        dao.save(
+                new RoomFavoriteLocationWithWeather(
+                        new RoomFavoriteLocation(
+                                data.getCityName(),
+                                data.getForecastUnitType()
+                        ),
+                        new RoomCurrentWeatherResponse(data.getCurrentWeather()),
+                        new RoomSeveralDaysWeatherResponse(data.getSeveralDaysForecast())
+                ));
     }
 
     @Override
@@ -40,7 +51,15 @@ public class RoomFavoriteLocationRepository implements IFavoriteLocationReposito
 
     @Override
     public IFavoriteLocationCacheData loadByDeviceLocation(IDeviceLocation deviceLocation) throws NotFoundException {
-        return null; // TODO : get from dao
+        IFavoriteLocationCacheData cacheData =
+                dao.loadByCityLocation(
+                        (int) deviceLocation.getLatitude(),
+                        (int) deviceLocation.getLongitude());
+        if (cacheData == null) {
+            throw new NotFoundException();
+        }
+
+        return cacheData;
     }
 
     @Override

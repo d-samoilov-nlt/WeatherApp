@@ -18,7 +18,7 @@ public class RoomWeatherResponse implements IWeatherResponse, Serializable {
     private String main;
     @ColumnInfo(name = "description")
     private String description;
-    @ColumnInfo(name = "iconName")
+    @ColumnInfo(name = "icon_name")
     private String iconName;
 
     public RoomWeatherResponse(IWeatherResponse origin) {
@@ -28,16 +28,13 @@ public class RoomWeatherResponse implements IWeatherResponse, Serializable {
         this.id = origin.getId();
     }
 
-    public RoomWeatherResponse(int id, String main, String description, String iconName) {
-        this.id = id;
-        this.main = main;
-        this.description = description;
-        this.iconName = iconName;
-    }
-
     @Override
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -45,13 +42,25 @@ public class RoomWeatherResponse implements IWeatherResponse, Serializable {
         return main;
     }
 
+    public void setMain(String main) {
+        this.main = main;
+    }
+
     @Override
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String getIconName() {
         return iconName;
+    }
+
+    public void setIconName(String iconName) {
+        this.iconName = iconName;
     }
 }

@@ -2,7 +2,6 @@ package com.example.weatherapp.data.model.favoriteLocation.room.forecast.weather
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 import com.example.weatherapi.data.entity.interfaces.currentWeather.IMainResponse;
 
@@ -10,19 +9,16 @@ import java.io.Serializable;
 
 @Entity
 public class RoomMainWeatherResponse implements IMainResponse, Serializable {
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    private int id;
     @ColumnInfo(name = "temp")
-    private double temp;
+    public double temp;
     @ColumnInfo(name = "pressure")
-    private int pressure;
+    public int pressure;
     @ColumnInfo(name = "humidity")
-    private int humidity;
-    @ColumnInfo(name = "tempMin")
-    private double tempMin;
-    @ColumnInfo(name = "tempMax")
-    private double tempMax;
+    public int humidity;
+    @ColumnInfo(name = "temp_min")
+    public double tempMin;
+    @ColumnInfo(name = "temp_max")
+    public double tempMax;
 
     public RoomMainWeatherResponse(IMainResponse origin) {
         this.temp = origin.getTemp();
@@ -32,8 +28,7 @@ public class RoomMainWeatherResponse implements IMainResponse, Serializable {
         this.tempMax = origin.getTempMax();
     }
 
-    public RoomMainWeatherResponse(int id, double temp, int pressure, int humidity, double tempMin, double tempMax) {
-        this.id = id;
+    public RoomMainWeatherResponse(double temp, int pressure, int humidity, double tempMin, double tempMax) {
         this.temp = temp;
         this.pressure = pressure;
         this.humidity = humidity;
@@ -46,9 +41,17 @@ public class RoomMainWeatherResponse implements IMainResponse, Serializable {
         return temp;
     }
 
+    public void setTemp(double temp) {
+        this.temp = temp;
+    }
+
     @Override
     public int getPressure() {
         return pressure;
+    }
+
+    public void setPressure(int pressure) {
+        this.pressure = pressure;
     }
 
     @Override
@@ -56,13 +59,25 @@ public class RoomMainWeatherResponse implements IMainResponse, Serializable {
         return humidity;
     }
 
+    public void setHumidity(int humidity) {
+        this.humidity = humidity;
+    }
+
     @Override
     public double getTempMin() {
         return tempMin;
     }
 
+    public void setTempMin(double tempMin) {
+        this.tempMin = tempMin;
+    }
+
     @Override
     public double getTempMax() {
         return tempMax;
+    }
+
+    public void setTempMax(double tempMax) {
+        this.tempMax = tempMax;
     }
 }
