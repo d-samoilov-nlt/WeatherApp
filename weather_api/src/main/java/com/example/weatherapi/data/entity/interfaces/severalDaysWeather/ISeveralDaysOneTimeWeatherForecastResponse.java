@@ -10,7 +10,7 @@ public interface ISeveralDaysOneTimeWeatherForecastResponse {
 
     IMainResponse getMain();
 
-    IWeatherResponse[] getWeather();
+    IWeatherResponse[] getWeatherList();
 
     ICloudsResponse getClouds();
 

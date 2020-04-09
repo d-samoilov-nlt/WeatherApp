@@ -34,7 +34,7 @@ public class GsonSeveralDaysOneTimeWeatherForecastResponse implements ISeveralDa
     }
 
     @Override
-    public IWeatherResponse[] getWeather() {
+    public IWeatherResponse[] getWeatherList() {
         return weatherArray;
     }
 
