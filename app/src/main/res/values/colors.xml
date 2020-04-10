@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorAccent">#1FB9E4</color>
-    <color name="colorSimpleText">#919191</color>
+    <color name="colorSimpleText">#3C3B3B</color>
     <color name="colorSimpleTextLight">#FDFDFD</color>
     <color name="colorFocusedSimpleText">#FFFFFF</color>
     <color name="colorScreenBackground">#FFFFFF</color>
@@ -14,4 +14,5 @@
     <color name="colorViewBorder">#DFDFDF</color>
     <color name="colorGreyLight">#F8F8F8</color>
     <color name="colorInactiveItem">#919191</color>
+    <color name="colorDividerBackground">#B0E9ECEF</color>
 </resources>

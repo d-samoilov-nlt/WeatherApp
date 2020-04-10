@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/tv_several_days_forecast_title"
-        style="@style/SimpleText"
+        style="@style/TitleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_view_margin"
@@ -28,7 +28,7 @@
     <View
         android:layout_width="0.5dp"
         android:layout_height="0dp"
-        android:background="@color/colorSimpleText"
+        android:background="@color/colorDividerBackground"
         app:layout_constraintBottom_toBottomOf="@+id/rv_several_days_forecast"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
