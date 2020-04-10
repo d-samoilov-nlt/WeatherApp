@@ -1,16 +1,12 @@
 package com.example.weatherapp.view.main;
 
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.ViewGroup;
 
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.weatherapp.R;
-import com.example.weatherapp.domain.useCase.updateFavoriteLocation.EnqueueUpdatingFavoriteLocationWorkerUseCase;
-import com.example.weatherapp.service.ConnectivityReceiver;
 import com.example.weatherapp.view.common.WeatherAppActivity;
 import com.example.weatherapp.view.currenctLocation.CurrentLocationFragment;
 import com.example.weatherapp.view.locationList.FavoriteLocationListFragment;
@@ -28,23 +24,19 @@ import java.util.concurrent.Executors;
 
 public class MainActivity extends WeatherAppActivity implements IMainView {
     private IMainPresenter presenter;
-    private ConnectivityReceiver connectivityReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupActions();
-        connectivityReceiver = new ConnectivityReceiver();
-        registerReceiver(connectivityReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
 
         presenter =
                 new AsyncMainPresenter(
                         new SafeMainPresenter(
                                 new MainPresenter(
                                         () -> startActivity(new Intent(MainActivity.this, SearchCityActivity.class)),
-                                        new InMainThreadMainView(this),
-                                        new EnqueueUpdatingFavoriteLocationWorkerUseCase())),
+                                        new InMainThreadMainView(this))),
                         Executors.newCachedThreadPool()
                 );
 
@@ -59,12 +51,6 @@ public class MainActivity extends WeatherAppActivity implements IMainView {
     @Override
     protected ViewGroup getCoordinatorContainerView() {
         return findViewById(R.id.cl_main_container);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(connectivityReceiver);
     }
 
     @Override
