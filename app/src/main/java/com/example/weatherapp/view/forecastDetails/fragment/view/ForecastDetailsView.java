@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weatherapp.data.model.forecast.fullForecast.IDayForecastDisplayModel;
 import com.example.weatherapp.data.model.forecast.fullForecast.ISeveralDaysForecastDisplayModel;
@@ -12,6 +13,7 @@ public class ForecastDetailsView implements IForecastDetailsView {
     private final ForecastDetailsRVAdapter todayForecastDetailsRVAdapter;
     private final ForecastDetailsRVAdapter tomorrowForecastDetailsRVAdapter;
     private final ForecastSeveralDaysDetailsRvAdapter forecastSeveralDaysDetailsRvAdapter;
+    private final RecyclerView rvForecastDetails;
     private final ConstraintLayout clForecastContent;
     private final ConstraintLayout clLoadingProgress;
     private final LinearLayout llLoadingErrorView;
@@ -20,6 +22,7 @@ public class ForecastDetailsView implements IForecastDetailsView {
             ForecastDetailsRVAdapter todayForecastDetailsRVAdapter,
             ForecastDetailsRVAdapter tomorrowForecastDetailsRVAdapter,
             ForecastSeveralDaysDetailsRvAdapter forecastSeveralDaysDetailsRvAdapter,
+            RecyclerView rvForecastDetails,
             ConstraintLayout clForecastContent,
             ConstraintLayout clLoadingProgress,
             LinearLayout llLoadingErrorView) {
@@ -27,6 +30,7 @@ public class ForecastDetailsView implements IForecastDetailsView {
         this.todayForecastDetailsRVAdapter = todayForecastDetailsRVAdapter;
         this.tomorrowForecastDetailsRVAdapter = tomorrowForecastDetailsRVAdapter;
         this.forecastSeveralDaysDetailsRvAdapter = forecastSeveralDaysDetailsRvAdapter;
+        this.rvForecastDetails = rvForecastDetails;
         this.clForecastContent = clForecastContent;
         this.clLoadingProgress = clLoadingProgress;
         this.llLoadingErrorView = llLoadingErrorView;
@@ -34,18 +38,24 @@ public class ForecastDetailsView implements IForecastDetailsView {
 
     @Override
     public void showForecastToday(IDayForecastDisplayModel dm) {
+        rvForecastDetails.setAdapter(todayForecastDetailsRVAdapter);
+
         todayForecastDetailsRVAdapter.updateForecastList(dm.getForecastList());
         todayForecastDetailsRVAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showForecastTomorrow(IDayForecastDisplayModel dm) {
+        rvForecastDetails.setAdapter(tomorrowForecastDetailsRVAdapter);
+
         tomorrowForecastDetailsRVAdapter.updateForecastList(dm.getForecastList());
         tomorrowForecastDetailsRVAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showForecastForSeveralDays(ISeveralDaysForecastDisplayModel dm) {
+        rvForecastDetails.setAdapter(forecastSeveralDaysDetailsRvAdapter);
+
         forecastSeveralDaysDetailsRvAdapter.updateForecastList(dm.getDaysForecastList());
         forecastSeveralDaysDetailsRvAdapter.notifyDataSetChanged();
     }

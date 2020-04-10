@@ -40,7 +40,7 @@ public class ForecastDetailsFragment extends Fragment {
 
     private View view;
 
-    private RecyclerView rvForecast;
+    private RecyclerView rvForecastDetails;
     private ForecastDetailsRVAdapter todayForecastDetailsRVAdapter;
     private ForecastDetailsRVAdapter tomorrowForecastDetailsRVAdapter;
     private ForecastSeveralDaysDetailsRvAdapter forecastSeveralDaysDetailsRvAdapter;
@@ -66,6 +66,7 @@ public class ForecastDetailsFragment extends Fragment {
                                                         todayForecastDetailsRVAdapter,
                                                         tomorrowForecastDetailsRVAdapter,
                                                         forecastSeveralDaysDetailsRvAdapter,
+                                                        rvForecastDetails,
                                                         view.findViewById(R.id.cl_forecast_details_content),
                                                         view.findViewById(R.id.cl_forecast_loading_progress),
                                                         view.findViewById(R.id.cl_forecast_error_message))
@@ -106,15 +107,12 @@ public class ForecastDetailsFragment extends Fragment {
                     int viewId = view.getId();
 
                     if (viewId == btnToday.getId()) {
-                        rvForecast.setAdapter(todayForecastDetailsRVAdapter);
                         presenter.onTodayPressed();
 
                     } else if (viewId == btnTomorrow.getId()) {
-                        rvForecast.setAdapter(tomorrowForecastDetailsRVAdapter);
                         presenter.onTomorrowPressed();
 
                     } else if (viewId == btnSeveralDays.getId()) {
-                        rvForecast.setAdapter(forecastSeveralDaysDetailsRvAdapter);
                         presenter.onFiveDaysPressed();
                     }
                 });
@@ -123,8 +121,8 @@ public class ForecastDetailsFragment extends Fragment {
     }
 
     private void setupRv() {
-        rvForecast = view.findViewById(R.id.rv_forecast_details_forecast);
-        rvForecast.setLayoutManager(
+        rvForecastDetails = view.findViewById(R.id.rv_forecast_details_forecast);
+        rvForecastDetails.setLayoutManager(
                 new LinearLayoutManager(
                         view.getContext(),
                         LinearLayoutManager.HORIZONTAL,
@@ -134,6 +132,6 @@ public class ForecastDetailsFragment extends Fragment {
         tomorrowForecastDetailsRVAdapter = new ForecastDetailsRVAdapter(new ArrayList<>());
         forecastSeveralDaysDetailsRvAdapter = new ForecastSeveralDaysDetailsRvAdapter(new ArrayList<>());
 
-        rvForecast.setAdapter(todayForecastDetailsRVAdapter);
+        rvForecastDetails.setAdapter(todayForecastDetailsRVAdapter);
     }
 }
