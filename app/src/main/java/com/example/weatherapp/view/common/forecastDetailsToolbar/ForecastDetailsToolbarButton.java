@@ -1,4 +1,4 @@
-package com.example.weatherapp.view.common;
+package com.example.weatherapp.view.common.forecastDetailsToolbar;
 
 import android.content.Context;
 import android.util.AttributeSet;

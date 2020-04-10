@@ -17,7 +17,8 @@ import com.example.weatherapp.R;
 import com.example.weatherapp.data.model.cityLocation.SerializableCityLocation;
 import com.example.weatherapp.provider.FavoriteLocationRepositoryProvider;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
-import com.example.weatherapp.view.common.ForecastDetailsToolbarButton;
+import com.example.weatherapp.view.common.forecastDetailsToolbar.ForecastDetailsToolbarButton;
+import com.example.weatherapp.view.common.forecastDetailsToolbar.ForecastDetailsToolbarViewGroup;
 import com.example.weatherapp.view.forecastDetails.ForecastDetailsConst;
 import com.example.weatherapp.view.forecastDetails.fragment.model.mapper.SeveralDaysForecastMapper;
 import com.example.weatherapp.view.forecastDetails.fragment.model.mapper.TodayForecastMapper;
@@ -34,7 +35,7 @@ import com.example.weatherapp.view.forecastDetails.fragment.view.InMainThreadFor
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 
-public class ForecastDetailsFragment extends Fragment implements View.OnClickListener {
+public class ForecastDetailsFragment extends Fragment {
     private IForecastDetailsPresenter presenter;
 
     private View view;
@@ -94,18 +95,31 @@ public class ForecastDetailsFragment extends Fragment implements View.OnClickLis
         btnTomorrow = view.findViewById(R.id.btn_forecast_details_toolbar_tomorrow);
         btnSeveralDays = view.findViewById(R.id.btn_forecast_details_toolbar_several_days);
 
-        btnToday.setOnClickListener(this);
-        btnTomorrow.setOnClickListener(this);
-        btnSeveralDays.setOnClickListener(this);
+        ForecastDetailsToolbarViewGroup forecastDetailsToolbarViewGroup =
+                view.findViewById(R.id.cl_forecast_details_toolbar);
 
-        // TODO : refactor to use group
-        btnToday.setIsSelectedBackground(true);
-        btnTomorrow.setIsSelectedBackground(false);
-        btnSeveralDays.setIsSelectedBackground(false);
+        forecastDetailsToolbarViewGroup.addView(btnToday);
+        forecastDetailsToolbarViewGroup.addView(btnTomorrow);
+        forecastDetailsToolbarViewGroup.addView(btnSeveralDays);
+        forecastDetailsToolbarViewGroup.addOnForecastToolbarButtonClickListener(
+                view -> {
+                    int viewId = view.getId();
+
+                    if (viewId == btnToday.getId()) {
+                        rvForecast.setAdapter(todayForecastDetailsRVAdapter);
+                        presenter.onTodayPressed();
+
+                    } else if (viewId == btnTomorrow.getId()) {
+                        rvForecast.setAdapter(tomorrowForecastDetailsRVAdapter);
+                        presenter.onTomorrowPressed();
+
+                    } else if (viewId == btnSeveralDays.getId()) {
+                        rvForecast.setAdapter(forecastSeveralDaysDetailsRvAdapter);
+                        presenter.onFiveDaysPressed();
+                    }
+                });
 
         setupRv();
-
-        rvForecast.setAdapter(todayForecastDetailsRVAdapter);
     }
 
     private void setupRv() {
@@ -119,38 +133,7 @@ public class ForecastDetailsFragment extends Fragment implements View.OnClickLis
         todayForecastDetailsRVAdapter = new ForecastDetailsRVAdapter(new ArrayList<>());
         tomorrowForecastDetailsRVAdapter = new ForecastDetailsRVAdapter(new ArrayList<>());
         forecastSeveralDaysDetailsRvAdapter = new ForecastSeveralDaysDetailsRvAdapter(new ArrayList<>());
-    }
 
-    @Override
-    public void onClick(View v) {
-        int viewId = v.getId();
-
-        if (viewId == btnToday.getId()) {
-            btnToday.setIsSelectedBackground(true);
-            btnTomorrow.setIsSelectedBackground(false);
-            btnSeveralDays.setIsSelectedBackground(false);
-
-            rvForecast.setAdapter(todayForecastDetailsRVAdapter);
-
-            presenter.onTodayPressed();
-
-        } else if (viewId == btnTomorrow.getId()) {
-            btnToday.setIsSelectedBackground(false);
-            btnTomorrow.setIsSelectedBackground(true);
-            btnSeveralDays.setIsSelectedBackground(false);
-
-            rvForecast.setAdapter(tomorrowForecastDetailsRVAdapter);
-
-            presenter.onTomorrowPressed();
-
-        } else if (viewId == btnSeveralDays.getId()) {
-            btnToday.setIsSelectedBackground(false);
-            btnTomorrow.setIsSelectedBackground(false);
-            btnSeveralDays.setIsSelectedBackground(true);
-
-            rvForecast.setAdapter(forecastSeveralDaysDetailsRvAdapter);
-
-            presenter.onFiveDaysPressed();
-        }
+        rvForecast.setAdapter(todayForecastDetailsRVAdapter);
     }
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.weatherapp.view.common.forecastDetailsToolbar.ForecastDetailsToolbarViewGroup xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.example.weatherapp.view.common.ForecastDetailsToolbarButton
+    <com.example.weatherapp.view.common.forecastDetailsToolbar.ForecastDetailsToolbarButton
         android:id="@+id/btn_forecast_details_toolbar_today"
         style="@style/ForecastDetailsToolbarButton"
         android:layout_margin="@dimen/default_view_margin"
@@ -17,7 +17,7 @@
         tools:background="@drawable/forecast_details_toolbar_btn_selected"
         tools:textColor="@color/colorSimpleText" />
 
-    <com.example.weatherapp.view.common.ForecastDetailsToolbarButton
+    <com.example.weatherapp.view.common.forecastDetailsToolbar.ForecastDetailsToolbarButton
         android:id="@+id/btn_forecast_details_toolbar_tomorrow"
         style="@style/ForecastDetailsToolbarButton"
         android:layout_marginTop="@dimen/default_view_margin"
@@ -30,7 +30,7 @@
         tools:background="@drawable/forecast_details_toolbar_btn_unselected"
         tools:textColor="@color/colorFocusedSimpleText" />
 
-    <com.example.weatherapp.view.common.ForecastDetailsToolbarButton
+    <com.example.weatherapp.view.common.forecastDetailsToolbar.ForecastDetailsToolbarButton
         android:id="@+id/btn_forecast_details_toolbar_several_days"
         style="@style/ForecastDetailsToolbarButton"
         android:layout_margin="@dimen/default_view_margin"
@@ -42,4 +42,4 @@
         tools:background="@drawable/forecast_details_toolbar_btn_unselected"
         tools:textColor="@color/colorFocusedSimpleText" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</com.example.weatherapp.view.common.forecastDetailsToolbar.ForecastDetailsToolbarViewGroup>
