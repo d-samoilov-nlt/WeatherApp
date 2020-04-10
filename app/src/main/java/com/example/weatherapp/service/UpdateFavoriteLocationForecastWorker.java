@@ -20,6 +20,7 @@ import com.example.weatherapp.R;
 import com.example.weatherapp.data.model.favoriteLocation.FavoriteLocationCacheData;
 import com.example.weatherapp.data.model.favoriteLocation.IFavoriteLocationCacheData;
 import com.example.weatherapp.data.repository.IFavoriteLocationRepository;
+import com.example.weatherapp.domain.exception.NotFoundException;
 import com.example.weatherapp.provider.FavoriteLocationRepositoryProvider;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
 
@@ -54,27 +55,33 @@ public class UpdateFavoriteLocationForecastWorker extends Worker {
     @Override
     public Result doWork() {
         showNotification();
-        List<IFavoriteLocationCacheData> favoriteLocationCacheDataList = favoriteLocationRepository.loadAll();
 
-        for (IFavoriteLocationCacheData cacheData : favoriteLocationCacheDataList) {
-            ICityLocation cityLocation = new CityLocation(
-                    cacheData.getCurrentWeather().getCoordinate().getLongitude(),
-                    cacheData.getCurrentWeather().getCoordinate().getLatitude());
+        try {
+            List<IFavoriteLocationCacheData> favoriteLocationCacheDataList = favoriteLocationRepository.loadAll();
 
-            IFavoriteLocationCacheData updatedCacheData =
-                    new FavoriteLocationCacheData(
-                            cacheData.getForecastUnitType(),
-                            cacheData.getCityName(),
-                            getCurrentWeatherByCityLocationUseCase.get(cityLocation, cacheData.getForecastUnitType()),
-                            getSeveralDaysForecastUseCase.get(cityLocation, cacheData.getForecastUnitType())
-                    );
+            for (IFavoriteLocationCacheData cacheData : favoriteLocationCacheDataList) {
+                ICityLocation cityLocation = new CityLocation(
+                        cacheData.getCurrentWeather().getCoordinate().getLongitude(),
+                        cacheData.getCurrentWeather().getCoordinate().getLatitude());
 
-            favoriteLocationRepository.save(updatedCacheData);
+                IFavoriteLocationCacheData updatedCacheData =
+                        new FavoriteLocationCacheData(
+                                cacheData.getForecastUnitType(),
+                                cacheData.getCityName(),
+                                getCurrentWeatherByCityLocationUseCase.get(cityLocation, cacheData.getForecastUnitType()),
+                                getSeveralDaysForecastUseCase.get(cityLocation, cacheData.getForecastUnitType())
+                        );
 
+                favoriteLocationRepository.save(updatedCacheData);
+
+            }
+        } catch (NotFoundException ignore) {
+            // nop
+        } finally {
+            hideNotification();
         }
-        hideNotification();
 
-        return Result.retry();
+        return Result.success();
     }
 
     private void showNotification() {
