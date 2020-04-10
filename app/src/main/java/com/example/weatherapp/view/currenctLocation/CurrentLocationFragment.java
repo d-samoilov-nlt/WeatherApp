@@ -117,13 +117,17 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
     }
 
     private void stopLocationService() {
-        if (isServiceBound) {
-            isServiceBound = false;
-            if (deviceLocationService != null) {
-                deviceLocationService.removeListener();
+        try {
+            if (isServiceBound) {
+                isServiceBound = false;
+                if (deviceLocationService != null) {
+                    deviceLocationService.removeListener();
+                }
+                context.unbindService(CurrentLocationFragment.this);
+                context.stopService(deviceLocationServiceIntent);
             }
-            context.unbindService(CurrentLocationFragment.this);
-            context.stopService(deviceLocationServiceIntent);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
         }
     }
 
@@ -136,12 +140,16 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
                         if (report.areAllPermissionsGranted()) {
                             presenter.onPermissionGranted();
 
-                            if (!isServiceBound) {
-                                context.startService(deviceLocationServiceIntent);
-                                context.bindService(
-                                        deviceLocationServiceIntent,
-                                        CurrentLocationFragment.this,
-                                        Context.BIND_AUTO_CREATE);
+                            try {
+                                if (!isServiceBound) {
+                                    context.startService(deviceLocationServiceIntent);
+                                    context.bindService(
+                                            deviceLocationServiceIntent,
+                                            CurrentLocationFragment.this,
+                                            Context.BIND_AUTO_CREATE);
+                                }
+                            } catch (RuntimeException e) {
+                                e.printStackTrace();
                             }
 
                         } else {

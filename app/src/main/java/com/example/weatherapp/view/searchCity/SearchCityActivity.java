@@ -166,9 +166,13 @@ public class SearchCityActivity extends WeatherAppActivity implements DeviceLoca
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         if (report.areAllPermissionsGranted()) {
-                            if (!isServiceBind) {
-                                startService(deviceLocationServiceIntent);
-                                bindService(deviceLocationServiceIntent, SearchCityActivity.this, Context.BIND_AUTO_CREATE);
+                            try {
+                                if (!isServiceBind) {
+                                    startService(deviceLocationServiceIntent);
+                                    bindService(deviceLocationServiceIntent, SearchCityActivity.this, Context.BIND_AUTO_CREATE);
+                                }
+                            } catch (RuntimeException e) {
+                                e.printStackTrace();
                             }
                         }
                     }
@@ -182,14 +186,19 @@ public class SearchCityActivity extends WeatherAppActivity implements DeviceLoca
     }
 
     private void stopLocationService() {
-        if (!isServiceBind) {
-            return;
+        try {
+            if (!isServiceBind) {
+                return;
+            }
+            if (deviceLocationService != null) {
+                deviceLocationService.removeListener();
+            }
+            unbindService(SearchCityActivity.this);
+            stopService(deviceLocationServiceIntent);
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
         }
-        if (deviceLocationService != null) {
-            deviceLocationService.removeListener();
-        }
-        unbindService(SearchCityActivity.this);
-        stopService(deviceLocationServiceIntent);
     }
 
     @Override
