@@ -160,12 +160,10 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
     @Override
     public void onPermissionGranted() {
         view.setIsPermissionRequiredError(false);
-        view.setIsSearchingLocationProcess(true);
     }
 
     @Override
     public void onPermissionDenied() {
         view.setIsPermissionRequiredError(true);
-        view.setIsSearchingLocationProcess(false);
     }
 }

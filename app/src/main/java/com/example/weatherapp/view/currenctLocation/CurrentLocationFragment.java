@@ -187,6 +187,7 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
     @Override
     public void stopLocationService() {
         if (isServiceBound) {
+            isServiceBound = false;
             if (deviceLocationService != null) {
                 deviceLocationService.removeListener();
             }
