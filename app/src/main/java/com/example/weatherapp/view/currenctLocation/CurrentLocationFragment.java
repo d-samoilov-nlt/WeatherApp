@@ -86,8 +86,8 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
                                             }
                                         },
                                         new ShowForecastDetailsByLocationUseCase(
-                                                getChildFragmentManager()
-                                        ))));
+                                                getChildFragmentManager(),
+                                                R.id.fl_forecast_details))));
 
         presenter.onCreate();
 
