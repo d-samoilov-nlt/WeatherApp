@@ -27,6 +27,13 @@ public final class LocationEditText extends androidx.appcompat.widget.AppCompatE
         this.onLocationIconClickListener = onLocationIconClickListener;
     }
 
+    public void setLocationIconEnabled(boolean isLocationIconEnabled) {
+        this.isLocationIconEnabled = isLocationIconEnabled;
+
+        this.setCompoundDrawablesWithIntrinsicBounds(0, 0, getRightDrawableId(), 0);
+        this.setHint(getHintTextResId());
+    }
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         final int DRAWABLE_RIGHT = 2;
