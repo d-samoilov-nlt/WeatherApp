@@ -2,9 +2,9 @@ package com.example.weatherapp.domain.mapper;
 
 import com.example.weatherapi.data.ForecastUnitsType;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeatherResponse;
-import com.example.weatherapp.data.model.forecast.shortDetails.ForecastShortDetailsDisplayModel;
-import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 import com.example.weatherapp.util.UtilWeatherDisplayFormat;
+import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.shortDetails.ForecastShortDetailsDisplayModel;
+import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 
 public class ForecastShortDetailsMapper implements IForecastShortDetailsMapper {
 

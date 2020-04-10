@@ -5,10 +5,10 @@ import android.content.res.Resources;
 import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysOneTimeWeatherForecastResponse;
 import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysWeatherResponse;
 import com.example.weatherapp.R;
-import com.example.weatherapp.data.model.forecast.fullForecast.DayForecastDisplayModel;
-import com.example.weatherapp.data.model.forecast.fullForecast.IDayForecastDisplayModel;
-import com.example.weatherapp.data.model.forecast.fullForecast.IOneTimeForecastDisplayModel;
-import com.example.weatherapp.data.model.forecast.fullForecast.OneTimeForecastDisplayModel;
+import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.fullForecast.DayForecastDisplayModel;
+import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.fullForecast.IDayForecastDisplayModel;
+import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.fullForecast.IOneTimeForecastDisplayModel;
+import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.fullForecast.OneTimeForecastDisplayModel;
 import com.example.weatherapp.view.forecastDetails.fragment.model.mapper.exception.UnsupportedForecastDateException;
 
 import java.text.ParseException;

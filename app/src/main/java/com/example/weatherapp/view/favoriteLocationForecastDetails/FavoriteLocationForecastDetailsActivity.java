@@ -16,7 +16,6 @@ import com.example.weatherapi.domain.useCase.getCurrentWeatherByName.GetCurrentW
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.GetSeveralDaysForecastUseCase;
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.model.cityLocation.SerializableCityLocation;
-import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 import com.example.weatherapp.domain.mapper.ForecastShortDetailsMapper;
 import com.example.weatherapp.provider.FavoriteLocationRepositoryProvider;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
@@ -28,6 +27,7 @@ import com.example.weatherapp.view.favoriteLocationForecastDetails.view.IFavorit
 import com.example.weatherapp.view.favoriteLocationForecastDetails.view.InMainThreadFavoriteLocationForecastDetailsView;
 import com.example.weatherapp.view.forecastDetails.ForecastDetailsConst;
 import com.example.weatherapp.view.forecastDetails.fragment.ForecastDetailsFragment;
+import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 
 public class FavoriteLocationForecastDetailsActivity extends WeatherAppActivity implements IFavoriteLocationForecastDetailsView {
     private IFavoriteLocationForecastDetailsPresenter presenter;

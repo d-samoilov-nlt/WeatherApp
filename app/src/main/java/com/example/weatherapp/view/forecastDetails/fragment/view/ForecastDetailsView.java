@@ -6,8 +6,8 @@ import android.widget.LinearLayout;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.weatherapp.data.model.forecast.fullForecast.IDayForecastDisplayModel;
-import com.example.weatherapp.data.model.forecast.fullForecast.ISeveralDaysForecastDisplayModel;
+import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.fullForecast.IDayForecastDisplayModel;
+import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.fullForecast.ISeveralDaysForecastDisplayModel;
 
 public class ForecastDetailsView implements IForecastDetailsView {
     private final ForecastDetailsRVAdapter todayForecastDetailsRVAdapter;

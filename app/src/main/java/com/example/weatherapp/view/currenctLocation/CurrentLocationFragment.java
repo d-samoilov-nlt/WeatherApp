@@ -26,7 +26,6 @@ import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.GetSeveralDa
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.model.cityLocation.SerializableCityLocation;
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
-import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 import com.example.weatherapp.domain.mapper.ForecastShortDetailsMapper;
 import com.example.weatherapp.provider.FavoriteLocationRepositoryProvider;
 import com.example.weatherapp.provider.LastDeviceLocationRepositoryProvider;
@@ -40,6 +39,7 @@ import com.example.weatherapp.view.currenctLocation.view.ICurrentLocationView;
 import com.example.weatherapp.view.currenctLocation.view.InMainThreadCurrentLocationView;
 import com.example.weatherapp.view.forecastDetails.ForecastDetailsConst;
 import com.example.weatherapp.view.forecastDetails.fragment.ForecastDetailsFragment;
+import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;

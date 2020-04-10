@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
-import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
+import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 
 public class InMainForecastDetailsContainerView implements IForecastDetailsContainerView {
     private final IForecastDetailsContainerView origin;

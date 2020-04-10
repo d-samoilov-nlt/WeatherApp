@@ -12,7 +12,6 @@ import com.example.weatherapi.data.entity.interfaces.cityLocation.ICityLocation;
 import com.example.weatherapi.domain.useCase.getCurrentWeatherByName.GetCurrentWeatherByCityNameUseCase;
 import com.example.weatherapp.R;
 import com.example.weatherapp.data.model.cityLocation.SerializableCityLocation;
-import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 import com.example.weatherapp.domain.mapper.ForecastShortDetailsMapper;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
 import com.example.weatherapp.view.common.WeatherAppActivity;
@@ -23,6 +22,7 @@ import com.example.weatherapp.view.forecastDetails.containerActivity.presenter.I
 import com.example.weatherapp.view.forecastDetails.containerActivity.view.IForecastDetailsContainerView;
 import com.example.weatherapp.view.forecastDetails.containerActivity.view.InMainForecastDetailsContainerView;
 import com.example.weatherapp.view.forecastDetails.fragment.ForecastDetailsFragment;
+import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.shortDetails.IForecastShortDetailsDisplayModel;
 
 public class ForecastDetailsContainerActivity extends WeatherAppActivity implements IForecastDetailsContainerView {
     private IForecastDetailsContainerPresenter presenter;

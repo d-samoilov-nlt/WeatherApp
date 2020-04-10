@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.model.forecast.fullForecast;
+package com.example.weatherapp.view.forecastDetails.fragment.model.forecast.fullForecast;
 
 import android.net.Uri;
 

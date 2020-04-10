@@ -1,9 +1,9 @@
 package com.example.weatherapp.view.locationList.model.mapper;
 
 import com.example.weatherapp.data.model.favoriteLocation.IFavoriteLocationCacheData;
-import com.example.weatherapp.data.model.forecast.shortDetails.ForecastShortDetailsDisplayModel;
 import com.example.weatherapp.util.UtilWeatherDisplayFormat;
 import com.example.weatherapp.util.UtilWeatherIcon;
+import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.shortDetails.ForecastShortDetailsDisplayModel;
 import com.example.weatherapp.view.locationList.model.FavoriteLocationItemDisplayModel;
 import com.example.weatherapp.view.locationList.model.IFavoriteLocationItemDisplayModel;
 
