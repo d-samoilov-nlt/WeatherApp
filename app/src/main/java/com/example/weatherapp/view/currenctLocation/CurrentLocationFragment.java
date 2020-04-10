@@ -47,7 +47,6 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.List;
-import java.util.concurrent.Executors;
 
 public class CurrentLocationFragment extends Fragment implements DeviceLocationService.OnLocationUpdateListener, ICurrentLocationView {
     private View view;
@@ -91,9 +90,7 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
                                         LastDeviceLocationRepositoryProvider.get(context.getApplicationContext()),
                                         FavoriteLocationRepositoryProvider.get(context.getApplicationContext()),
                                         new GetSeveralDaysForecastUseCase(
-                                                OpenWeatherApiProvider.get(context.getApplicationContext())))),
-                        Executors.newCachedThreadPool()
-                );
+                                                OpenWeatherApiProvider.get(context.getApplicationContext())))));
 
         presenter.onCreate();
 

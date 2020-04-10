@@ -1,6 +1,7 @@
 package com.example.weatherapp.view.currenctLocation.presenter;
 
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
+import com.example.weatherapp.provider.ExecutorServiceProvider;
 
 import java.util.concurrent.ExecutorService;
 
@@ -8,9 +9,9 @@ public class AsyncCurrentLocationPresenter implements ICurrentLocationPresenter 
     private final ICurrentLocationPresenter origin;
     private final ExecutorService service;
 
-    public AsyncCurrentLocationPresenter(ICurrentLocationPresenter origin, ExecutorService service) {
+    public AsyncCurrentLocationPresenter(ICurrentLocationPresenter origin) {
         this.origin = origin;
-        this.service = service;
+        this.service = ExecutorServiceProvider.get();
     }
 
     @Override

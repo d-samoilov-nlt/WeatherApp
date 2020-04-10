@@ -24,8 +24,6 @@ import com.example.weatherapp.view.forecastDetails.containerActivity.view.IForec
 import com.example.weatherapp.view.forecastDetails.containerActivity.view.InMainForecastDetailsContainerView;
 import com.example.weatherapp.view.forecastDetails.fragment.ForecastDetailsFragment;
 
-import java.util.concurrent.Executors;
-
 public class ForecastDetailsContainerActivity extends WeatherAppActivity implements IForecastDetailsContainerView {
     private IForecastDetailsContainerPresenter presenter;
 
@@ -44,10 +42,7 @@ public class ForecastDetailsContainerActivity extends WeatherAppActivity impleme
                         getIntent().getStringExtra(ForecastDetailsConst.CITY_NAME_KEY),
                         new InMainForecastDetailsContainerView(this),
                         new GetCurrentWeatherByCityNameUseCase(OpenWeatherApiProvider.get(getApplicationContext())),
-                        new ForecastShortDetailsMapper()
-                ),
-                Executors.newCachedThreadPool()
-        );
+                        new ForecastShortDetailsMapper()));
 
         presenter.onCreate();
     }

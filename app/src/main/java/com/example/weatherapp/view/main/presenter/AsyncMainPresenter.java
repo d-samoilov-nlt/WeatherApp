@@ -1,14 +1,16 @@
 package com.example.weatherapp.view.main.presenter;
 
+import com.example.weatherapp.provider.ExecutorServiceProvider;
+
 import java.util.concurrent.ExecutorService;
 
 public class AsyncMainPresenter implements IMainPresenter {
     private final IMainPresenter origin;
     private final ExecutorService service;
 
-    public AsyncMainPresenter(IMainPresenter origin, ExecutorService service) {
+    public AsyncMainPresenter(IMainPresenter origin) {
         this.origin = origin;
-        this.service = service;
+        this.service = ExecutorServiceProvider.get();
     }
 
     @Override

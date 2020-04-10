@@ -1,16 +1,16 @@
 package com.example.weatherapp.view.forecastDetails.containerActivity.presenter;
 
+import com.example.weatherapp.provider.ExecutorServiceProvider;
+
 import java.util.concurrent.ExecutorService;
 
 public class AsyncForecastDetailsContainerPresenter implements IForecastDetailsContainerPresenter {
     private final IForecastDetailsContainerPresenter origin;
     private final ExecutorService service;
 
-    public AsyncForecastDetailsContainerPresenter(
-            IForecastDetailsContainerPresenter origin,
-            ExecutorService service) {
+    public AsyncForecastDetailsContainerPresenter(IForecastDetailsContainerPresenter origin) {
         this.origin = origin;
-        this.service = service;
+        this.service = ExecutorServiceProvider.get();
     }
 
     @Override

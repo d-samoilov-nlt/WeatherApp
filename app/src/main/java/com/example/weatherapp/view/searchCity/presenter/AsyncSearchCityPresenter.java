@@ -1,6 +1,7 @@
 package com.example.weatherapp.view.searchCity.presenter;
 
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
+import com.example.weatherapp.provider.ExecutorServiceProvider;
 
 import java.util.concurrent.ExecutorService;
 
@@ -8,9 +9,9 @@ public class AsyncSearchCityPresenter implements ISearchCityPresenter {
     private final ISearchCityPresenter origin;
     private final ExecutorService service;
 
-    public AsyncSearchCityPresenter(ISearchCityPresenter origin, ExecutorService service) {
+    public AsyncSearchCityPresenter(ISearchCityPresenter origin) {
         this.origin = origin;
-        this.service = service;
+        this.service = ExecutorServiceProvider.get();
     }
 
     @Override

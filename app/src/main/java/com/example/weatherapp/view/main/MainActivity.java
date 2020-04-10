@@ -20,8 +20,6 @@ import com.example.weatherapp.view.main.view.LocationTabFragmentAdapter;
 import com.example.weatherapp.view.searchCity.SearchCityActivity;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.concurrent.Executors;
-
 public class MainActivity extends WeatherAppActivity implements IMainView {
     private IMainPresenter presenter;
 
@@ -36,9 +34,7 @@ public class MainActivity extends WeatherAppActivity implements IMainView {
                         new SafeMainPresenter(
                                 new MainPresenter(
                                         () -> startActivity(new Intent(MainActivity.this, SearchCityActivity.class)),
-                                        new InMainThreadMainView(this))),
-                        Executors.newCachedThreadPool()
-                );
+                                        new InMainThreadMainView(this))));
 
         presenter.onCreate();
 

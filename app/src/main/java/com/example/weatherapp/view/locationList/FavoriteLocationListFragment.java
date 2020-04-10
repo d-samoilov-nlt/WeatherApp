@@ -32,7 +32,6 @@ import com.example.weatherapp.view.locationList.view.FavoriteLocationListView;
 import com.example.weatherapp.view.locationList.view.InMainThreadFavoriteLocationListView;
 
 import java.util.ArrayList;
-import java.util.concurrent.Executors;
 
 public class FavoriteLocationListFragment extends Fragment {
     private View view;
@@ -69,9 +68,7 @@ public class FavoriteLocationListFragment extends Fragment {
                                     intent.putExtra(FavoriteLocationForecastDetailsConst.CITY_NAME_KEY, cityName);
                                     getActivity().startActivity(intent);
                                 }
-                        ),
-                        Executors.newCachedThreadPool()
-                );
+                        ));
 
 
         return view;

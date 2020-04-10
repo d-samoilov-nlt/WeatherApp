@@ -1,15 +1,16 @@
 package com.example.weatherapp.view.forecastDetails.fragment.presenter;
 
+import com.example.weatherapp.provider.ExecutorServiceProvider;
+
 import java.util.concurrent.ExecutorService;
 
 public class AsyncForecastDetailsPresenter implements IForecastDetailsPresenter {
     private final IForecastDetailsPresenter origin;
     private final ExecutorService service;
 
-    public AsyncForecastDetailsPresenter(
-            IForecastDetailsPresenter origin, ExecutorService service) {
+    public AsyncForecastDetailsPresenter(IForecastDetailsPresenter origin) {
         this.origin = origin;
-        this.service = service;
+        this.service = ExecutorServiceProvider.get();
     }
 
     @Override

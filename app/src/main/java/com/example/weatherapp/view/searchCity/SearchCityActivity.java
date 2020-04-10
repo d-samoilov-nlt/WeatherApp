@@ -39,7 +39,6 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.util.List;
-import java.util.concurrent.Executors;
 
 import static com.example.weatherapp.util.FocusUtils.requestFocusWithSoftKeyboard;
 
@@ -92,9 +91,7 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
                                             new Intent(SearchCityActivity.this, ForecastDetailsContainerActivity.class);
                                     intent.putExtra(ForecastDetailsConst.CITY_NAME_KEY, cityName);
                                     SearchCityActivity.this.startActivity(intent);
-                                }),
-                        Executors.newCachedThreadPool()
-                );
+                                }));
     }
 
     private void setupView() {

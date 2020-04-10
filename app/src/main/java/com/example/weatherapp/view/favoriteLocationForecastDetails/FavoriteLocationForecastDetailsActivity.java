@@ -29,8 +29,6 @@ import com.example.weatherapp.view.favoriteLocationForecastDetails.view.InMainTh
 import com.example.weatherapp.view.forecastDetails.ForecastDetailsConst;
 import com.example.weatherapp.view.forecastDetails.fragment.ForecastDetailsFragment;
 
-import java.util.concurrent.Executors;
-
 public class FavoriteLocationForecastDetailsActivity extends WeatherAppActivity implements IFavoriteLocationForecastDetailsView {
     private IFavoriteLocationForecastDetailsPresenter presenter;
 
@@ -60,8 +58,7 @@ public class FavoriteLocationForecastDetailsActivity extends WeatherAppActivity 
                                 FavoriteLocationRepositoryProvider.get(getApplicationContext()),
                                 new GetCurrentWeatherByCityNameUseCase(OpenWeatherApiProvider.get(getApplicationContext())),
                                 new GetSeveralDaysForecastUseCase(OpenWeatherApiProvider.get(getApplicationContext())),
-                                new ForecastShortDetailsMapper()),
-                        Executors.newCachedThreadPool());
+                                new ForecastShortDetailsMapper()));
 
         presenter.onCreate();
 

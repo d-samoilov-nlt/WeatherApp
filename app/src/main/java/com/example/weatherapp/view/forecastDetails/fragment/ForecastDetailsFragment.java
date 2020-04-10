@@ -33,7 +33,6 @@ import com.example.weatherapp.view.forecastDetails.fragment.view.ForecastSeveral
 import com.example.weatherapp.view.forecastDetails.fragment.view.InMainThreadForecastDetailsView;
 
 import java.util.ArrayList;
-import java.util.concurrent.Executors;
 
 public class ForecastDetailsFragment extends Fragment {
     private IForecastDetailsPresenter presenter;
@@ -77,10 +76,7 @@ public class ForecastDetailsFragment extends Fragment {
                                         new SeveralDaysForecastMapper(getResources()),
                                         (SerializableCityLocation) getArguments().getSerializable(ForecastDetailsConst.CITY_LOCATION_KEY),
                                         getArguments().getInt(ForecastDetailsConst.UNIT_TYPE_KEY, ForecastUnitsType.CELSIUS.getValue()),
-                                        FavoriteLocationRepositoryProvider.get(getContext().getApplicationContext()))
-                        ),
-                        Executors.newCachedThreadPool()
-                );
+                                        FavoriteLocationRepositoryProvider.get(getContext().getApplicationContext()))));
 
         presenter.onCreate();
 
