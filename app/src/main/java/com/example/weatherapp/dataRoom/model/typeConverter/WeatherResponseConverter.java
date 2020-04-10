@@ -1,8 +1,8 @@
-package com.example.weatherapp.data.model.favoriteLocation.room.typeConverter;
+package com.example.weatherapp.dataRoom.model.typeConverter;
 
 import androidx.room.TypeConverter;
 
-import com.example.weatherapp.data.model.favoriteLocation.room.forecast.weatherCondition.RoomWeatherResponse;
+import com.example.weatherapp.dataRoom.model.forecast.weatherCondition.RoomWeatherResponse;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

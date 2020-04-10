@@ -4,7 +4,7 @@ import android.content.Context;
 
 import androidx.room.Room;
 
-import com.example.weatherapp.data.repository.AppRoomDatabase;
+import com.example.weatherapp.dataRoom.repository.AppRoomDatabase;
 
 public class RoomDBProvider {
     private static AppRoomDatabase appDatabase;

@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.model.favoriteLocation.room.forecast.weatherCondition;
+package com.example.weatherapp.dataRoom.model.forecast.weatherCondition;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

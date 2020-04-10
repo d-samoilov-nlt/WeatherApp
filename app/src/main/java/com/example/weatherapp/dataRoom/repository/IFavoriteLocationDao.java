@@ -1,11 +1,11 @@
-package com.example.weatherapp.data.repository;
+package com.example.weatherapp.dataRoom.repository;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
-import com.example.weatherapp.data.model.favoriteLocation.room.forecast.relation.RoomFavoriteLocationWithWeather;
+import com.example.weatherapp.dataRoom.model.forecast.relation.RoomFavoriteLocationWithWeather;
 
 import java.util.List;
 

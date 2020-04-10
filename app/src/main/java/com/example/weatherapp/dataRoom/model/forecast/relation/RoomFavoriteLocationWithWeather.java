@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.model.favoriteLocation.room.forecast.relation;
+package com.example.weatherapp.dataRoom.model.forecast.relation;
 
 
 import androidx.annotation.NonNull;
@@ -8,8 +8,8 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.example.weatherapp.data.model.favoriteLocation.IFavoriteLocationCacheData;
-import com.example.weatherapp.data.model.favoriteLocation.room.forecast.currentWeather.RoomCurrentWeatherResponse;
-import com.example.weatherapp.data.model.favoriteLocation.room.forecast.severalDaysWeather.RoomSeveralDaysWeatherResponse;
+import com.example.weatherapp.dataRoom.model.forecast.currentWeather.RoomCurrentWeatherResponse;
+import com.example.weatherapp.dataRoom.model.forecast.severalDaysWeather.RoomSeveralDaysWeatherResponse;
 
 @Entity
 public class RoomFavoriteLocationWithWeather implements IFavoriteLocationCacheData {

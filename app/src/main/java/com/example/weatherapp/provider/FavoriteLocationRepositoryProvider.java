@@ -3,7 +3,7 @@ package com.example.weatherapp.provider;
 import android.content.Context;
 
 import com.example.weatherapp.data.repository.IFavoriteLocationRepository;
-import com.example.weatherapp.data.repository.RoomFavoriteLocationRepository;
+import com.example.weatherapp.dataRoom.repository.RoomFavoriteLocationRepository;
 
 public class FavoriteLocationRepositoryProvider {
     private static IFavoriteLocationRepository repository;

@@ -1,10 +1,11 @@
-package com.example.weatherapp.data.repository;
+package com.example.weatherapp.dataRoom.repository;
 
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.data.model.favoriteLocation.IFavoriteLocationCacheData;
-import com.example.weatherapp.data.model.favoriteLocation.room.forecast.currentWeather.RoomCurrentWeatherResponse;
-import com.example.weatherapp.data.model.favoriteLocation.room.forecast.relation.RoomFavoriteLocationWithWeather;
-import com.example.weatherapp.data.model.favoriteLocation.room.forecast.severalDaysWeather.RoomSeveralDaysWeatherResponse;
+import com.example.weatherapp.data.repository.IFavoriteLocationRepository;
+import com.example.weatherapp.dataRoom.model.forecast.currentWeather.RoomCurrentWeatherResponse;
+import com.example.weatherapp.dataRoom.model.forecast.relation.RoomFavoriteLocationWithWeather;
+import com.example.weatherapp.dataRoom.model.forecast.severalDaysWeather.RoomSeveralDaysWeatherResponse;
 import com.example.weatherapp.domain.exception.NotFoundException;
 
 import java.util.ArrayList;

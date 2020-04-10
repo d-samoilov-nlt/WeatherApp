@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.model.favoriteLocation.room.forecast.severalDaysWeather;
+package com.example.weatherapp.dataRoom.model.forecast.severalDaysWeather;
 
 import androidx.room.ColumnInfo;
 import androidx.room.PrimaryKey;
@@ -7,7 +7,7 @@ import androidx.room.TypeConverters;
 import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysOneTimeWeatherForecastResponse;
 import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysWeatherCityResponse;
 import com.example.weatherapi.data.entity.interfaces.severalDaysWeather.ISeveralDaysWeatherResponse;
-import com.example.weatherapp.data.model.favoriteLocation.room.typeConverter.SeveralDaysOneTimeWeatherForecastResponseConverter;
+import com.example.weatherapp.dataRoom.model.typeConverter.SeveralDaysOneTimeWeatherForecastResponseConverter;
 
 public class RoomSeveralDaysWeatherResponse implements ISeveralDaysWeatherResponse {
     @PrimaryKey

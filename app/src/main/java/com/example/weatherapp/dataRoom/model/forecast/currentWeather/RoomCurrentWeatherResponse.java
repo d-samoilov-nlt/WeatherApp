@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.model.favoriteLocation.room.forecast.currentWeather;
+package com.example.weatherapp.dataRoom.model.forecast.currentWeather;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -8,11 +8,11 @@ import androidx.room.TypeConverters;
 
 import com.example.weatherapi.data.entity.interfaces.currentWeather.ICurrentWeatherResponse;
 import com.example.weatherapi.data.entity.interfaces.currentWeather.IWeatherResponse;
-import com.example.weatherapp.data.model.favoriteLocation.room.forecast.weatherCondition.RoomCloudsResponse;
-import com.example.weatherapp.data.model.favoriteLocation.room.forecast.weatherCondition.RoomMainWeatherResponse;
-import com.example.weatherapp.data.model.favoriteLocation.room.forecast.weatherCondition.RoomWeatherResponse;
-import com.example.weatherapp.data.model.favoriteLocation.room.forecast.weatherCondition.RoomWindResponse;
-import com.example.weatherapp.data.model.favoriteLocation.room.typeConverter.WeatherResponseConverter;
+import com.example.weatherapp.dataRoom.model.forecast.weatherCondition.RoomCloudsResponse;
+import com.example.weatherapp.dataRoom.model.forecast.weatherCondition.RoomMainWeatherResponse;
+import com.example.weatherapp.dataRoom.model.forecast.weatherCondition.RoomWeatherResponse;
+import com.example.weatherapp.dataRoom.model.forecast.weatherCondition.RoomWindResponse;
+import com.example.weatherapp.dataRoom.model.typeConverter.WeatherResponseConverter;
 
 import java.io.Serializable;
 
