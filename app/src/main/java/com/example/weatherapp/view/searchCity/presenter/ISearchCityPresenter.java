@@ -3,6 +3,8 @@ package com.example.weatherapp.view.searchCity.presenter;
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 
 public interface ISearchCityPresenter {
+    void onDestroy();
+
     void onLocationIconPressed(boolean isLocationEnabled);
 
     void onLocationUpdated(IDeviceLocation deviceLocation);

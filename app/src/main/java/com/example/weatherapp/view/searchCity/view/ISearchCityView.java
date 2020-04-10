@@ -11,4 +11,6 @@ public interface ISearchCityView {
     void startLocationService();
 
     void stopLocationService();
+
+    void setLocationIconEnabled(boolean isEnabled);
 }

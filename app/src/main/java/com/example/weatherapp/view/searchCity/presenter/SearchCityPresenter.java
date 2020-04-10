@@ -50,6 +50,13 @@ public class SearchCityPresenter implements ISearchCityPresenter {
     }
 
     @Override
+    public void onDestroy() {
+        if (isLocationServiceEnabled) {
+            view.stopLocationService();
+        }
+    }
+
+    @Override
     public void onLocationIconPressed(boolean isLocationEnabled) {
         isLocationServiceEnabled = isLocationEnabled;
 
@@ -76,6 +83,7 @@ public class SearchCityPresenter implements ISearchCityPresenter {
         } finally {
             isLocationServiceEnabled = false;
             view.stopLocationService();
+            view.setLocationIconEnabled(false);
         }
     }
 

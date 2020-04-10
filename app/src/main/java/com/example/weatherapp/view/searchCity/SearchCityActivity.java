@@ -54,6 +54,8 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
     private Switch switchIsFavorite;
     private Button btnViewWeather;
 
+    private Boolean isServiceBind;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,7 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
         setupView();
         setupActions();
         deviceLocationServiceIntent = new Intent(this, DeviceLocationService.class);
+        isServiceBind = false;
 
         presenter =
                 new AsyncSearchCityPresenter(
@@ -160,26 +163,25 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
 
     @Override
     public void stopLocationService() {
-        try {
-            if (deviceLocationService != null) {
-                deviceLocationService.removeListener();
-            }
-            unbindService(this);
-            stopService(deviceLocationServiceIntent);
-        } catch (RuntimeException e) {
-            e.printStackTrace();
+        if (!isServiceBind) {
+            return;
         }
+        isServiceBind = true;
+        if (deviceLocationService != null) {
+            deviceLocationService.removeListener();
+        }
+        unbindService(this);
+        stopService(deviceLocationServiceIntent);
+    }
+
+    @Override
+    public void setLocationIconEnabled(boolean isEnabled) {
+        etEnterLocationData.setLocationIconEnabled(isEnabled);
     }
 
     @Override
     protected ViewGroup getCoordinatorContainerView() {
         return findViewById(R.id.cl_search_city_container);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        this.stopLocationService();
     }
 
     @Override
@@ -190,8 +192,10 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         if (report.areAllPermissionsGranted()) {
-                            startService(deviceLocationServiceIntent);
-                            bindService(deviceLocationServiceIntent, SearchCityActivity.this, Context.BIND_AUTO_CREATE);
+                            if (!isServiceBind) {
+                                startService(deviceLocationServiceIntent);
+                                bindService(deviceLocationServiceIntent, SearchCityActivity.this, Context.BIND_AUTO_CREATE);
+                            }
                         }
                     }
 
@@ -205,7 +209,6 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
 
     @Override
     public void onUpdated(IDeviceLocation deviceLocation) {
-        stopLocationService();
         presenter.onLocationUpdated(deviceLocation);
     }
 
@@ -214,12 +217,11 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
         DeviceLocationService.LocalBinder localBinder = (DeviceLocationService.LocalBinder) service;
         deviceLocationService = localBinder.getServiceInstance();
         deviceLocationService.attachListener(this);
+        isServiceBind = true;
     }
 
     @Override
     public void onServiceDisconnected(ComponentName name) {
-        if (deviceLocationService != null) {
-            deviceLocationService.removeListener();
-        }
+        isServiceBind = false;
     }
 }

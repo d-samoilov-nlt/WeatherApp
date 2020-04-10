@@ -14,6 +14,11 @@ public class AsyncSearchCityPresenter implements ISearchCityPresenter {
     }
 
     @Override
+    public void onDestroy() {
+        service.execute(origin::onDestroy);
+    }
+
+    @Override
     public void onLocationIconPressed(boolean isLocationEnabled) {
         service.execute(() -> origin.onLocationIconPressed(isLocationEnabled));
     }
