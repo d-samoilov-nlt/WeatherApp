@@ -9,13 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weatherapp.R;
 import com.example.weatherapp.provider.FavoriteLocationRepositoryProvider;
@@ -27,22 +24,15 @@ import com.example.weatherapp.view.locationList.model.useCase.FilterFavoriteLoca
 import com.example.weatherapp.view.locationList.presenter.AsyncFavoriteLocationListPresenter;
 import com.example.weatherapp.view.locationList.presenter.FavoriteLocationListPresenter;
 import com.example.weatherapp.view.locationList.presenter.IFavoriteLocationListPresenter;
-import com.example.weatherapp.view.locationList.view.FavoriteLocationListRVAdapter;
 import com.example.weatherapp.view.locationList.view.FavoriteLocationListView;
 import com.example.weatherapp.view.locationList.view.InMainThreadFavoriteLocationListView;
 
-import java.util.ArrayList;
-
 public class FavoriteLocationListFragment extends Fragment {
-    private View view;
-
     private IFavoriteLocationListPresenter presenter;
 
+    private View view;
     private ImageView ivSearchIcon;
     private EditText etSearchLocation;
-    private TextView tvNoItemsMessage;
-    private FavoriteLocationListRVAdapter locationListRVAdapter;
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,11 +45,10 @@ public class FavoriteLocationListFragment extends Fragment {
                         new FavoriteLocationListPresenter(
                                 new InMainThreadFavoriteLocationListView(
                                         new FavoriteLocationListView(
-                                                etSearchLocation,
-                                                locationListRVAdapter,
-                                                tvNoItemsMessage)
+                                                dm -> presenter.onLocationItemPressed(dm),
+                                                view)
                                 ),
-                                FavoriteLocationRepositoryProvider.get(getContext().getApplicationContext()),
+                                FavoriteLocationRepositoryProvider.get(view.getContext().getApplicationContext()),
                                 new FilterFavoriteLocationListByCityNameUseCase(),
                                 new FavoriteLocationItemMapper(),
                                 cityName -> {
@@ -89,16 +78,6 @@ public class FavoriteLocationListFragment extends Fragment {
     private void setupView() {
         ivSearchIcon = view.findViewById(R.id.iv_location_list_toolbar_search);
         etSearchLocation = view.findViewById(R.id.et_location_list_toolbar_search);
-        tvNoItemsMessage = view.findViewById(R.id.tv_location_list_no_items_message);
-
-        RecyclerView rvLocationList = view.findViewById(R.id.rv_location_list);
-        rvLocationList.setLayoutManager(new LinearLayoutManager(view.getContext()));
-
-        locationListRVAdapter = new FavoriteLocationListRVAdapter(
-                dm -> presenter.onLocationItemPressed(dm),
-                new ArrayList<>());
-        rvLocationList.setAdapter(locationListRVAdapter);
-
     }
 
     private void setupActions() {
