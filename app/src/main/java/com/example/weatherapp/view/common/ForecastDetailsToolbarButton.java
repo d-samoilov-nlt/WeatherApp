@@ -17,9 +17,15 @@ final public class ForecastDetailsToolbarButton extends androidx.appcompat.widge
 
     public void setIsSelectedBackground(boolean selected) {
         if (selected) {
+            float viewWithFilter = 1f;
+
+            setAlpha(viewWithFilter);
             setTextColor(getResources().getColor(R.color.colorFocusedSimpleText));
             setBackground(getResources().getDrawable(R.drawable.forecast_details_toolbar_btn_selected));
         } else {
+            float viewWithFilter = 0.8f;
+
+            setAlpha(viewWithFilter);
             setTextColor(getResources().getColor(R.color.colorSimpleTextLight));
             setBackground(getResources().getDrawable(R.drawable.forecast_details_toolbar_btn_unselected));
         }
