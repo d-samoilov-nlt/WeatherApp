@@ -1,6 +1,7 @@
 package com.example.weatherapp.domain.useCase.updateFavoriteLocation;
 
 import androidx.work.Constraints;
+import androidx.work.ExistingPeriodicWorkPolicy;
 import androidx.work.NetworkType;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
@@ -23,10 +24,15 @@ public class EnqueueUpdatingFavoriteLocationWorkerUseCase implements IEnqueueUpd
                         (
                                 UpdateFavoriteLocationForecastWorker.class,
                                 12,
+                                TimeUnit.HOURS,
+                                6,
                                 TimeUnit.HOURS
 
                         ).setConstraints(constraints).build();
 
-        WorkManager.getInstance().enqueue(updateFavoriteLocationRequest);
+        WorkManager.getInstance().enqueueUniquePeriodicWork(
+                UpdateFavoriteLocationForecastWorker.class.getSimpleName(),
+                ExistingPeriodicWorkPolicy.REPLACE,
+                updateFavoriteLocationRequest);
     }
 }
