@@ -19,8 +19,8 @@ public class AsyncCurrentLocationPresenter implements ICurrentLocationPresenter 
     }
 
     @Override
-    public void onStart() {
-        service.execute(origin::onStart);
+    public void onDestroy() {
+        service.execute(origin::onDestroy);
     }
 
     @Override
@@ -41,5 +41,15 @@ public class AsyncCurrentLocationPresenter implements ICurrentLocationPresenter 
     @Override
     public void onRefreshPressed() {
         service.execute(origin::onRefreshPressed);
+    }
+
+    @Override
+    public void onPermissionGranted() {
+        service.execute(origin::onPermissionGranted);
+    }
+
+    @Override
+    public void onPermissionDenied() {
+        service.execute(origin::onPermissionDenied);
     }
 }

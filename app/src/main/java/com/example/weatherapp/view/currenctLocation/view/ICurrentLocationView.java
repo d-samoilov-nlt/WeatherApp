@@ -6,6 +6,8 @@ import com.example.weatherapp.data.model.forecast.shortDetails.IForecastShortDet
 public interface ICurrentLocationView {
     void startLocationService();
 
+    void stopLocationService();
+
     void setIsSearchingLocationProcess(boolean isProcess);
 
     void setIsPermissionRequiredError(boolean isError);

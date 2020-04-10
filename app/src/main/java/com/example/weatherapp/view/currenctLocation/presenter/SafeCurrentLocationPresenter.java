@@ -19,9 +19,9 @@ public class SafeCurrentLocationPresenter implements ICurrentLocationPresenter {
     }
 
     @Override
-    public void onStart() {
+    public void onDestroy() {
         try {
-            origin.onStart();
+            origin.onDestroy();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,6 +58,24 @@ public class SafeCurrentLocationPresenter implements ICurrentLocationPresenter {
     public void onRefreshPressed() {
         try {
             origin.onRefreshPressed();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onPermissionGranted() {
+        try {
+            origin.onPermissionGranted();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onPermissionDenied() {
+        try {
+            origin.onPermissionDenied();
         } catch (Exception e) {
             e.printStackTrace();
         }

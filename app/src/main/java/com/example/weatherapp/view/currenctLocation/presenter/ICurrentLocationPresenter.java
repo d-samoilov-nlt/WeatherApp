@@ -5,7 +5,7 @@ import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 public interface ICurrentLocationPresenter {
     void onCreate();
 
-    void onStart();
+    void onDestroy();
 
     void onLocationUpdated(IDeviceLocation deviceLocation);
 
@@ -14,4 +14,8 @@ public interface ICurrentLocationPresenter {
     void onAddToFavoritePressed();
 
     void onRefreshPressed();
+
+    void onPermissionGranted();
+
+    void onPermissionDenied();
 }

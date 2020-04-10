@@ -21,6 +21,11 @@ public class InMainThreadCurrentLocationView implements ICurrentLocationView {
     }
 
     @Override
+    public void stopLocationService() {
+        handler.post(origin::stopLocationService);
+    }
+
+    @Override
     public void setIsSearchingLocationProcess(boolean isProcess) {
         handler.post(() -> origin.setIsSearchingLocationProcess(isProcess));
     }

@@ -49,10 +49,8 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
 
     @Override
     public void onCreate() {
-        view.setIsSearchingLocationProcess(true);
         try {
             deviceLocation = lastDeviceLocationRepository.load();
-
 
             view.showShortForecastDetails(forecastShortDetailsMapper.map(
                     favoriteLocationRepository.loadByDeviceLocation(deviceLocation).getCurrentWeather()));
@@ -63,24 +61,35 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
                     new CityLocation(
                             deviceLocation.getLongitude(),
                             deviceLocation.getLatitude()));
-            view.setIsSearchingLocationProcess(false);
+
             view.setIsFavoriteSelected(true);
         } catch (NotFoundException ignore) {
             //nop
         }
-    }
 
-    @Override
-    public void onStart() {
+        if (deviceLocation == null) {
+            view.setIsSearchingLocationProcess(true);
+        }
         view.startLocationService();
     }
 
     @Override
+    public void onDestroy() {
+        view.stopLocationService();
+    }
+
+    @Override
     public void onLocationUpdated(IDeviceLocation deviceLocation) {
+        if (deviceLocation == null) {
+            view.setIsSearchingLocationProcess(false);
+        }
         this.deviceLocation = deviceLocation;
+        view.stopLocationService();
+
+        lastDeviceLocationRepository.save(deviceLocation);
 
         view.setIsPermissionRequiredError(false);
-        lastDeviceLocationRepository.save(deviceLocation);
+
         updateForecastDetails();
     }
 
@@ -146,5 +155,17 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
     @Override
     public void onRefreshPressed() {
         updateForecastDetails();
+    }
+
+    @Override
+    public void onPermissionGranted() {
+        view.setIsPermissionRequiredError(false);
+        view.setIsSearchingLocationProcess(true);
+    }
+
+    @Override
+    public void onPermissionDenied() {
+        view.setIsPermissionRequiredError(true);
+        view.setIsSearchingLocationProcess(false);
     }
 }

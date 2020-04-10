@@ -51,6 +51,8 @@ import java.util.concurrent.Executors;
 
 public class CurrentLocationFragment extends Fragment implements DeviceLocationService.OnLocationUpdateListener, ICurrentLocationView {
     private View view;
+    private Context context;
+
     private Intent deviceLocationServiceIntent;
     private DeviceLocationService deviceLocationService;
     private ICurrentLocationPresenter presenter;
@@ -65,10 +67,14 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
     private Button btnTryAgain;
     private ProgressBar pbSearchingProgress;
 
+    private Boolean isServiceBound;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_current_location, container, false);
-        deviceLocationServiceIntent = new Intent(view.getContext(), DeviceLocationService.class);
+        context = view.getContext();
+
+        setupService();
         setupView();
 
         presenter =
@@ -79,19 +85,24 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
                                                 this
                                         ),
                                         new GetCurrentWeatherByCityLocationUseCase(
-                                                OpenWeatherApiProvider.get(getContext().getApplicationContext())
+                                                OpenWeatherApiProvider.get(context.getApplicationContext())
                                         ),
                                         new ForecastShortDetailsMapper(),
-                                        LastDeviceLocationRepositoryProvider.get(getContext().getApplicationContext()),
-                                        FavoriteLocationRepositoryProvider.get(getContext().getApplicationContext()),
+                                        LastDeviceLocationRepositoryProvider.get(context.getApplicationContext()),
+                                        FavoriteLocationRepositoryProvider.get(context.getApplicationContext()),
                                         new GetSeveralDaysForecastUseCase(
-                                                OpenWeatherApiProvider.get(getContext().getApplicationContext())))),
+                                                OpenWeatherApiProvider.get(context.getApplicationContext())))),
                         Executors.newCachedThreadPool()
                 );
 
         presenter.onCreate();
 
         return view;
+    }
+
+    private void setupService() {
+        deviceLocationServiceIntent = new Intent(view.getContext(), DeviceLocationService.class);
+        isServiceBound = false;
     }
 
     private void setupView() {
@@ -173,28 +184,21 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
         }
     }
 
-    private void stopLocationService() {
-        try {
+    @Override
+    public void stopLocationService() {
+        if (isServiceBound) {
             if (deviceLocationService != null) {
                 deviceLocationService.removeListener();
             }
-            view.getContext().unbindService(this);
-            view.getContext().stopService(deviceLocationServiceIntent);
-        } catch (RuntimeException e) {
-            e.printStackTrace();
+            context.unbindService(CurrentLocationFragment.this);
+            context.stopService(deviceLocationServiceIntent);
         }
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        stopLocationService();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        presenter.onStart();
+    public void onDestroyView() {
+        super.onDestroyView();
+        presenter.onDestroy();
     }
 
     @Override
@@ -205,11 +209,18 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         if (report.areAllPermissionsGranted()) {
-                            view.getContext().startService(deviceLocationServiceIntent);
-                            view.getContext().bindService(deviceLocationServiceIntent, CurrentLocationFragment.this, Context.BIND_AUTO_CREATE);
+                            presenter.onPermissionGranted();
+
+                            if (!isServiceBound) {
+                                context.startService(deviceLocationServiceIntent);
+                                context.bindService(
+                                        deviceLocationServiceIntent,
+                                        CurrentLocationFragment.this,
+                                        Context.BIND_AUTO_CREATE);
+                            }
+
                         } else {
-                            setIsPermissionRequiredError(true);
-                            setIsSearchingLocationProcess(false);
+                            presenter.onPermissionDenied();
                         }
                     }
 
@@ -223,7 +234,6 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
 
     @Override
     public void onUpdated(IDeviceLocation deviceLocation) {
-        stopLocationService();
         presenter.onLocationUpdated(deviceLocation);
     }
 
@@ -231,13 +241,12 @@ public class CurrentLocationFragment extends Fragment implements DeviceLocationS
     public void onServiceConnected(ComponentName name, IBinder service) {
         DeviceLocationService.LocalBinder localBinder = (DeviceLocationService.LocalBinder) service;
         deviceLocationService = localBinder.getServiceInstance();
-        deviceLocationService.attachListener(this);
+        deviceLocationService.attachListener(CurrentLocationFragment.this);
+        isServiceBound = true;
     }
 
     @Override
     public void onServiceDisconnected(ComponentName name) {
-        if (deviceLocationService != null) {
-            deviceLocationService.removeListener();
-        }
+        isServiceBound = false;
     }
 }
