@@ -11,7 +11,7 @@ import com.example.weatherapi.service.exception.RequestFailedException;
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.data.model.favoriteLocation.FavoriteLocationCacheData;
 import com.example.weatherapp.data.repository.IFavoriteLocationRepository;
-import com.example.weatherapp.data.repository.deviceLocation.ILastDeviceLocationRepository;
+import com.example.weatherapp.data.repository.ILastDeviceLocationRepository;
 import com.example.weatherapp.domain.exception.InternetUnreachableException;
 import com.example.weatherapp.domain.exception.NotFoundException;
 import com.example.weatherapp.domain.mapper.IForecastShortDetailsMapper;

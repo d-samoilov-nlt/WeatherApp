@@ -1,4 +1,6 @@
-package com.example.weatherapp.data.model.deviceLocation;
+package com.example.weatherapp.dataSharedPref.model;
+
+import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 
 import java.io.Serializable;
 

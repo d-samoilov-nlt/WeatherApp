@@ -1,9 +1,10 @@
-package com.example.weatherapp.data.repository.deviceLocation;
+package com.example.weatherapp.dataSharedPref.repository;
 
 import android.content.SharedPreferences;
 
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
-import com.example.weatherapp.data.model.deviceLocation.SerializableDeviceLocation;
+import com.example.weatherapp.data.repository.ILastDeviceLocationRepository;
+import com.example.weatherapp.dataSharedPref.model.SerializableDeviceLocation;
 import com.example.weatherapp.domain.exception.NotFoundException;
 import com.google.gson.Gson;
 

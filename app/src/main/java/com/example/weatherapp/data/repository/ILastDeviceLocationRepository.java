@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.repository.deviceLocation;
+package com.example.weatherapp.data.repository;
 
 import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 

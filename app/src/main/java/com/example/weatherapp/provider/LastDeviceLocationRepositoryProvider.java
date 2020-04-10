@@ -2,8 +2,8 @@ package com.example.weatherapp.provider;
 
 import android.content.Context;
 
-import com.example.weatherapp.data.repository.deviceLocation.ILastDeviceLocationRepository;
-import com.example.weatherapp.data.repository.deviceLocation.SharedPrefLastDeviceLocationRepository;
+import com.example.weatherapp.data.repository.ILastDeviceLocationRepository;
+import com.example.weatherapp.dataSharedPref.repository.SharedPrefLastDeviceLocationRepository;
 
 public class LastDeviceLocationRepositoryProvider {
     private static ILastDeviceLocationRepository repository;
