@@ -113,7 +113,6 @@ public class SearchCityPresenter implements ISearchCityPresenter {
 
     @Override
     public void onViewWeatherPressed() {
-        locationService.stopService();
         if (isFavoriteSelected) {
 
             favoriteLocationRepository.save(
