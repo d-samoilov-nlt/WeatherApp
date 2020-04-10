@@ -9,6 +9,7 @@ import java.util.List;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.example.weatherapp.util.FocusUtils.requestFocusWithSoftKeyboard;
 
 public class FavoriteLocationListView implements IFavoriteLocationListView {
     private final EditText etSearchField;
@@ -27,6 +28,7 @@ public class FavoriteLocationListView implements IFavoriteLocationListView {
     @Override
     public void showSearchField() {
         etSearchField.setVisibility(VISIBLE);
+        requestFocusWithSoftKeyboard(etSearchField);
     }
 
     @Override

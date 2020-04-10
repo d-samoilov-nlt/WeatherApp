@@ -41,6 +41,8 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import static com.example.weatherapp.util.FocusUtils.requestFocusWithSoftKeyboard;
+
 public class SearchCityActivity extends WeatherAppActivity implements ISearchCityView, DeviceLocationService.OnLocationUpdateListener {
     private Intent deviceLocationServiceIntent;
     private DeviceLocationService deviceLocationService;
@@ -97,6 +99,8 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
         switchUnitType = findViewById(R.id.switch_search_city_unit_type);
         switchIsFavorite = findViewById(R.id.switch_search_city_favorite);
         btnViewWeather = findViewById(R.id.btn_search_city_view_weather);
+
+        requestFocusWithSoftKeyboard(etEnterLocationData);
     }
 
     private void setupActions() {
