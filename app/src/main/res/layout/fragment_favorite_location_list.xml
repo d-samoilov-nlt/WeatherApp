@@ -11,17 +11,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
+        android:elevation="@dimen/default_view_elevation"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true">
 
             <EditText
                 android:id="@+id/et_location_list_toolbar_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edit_text_background_border"
+                android:hint="@string/favorite_location_search_hint"
                 android:padding="@dimen/small_view_margin"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"

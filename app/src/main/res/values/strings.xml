@@ -31,6 +31,7 @@
     <string name="favorite_location_short_data_cel">%1$s °C, %2$s</string>
     <string name="favorite_location_short_data_far">%1$s °F, %2$s</string>
     <string name="favorite_location_no_items_message">No items to display</string>
+    <string name="favorite_location_search_hint">City name</string>
 
     // forecast details
     <string name="forecast_details_today">Today</string>
