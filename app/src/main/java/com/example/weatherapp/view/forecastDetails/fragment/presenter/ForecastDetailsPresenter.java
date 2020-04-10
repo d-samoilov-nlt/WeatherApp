@@ -87,6 +87,11 @@ public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
     }
 
     private void showTodayForecast() {
+        if (severalDaysWeatherResponse == null) {
+            view.showLoadingError(true);
+            return;
+        }
+
         view.showLoadingError(false);
         view.showDetailsLoadingProgress(true);
 
@@ -97,6 +102,11 @@ public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
 
     @Override
     public void onTomorrowPressed() {
+        if (severalDaysWeatherResponse == null) {
+            view.showLoadingError(true);
+            return;
+        }
+
         view.showLoadingError(false);
         view.showDetailsLoadingProgress(true);
 
@@ -107,6 +117,11 @@ public class ForecastDetailsPresenter implements IForecastDetailsPresenter {
 
     @Override
     public void onFiveDaysPressed() {
+        if (severalDaysWeatherResponse == null) {
+            view.showLoadingError(true);
+            return;
+        }
+
         view.showLoadingError(false);
         view.showDetailsLoadingProgress(true);
 
