@@ -4,10 +4,14 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.weatherapp.R;
 import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.fullForecast.IDayForecastDisplayModel;
 import com.example.weatherapp.view.forecastDetails.fragment.model.forecast.fullForecast.ISeveralDaysForecastDisplayModel;
+
+import java.util.ArrayList;
 
 public class ForecastDetailsView implements IForecastDetailsView {
     private final ForecastDetailsRVAdapter todayForecastDetailsRVAdapter;
@@ -18,22 +22,28 @@ public class ForecastDetailsView implements IForecastDetailsView {
     private final ConstraintLayout clLoadingProgress;
     private final LinearLayout llLoadingErrorView;
 
-    public ForecastDetailsView(
-            ForecastDetailsRVAdapter todayForecastDetailsRVAdapter,
-            ForecastDetailsRVAdapter tomorrowForecastDetailsRVAdapter,
-            ForecastSeveralDaysDetailsRvAdapter forecastSeveralDaysDetailsRvAdapter,
-            RecyclerView rvForecastDetails,
-            ConstraintLayout clForecastContent,
-            ConstraintLayout clLoadingProgress,
-            LinearLayout llLoadingErrorView) {
+    public ForecastDetailsView(View rootView) {
+        todayForecastDetailsRVAdapter = new ForecastDetailsRVAdapter(new ArrayList<>());
+        tomorrowForecastDetailsRVAdapter = new ForecastDetailsRVAdapter(new ArrayList<>());
+        forecastSeveralDaysDetailsRvAdapter = new ForecastSeveralDaysDetailsRvAdapter(new ArrayList<>());
 
-        this.todayForecastDetailsRVAdapter = todayForecastDetailsRVAdapter;
-        this.tomorrowForecastDetailsRVAdapter = tomorrowForecastDetailsRVAdapter;
-        this.forecastSeveralDaysDetailsRvAdapter = forecastSeveralDaysDetailsRvAdapter;
-        this.rvForecastDetails = rvForecastDetails;
-        this.clForecastContent = clForecastContent;
-        this.clLoadingProgress = clLoadingProgress;
-        this.llLoadingErrorView = llLoadingErrorView;
+        clForecastContent = rootView.findViewById(R.id.cl_forecast_details_content);
+        clLoadingProgress = rootView.findViewById(R.id.cl_forecast_loading_progress);
+        llLoadingErrorView = rootView.findViewById(R.id.cl_forecast_error_message);
+        rvForecastDetails = rootView.findViewById(R.id.rv_forecast_details_forecast);
+
+
+        setupRv(rootView);
+    }
+
+    private void setupRv(View rootView) {
+        rvForecastDetails.setLayoutManager(
+                new LinearLayoutManager(
+                        rootView.getContext(),
+                        LinearLayoutManager.HORIZONTAL,
+                        false));
+
+        rvForecastDetails.setAdapter(todayForecastDetailsRVAdapter);
     }
 
     @Override

@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.weatherapi.data.ForecastUnitsType;
 import com.example.weatherapi.domain.useCase.getSeveralDaysForecast.GetSeveralDaysForecastUseCase;
@@ -27,22 +25,13 @@ import com.example.weatherapp.view.forecastDetails.fragment.presenter.AsyncForec
 import com.example.weatherapp.view.forecastDetails.fragment.presenter.ForecastDetailsPresenter;
 import com.example.weatherapp.view.forecastDetails.fragment.presenter.IForecastDetailsPresenter;
 import com.example.weatherapp.view.forecastDetails.fragment.presenter.SafeForecastDetailsPresenter;
-import com.example.weatherapp.view.forecastDetails.fragment.view.ForecastDetailsRVAdapter;
 import com.example.weatherapp.view.forecastDetails.fragment.view.ForecastDetailsView;
-import com.example.weatherapp.view.forecastDetails.fragment.view.ForecastSeveralDaysDetailsRvAdapter;
 import com.example.weatherapp.view.forecastDetails.fragment.view.InMainThreadForecastDetailsView;
-
-import java.util.ArrayList;
 
 public class ForecastDetailsFragment extends Fragment {
     private IForecastDetailsPresenter presenter;
 
     private View view;
-
-    private RecyclerView rvForecastDetails;
-    private ForecastDetailsRVAdapter todayForecastDetailsRVAdapter;
-    private ForecastDetailsRVAdapter tomorrowForecastDetailsRVAdapter;
-    private ForecastSeveralDaysDetailsRvAdapter forecastSeveralDaysDetailsRvAdapter;
 
     private ForecastDetailsToolbarButton btnToday;
     private ForecastDetailsToolbarButton btnTomorrow;
@@ -54,23 +43,15 @@ public class ForecastDetailsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_forecast_details, container, false);
 
         setupView();
-        setupActions();
 
         presenter =
                 new AsyncForecastDetailsPresenter(
                         new SafeForecastDetailsPresenter(
                                 new ForecastDetailsPresenter(
                                         new InMainThreadForecastDetailsView(
-                                                new ForecastDetailsView(
-                                                        todayForecastDetailsRVAdapter,
-                                                        tomorrowForecastDetailsRVAdapter,
-                                                        forecastSeveralDaysDetailsRvAdapter,
-                                                        rvForecastDetails,
-                                                        view.findViewById(R.id.cl_forecast_details_content),
-                                                        view.findViewById(R.id.cl_forecast_loading_progress),
-                                                        view.findViewById(R.id.cl_forecast_error_message))
+                                                new ForecastDetailsView(view)
                                         ),
-                                        new GetSeveralDaysForecastUseCase(OpenWeatherApiProvider.get(getContext().getApplicationContext())),
+                                        new GetSeveralDaysForecastUseCase(OpenWeatherApiProvider.get(view.getContext().getApplicationContext())),
                                         new TodayForecastMapper(getResources()),
                                         new TomorrowForecastMapper(getResources()),
                                         new SeveralDaysForecastMapper(getResources()),
@@ -81,10 +62,6 @@ public class ForecastDetailsFragment extends Fragment {
         presenter.onCreate();
 
         return view;
-    }
-
-    private void setupActions() {
-        btnToday.setIsSelectedBackground(true);
     }
 
     private void setupView() {
@@ -112,22 +89,5 @@ public class ForecastDetailsFragment extends Fragment {
                         presenter.onFiveDaysPressed();
                     }
                 });
-
-        setupRv();
-    }
-
-    private void setupRv() {
-        rvForecastDetails = view.findViewById(R.id.rv_forecast_details_forecast);
-        rvForecastDetails.setLayoutManager(
-                new LinearLayoutManager(
-                        view.getContext(),
-                        LinearLayoutManager.HORIZONTAL,
-                        false));
-
-        todayForecastDetailsRVAdapter = new ForecastDetailsRVAdapter(new ArrayList<>());
-        tomorrowForecastDetailsRVAdapter = new ForecastDetailsRVAdapter(new ArrayList<>());
-        forecastSeveralDaysDetailsRvAdapter = new ForecastSeveralDaysDetailsRvAdapter(new ArrayList<>());
-
-        rvForecastDetails.setAdapter(todayForecastDetailsRVAdapter);
     }
 }
