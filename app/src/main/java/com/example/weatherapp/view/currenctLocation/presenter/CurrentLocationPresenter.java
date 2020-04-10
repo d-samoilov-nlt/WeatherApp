@@ -15,7 +15,9 @@ import com.example.weatherapp.data.repository.ILastDeviceLocationRepository;
 import com.example.weatherapp.domain.exception.InternetUnreachableException;
 import com.example.weatherapp.domain.exception.NotFoundException;
 import com.example.weatherapp.domain.mapper.IForecastShortDetailsMapper;
+import com.example.weatherapp.service.ILocationService;
 import com.example.weatherapp.view.currenctLocation.view.ICurrentLocationView;
+import com.example.weatherapp.view.forecastDetails.fragment.model.useCase.IShowForecastDetailsByLocationUseCase;
 
 public class CurrentLocationPresenter implements ICurrentLocationPresenter {
     private final ICurrentLocationView view;
@@ -24,6 +26,8 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
     private final ILastDeviceLocationRepository lastDeviceLocationRepository;
     private final IFavoriteLocationRepository favoriteLocationRepository;
     private final IGetSeveralDaysForecastUseCase getSeveralDaysForecastUseCase;
+    private final ILocationService locationService;
+    private final IShowForecastDetailsByLocationUseCase showForecastDetailsByLocationUseCase;
 
     private IDeviceLocation deviceLocation;
     private boolean isCurrentLocationFavorite;
@@ -37,7 +41,9 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
             IForecastShortDetailsMapper forecastShortDetailsMapper,
             ILastDeviceLocationRepository lastDeviceLocationRepository,
             IFavoriteLocationRepository favoriteLocationRepository,
-            IGetSeveralDaysForecastUseCase getSeveralDaysForecastUseCase) {
+            IGetSeveralDaysForecastUseCase getSeveralDaysForecastUseCase,
+            ILocationService locationService,
+            IShowForecastDetailsByLocationUseCase showForecastDetailsByLocationUseCase) {
 
         this.view = view;
         this.getCurrentWeatherByCityLocationUseCase = getCurrentWeatherByCityLocationUseCase;
@@ -45,6 +51,8 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
         this.lastDeviceLocationRepository = lastDeviceLocationRepository;
         this.favoriteLocationRepository = favoriteLocationRepository;
         this.getSeveralDaysForecastUseCase = getSeveralDaysForecastUseCase;
+        this.locationService = locationService;
+        this.showForecastDetailsByLocationUseCase = showForecastDetailsByLocationUseCase;
     }
 
     @Override
@@ -57,8 +65,8 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
 
             isCurrentLocationFavorite = true;
 
-            view.showForecastDetails(
-                    new CityLocation(
+            showForecastDetailsByLocationUseCase
+                    .show(new CityLocation(
                             deviceLocation.getLongitude(),
                             deviceLocation.getLatitude()));
 
@@ -70,12 +78,12 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
         if (deviceLocation == null) {
             view.setIsSearchingLocationProcess(true);
         }
-        view.startLocationService();
+        locationService.startService();
     }
 
     @Override
     public void onDestroy() {
-        view.stopLocationService();
+        locationService.stopService();
     }
 
     @Override
@@ -84,7 +92,7 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
             view.setIsSearchingLocationProcess(false);
         }
         this.deviceLocation = deviceLocation;
-        view.stopLocationService();
+        locationService.stopService();
 
         lastDeviceLocationRepository.save(deviceLocation);
 
@@ -107,7 +115,7 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
         } catch (InternetUnreachableException | RequestFailedException e) {
             e.printStackTrace();
         } finally {
-            view.showForecastDetails(cityLocation);
+            showForecastDetailsByLocationUseCase.show(cityLocation);
 
             view.setIsSearchingLocationProcess(false);
         }
@@ -116,7 +124,7 @@ public class CurrentLocationPresenter implements ICurrentLocationPresenter {
     @Override
     public void onTrySearchAgainPressed() {
         view.setIsPermissionRequiredError(false);
-        view.startLocationService();
+        locationService.startService();
         view.setIsSearchingLocationProcess(true);
     }
 
