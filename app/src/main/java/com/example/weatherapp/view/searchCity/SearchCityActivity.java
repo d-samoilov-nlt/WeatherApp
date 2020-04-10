@@ -20,6 +20,7 @@ import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.provider.FavoriteLocationRepositoryProvider;
 import com.example.weatherapp.provider.OpenWeatherApiProvider;
 import com.example.weatherapp.service.DeviceLocationService;
+import com.example.weatherapp.service.ILocationService;
 import com.example.weatherapp.view.common.DelayedAfterTextChangedWatcher;
 import com.example.weatherapp.view.common.LocationEditText;
 import com.example.weatherapp.view.common.WeatherAppActivity;
@@ -30,8 +31,8 @@ import com.example.weatherapp.view.forecastDetails.containerActivity.ForecastDet
 import com.example.weatherapp.view.searchCity.presenter.AsyncSearchCityPresenter;
 import com.example.weatherapp.view.searchCity.presenter.ISearchCityPresenter;
 import com.example.weatherapp.view.searchCity.presenter.SearchCityPresenter;
-import com.example.weatherapp.view.searchCity.view.ISearchCityView;
 import com.example.weatherapp.view.searchCity.view.InMainThreadSearchCityView;
+import com.example.weatherapp.view.searchCity.view.SearchCityView;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -42,7 +43,7 @@ import java.util.List;
 
 import static com.example.weatherapp.util.FocusUtils.requestFocusWithSoftKeyboard;
 
-public class SearchCityActivity extends WeatherAppActivity implements ISearchCityView, DeviceLocationService.OnLocationUpdateListener {
+public class SearchCityActivity extends WeatherAppActivity implements DeviceLocationService.OnLocationUpdateListener {
     private Intent deviceLocationServiceIntent;
     private DeviceLocationService deviceLocationService;
 
@@ -61,6 +62,7 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
         setContentView(R.layout.activity_search_city);
         setupView();
         setupActions();
+
         deviceLocationServiceIntent = new Intent(this, DeviceLocationService.class);
         isServiceBind = false;
 
@@ -68,7 +70,9 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
                 new AsyncSearchCityPresenter(
                         new SearchCityPresenter(
                                 new InMainThreadSearchCityView(
-                                        this
+                                        new SearchCityView(
+                                                findViewById(R.id.cl_search_city_container)
+                                        )
                                 ),
                                 new GetCurrentWeatherByCityLocationUseCase(
                                         OpenWeatherApiProvider.get(getApplicationContext())
@@ -91,6 +95,17 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
                                             new Intent(SearchCityActivity.this, ForecastDetailsContainerActivity.class);
                                     intent.putExtra(ForecastDetailsConst.CITY_NAME_KEY, cityName);
                                     SearchCityActivity.this.startActivity(intent);
+                                },
+                                new ILocationService() {
+                                    @Override
+                                    public void stopService() {
+                                        stopLocationService();
+                                    }
+
+                                    @Override
+                                    public void startService() {
+                                        startLocationService();
+                                    }
                                 }));
     }
 
@@ -140,49 +155,11 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
     }
 
     @Override
-    public void setViewWeatherBtnEnabled(boolean isEnabled) {
-        btnViewWeather.setEnabled(isEnabled);
-    }
-
-    @Override
-    public void setDeviceLocationInfo(String locationInfo) {
-        etEnterLocationData.setText(locationInfo);
-    }
-
-    @Override
-    public void showCityNotFoundError(boolean isError) {
-        if (isError) {
-            etEnterLocationData.setError(getResources().getString(R.string.error_city_not_found));
-        } else {
-            etEnterLocationData.setError(null);
-        }
-    }
-
-    @Override
-    public void stopLocationService() {
-        if (!isServiceBind) {
-            return;
-        }
-        isServiceBind = true;
-        if (deviceLocationService != null) {
-            deviceLocationService.removeListener();
-        }
-        unbindService(this);
-        stopService(deviceLocationServiceIntent);
-    }
-
-    @Override
-    public void setLocationIconEnabled(boolean isEnabled) {
-        etEnterLocationData.setLocationIconEnabled(isEnabled);
-    }
-
-    @Override
     protected ViewGroup getCoordinatorContainerView() {
         return findViewById(R.id.cl_search_city_container);
     }
 
-    @Override
-    public void startLocationService() {
+    private void startLocationService() {
         Dexter.withActivity(this)
                 .withPermissions(Manifest.permission.ACCESS_FINE_LOCATION)
                 .withListener(new MultiplePermissionsListener() {
@@ -204,6 +181,17 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
                 .check();
     }
 
+    private void stopLocationService() {
+        if (!isServiceBind) {
+            return;
+        }
+        if (deviceLocationService != null) {
+            deviceLocationService.removeListener();
+        }
+        unbindService(SearchCityActivity.this);
+        stopService(deviceLocationServiceIntent);
+    }
+
     @Override
     public void onUpdated(IDeviceLocation deviceLocation) {
         presenter.onLocationUpdated(deviceLocation);
@@ -213,7 +201,7 @@ public class SearchCityActivity extends WeatherAppActivity implements ISearchCit
     public void onServiceConnected(ComponentName name, IBinder service) {
         DeviceLocationService.LocalBinder localBinder = (DeviceLocationService.LocalBinder) service;
         deviceLocationService = localBinder.getServiceInstance();
-        deviceLocationService.attachListener(this);
+        deviceLocationService.attachListener(SearchCityActivity.this);
         isServiceBind = true;
     }
 

@@ -8,9 +8,5 @@ public interface ISearchCityView {
 
     void showCityNotFoundError(boolean isError);
 
-    void startLocationService();
-
-    void stopLocationService();
-
     void setLocationIconEnabled(boolean isEnabled);
 }

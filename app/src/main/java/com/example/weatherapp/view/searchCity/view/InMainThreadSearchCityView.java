@@ -28,16 +28,6 @@ public class InMainThreadSearchCityView implements ISearchCityView {
     }
 
     @Override
-    public void startLocationService() {
-        handler.post(origin::startLocationService);
-    }
-
-    @Override
-    public void stopLocationService() {
-        handler.post(origin::stopLocationService);
-    }
-
-    @Override
     public void setLocationIconEnabled(boolean isEnabled) {
         handler.post(() -> origin.setLocationIconEnabled(isEnabled));
     }

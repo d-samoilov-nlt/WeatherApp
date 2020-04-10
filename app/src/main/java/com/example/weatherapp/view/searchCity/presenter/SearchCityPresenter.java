@@ -11,6 +11,7 @@ import com.example.weatherapp.data.model.deviceLocation.IDeviceLocation;
 import com.example.weatherapp.data.model.favoriteLocation.FavoriteLocationCacheData;
 import com.example.weatherapp.data.repository.IFavoriteLocationRepository;
 import com.example.weatherapp.domain.exception.InternetUnreachableException;
+import com.example.weatherapp.service.ILocationService;
 import com.example.weatherapp.view.searchCity.model.ILaunchForecastDetailsScreenUseCase;
 import com.example.weatherapp.view.searchCity.view.ISearchCityView;
 
@@ -22,6 +23,7 @@ public class SearchCityPresenter implements ISearchCityPresenter {
     private final IFavoriteLocationRepository favoriteLocationRepository;
     private final ILaunchForecastDetailsScreenUseCase launchFavoriteLocationForecastDetailsUseCase;
     private final ILaunchForecastDetailsScreenUseCase launchForecastDetailsUseCase;
+    private final ILocationService locationService;
 
     private boolean isLocationServiceEnabled = false;
     private boolean isFavoriteSelected = false;
@@ -36,7 +38,8 @@ public class SearchCityPresenter implements ISearchCityPresenter {
             IGetSeveralDaysForecastUseCase getSeveralDaysForecastUseCase,
             IFavoriteLocationRepository favoriteLocationRepository,
             ILaunchForecastDetailsScreenUseCase launchFavoriteLocationForecastDetailsUseCase,
-            ILaunchForecastDetailsScreenUseCase launchForecastDetailsUseCase) {
+            ILaunchForecastDetailsScreenUseCase launchForecastDetailsUseCase,
+            ILocationService locationService) {
 
         this.view = view;
         this.getCurrentWeatherByCityLocationUseCase = getCurrentWeatherByCityLocationUseCase;
@@ -45,6 +48,7 @@ public class SearchCityPresenter implements ISearchCityPresenter {
         this.favoriteLocationRepository = favoriteLocationRepository;
         this.launchFavoriteLocationForecastDetailsUseCase = launchFavoriteLocationForecastDetailsUseCase;
         this.launchForecastDetailsUseCase = launchForecastDetailsUseCase;
+        this.locationService = locationService;
 
         locationUnitType = ForecastUnitsType.CELSIUS.getValue();
     }
@@ -52,7 +56,7 @@ public class SearchCityPresenter implements ISearchCityPresenter {
     @Override
     public void onDestroy() {
         if (isLocationServiceEnabled) {
-            view.stopLocationService();
+            locationService.stopService();
         }
     }
 
@@ -61,9 +65,9 @@ public class SearchCityPresenter implements ISearchCityPresenter {
         isLocationServiceEnabled = isLocationEnabled;
 
         if (isLocationServiceEnabled) {
-            view.startLocationService();
+            locationService.startService();
         } else {
-            view.stopLocationService();
+            locationService.stopService();
         }
     }
 
@@ -82,7 +86,7 @@ public class SearchCityPresenter implements ISearchCityPresenter {
             view.showCityNotFoundError(true);
         } finally {
             isLocationServiceEnabled = false;
-            view.stopLocationService();
+            locationService.stopService();
             view.setLocationIconEnabled(false);
         }
     }
@@ -109,7 +113,7 @@ public class SearchCityPresenter implements ISearchCityPresenter {
 
     @Override
     public void onViewWeatherPressed() {
-        view.stopLocationService();
+        locationService.stopService();
         if (isFavoriteSelected) {
 
             favoriteLocationRepository.save(
